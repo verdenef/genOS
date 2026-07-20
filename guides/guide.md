@@ -9,10 +9,17 @@ Before you can use GameOS for daily development, it needs to be initialized for 
 ### 1. Project Onboarding
 **Important:** You must create your actual game/engine project (e.g. via Unity Hub) *before* running this setup prompt. GameOS is an observer, it is not designed to generate engine scaffolds from scratch for you.
 
-Once your blank engine project is ready and you have copied the GameOS folder into the repository, open a chat with your AI agent and paste the contents of:
-**`guides/prompts/setup-01-project-onboarding.md`**
+Once your engine project is ready and you have copied the GameOS folder into the repository, you need to initialize the Brain. Choose the prompt that matches your situation:
 
-This instructs the AI to scan your workspace, verify the GameOS installation, and prompt you for your project vision to initialize the Brain.
+**Option A: Blank Projects**
+If you are starting a brand new project with no existing code, open a chat with your AI agent and paste the contents of:
+**`guides/prompts/setup-01-project-onboarding.md`**
+This instructs the AI to verify the GameOS installation and prompt you for your project vision to initialize the Empty Brain.
+
+**Option B: Existing Projects**
+If you are bringing GameOS into a project that already has scripts, assets, or in-progress features, open a chat with your AI agent and paste the contents of:
+**`guides/prompts/setup-01b-existing-project.md`**
+This instructs the AI to halt and ask for your high-level vision *first*, and then retroactively read your existing source code to organize it into the GameOS Brain.
 
 ### 2. MCP Setup
 Once the project vision is established, you need to hook up the necessary Model Context Protocol (MCP) servers so the AI can read your engine's live state. Paste the contents of:
