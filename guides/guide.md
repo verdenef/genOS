@@ -27,6 +27,12 @@ Once the project vision is established, you need to hook up the necessary Model 
 
 The AI will configure the servers based on your stack. It will pause and ask for your help if it needs global packages installed or specific permissions.
 
+### 3. Workforce Setup (Optional)
+If you want to use the Agency Agents integration to assign specialized roles to your AI, paste the contents of:
+**`guides/prompts/setup-03-workforce.md`**
+
+This instructs the AI to evaluate your project scope and recommend a tailored AI workforce for you to approve.
+
 ---
 
 ## The Daily Workflow
@@ -68,6 +74,6 @@ As GameOS evolves, you may want to pull in new framework features or kernel upda
 1. Download the latest GameOS release.
 2. Extract it into your repository as a temporary folder named `_GameOS_Update/` (placed right next to your active `GameOS/` folder).
 3. Open a chat with your AI agent and paste the contents of:
-**`guides/prompts/setup-03-framework-upgrade.md`**
+**`guides/prompts/setup-04-framework-upgrade.md`**
 
 This instructs the AI to safely compare the new framework against your local one. It will selectively upgrade your kernel (`AGENTS.md`) and tools while preserving all of your project's `brain/` data.
