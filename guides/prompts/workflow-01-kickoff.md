@@ -1,4 +1,4 @@
-Begin the next development cycle using GameOS.
+Begin the next development cycle using genOS.
 
 Follow AGENTS.md exactly.
 

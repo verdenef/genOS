@@ -1,11 +1,11 @@
 The current milestone has been successfully implemented and verified.
 
-Perform the GameOS SHUTDOWN procedure.
+Perform the genOS SHUTDOWN procedure.
 
 Instructions:
 
 1. Verify that the milestone satisfies every completion criterion in the ROADMAP.
-2. Update ONLY the necessary GameOS files.
+2. Update ONLY the necessary genOS files.
 3. Update affected SYSTEMS documents to reflect the implementation.
 4. Update ROADMAP:
    - mark the milestone as done
@@ -35,4 +35,4 @@ Instructions:
    - recommendations for the next milestone
 
 Do not modify implementation source code during SHUTDOWN.
-Only update GameOS brain files.
+Only update genOS brain files.
