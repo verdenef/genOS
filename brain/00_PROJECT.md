@@ -28,17 +28,17 @@ _TBD_
 
 <!-- In scope / out of scope. Keep concise. -->
 
-## Target Platform
+## Target Environment & Stack
 
 _TBD_
 
-<!-- e.g. Unity 6, PC, etc. -->
+<!-- e.g. Web (Next.js/Node), Cloud/Docker (Go/Postgres), Mobile (Flutter), Game Engine (Unity 6), etc. -->
 
-## Core Gameplay Loop
+## Core User Workflow / Domain Loop
 
 _TBD_
 
-<!-- High-level loop only — not system implementation. -->
+<!-- The primary end-to-end user workflow or domain loop that this system powers. -->
 
 ## Constraints
 
