@@ -167,7 +167,14 @@ Mandatory. Incomplete SHUTDOWN breaks the next agent.
 3. Record decisions in `brain/30_DECISIONS.md` when applicable; keep Index in sync with entries
 4. Update `brain/50_ROADMAP.md` when a milestone is started, completed, cancelled, or its definition changes (status + Index row)
 5. Update `brain/40_BACKLOG.md` for ad-hoc queue columns only — never milestone status
-6. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions
+6. **Sanity Gate (Mandatory Integrity Audit):**
+   - Confirm `20_PROGRESS.yaml` is valid, parseable YAML with all required keys.
+   - Verify `current_milestone` in `PROGRESS.yaml` matches an existing, active ID in `50_ROADMAP.md`.
+   - Ensure all index tables in `50_ROADMAP.md` and `30_DECISIONS.md` match their section headers.
+   - Ensure no milestone tasks or "Doing" states leaked into `40_BACKLOG.md`.
+   - Ensure all `systems_in_scope` exist in `brain/systems/`.
+   - Auto-repair any syntax or index desyncs before reporting completion.
+7. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions
 
 Clear or rewrite stale `systems_in_scope` / `working_on` so the next agent is not misled.
 
