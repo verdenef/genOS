@@ -1,0 +1,30 @@
+id: web-fullstack
+name: "Web Full-Stack"
+description: "Modern web applications using React, Next.js, Vue, or Svelte with Node/tRPC/REST backends and relational/NoSQL databases."
+detection_indicators:
+  - "package.json"
+  - "next.config.js"
+  - "vite.config.ts"
+recommended_mcps:
+  - id: playwright
+    name: "Playwright / Chrome DevTools MCP"
+    purpose: "Inspect rendered DOM, verify UI flows, and take automated screenshots."
+  - id: postgres
+    name: "PostgreSQL / Prisma MCP"
+    purpose: "Inspect live schemas, run migrations, and test database queries."
+recommended_agents:
+  - role: "Lead Architect"
+    purpose: "System boundaries, state management architecture, and API design."
+  - role: "Frontend UI Specialist"
+    purpose: "Component hierarchy, responsive layouts, accessibility, and CSS styling."
+  - role: "Backend / API Engineer"
+    purpose: "Server actions, API endpoints, authentication, and database repositories."
+starter_systems:
+  - name: "Authentication"
+    purpose: "User identity, session management, tokens, and authorization guards."
+  - name: "Database"
+    purpose: "Schema migrations, data models, connection pooling, and repositories."
+  - name: "FrontendUI"
+    purpose: "Design system tokens, component hierarchy, layouts, and routing."
+  - name: "APIGateway"
+    purpose: "Endpoints, request validation, middleware, and rate limiting."

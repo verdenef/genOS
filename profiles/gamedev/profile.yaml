@@ -1,0 +1,28 @@
+id: gamedev
+name: "Game Development (GameOS Profile)"
+description: "Video games, simulations, and real-time interactive experiences using Unity, Unreal Engine, Godot, or Custom Game Engines."
+detection_indicators:
+  - "Assets/"
+  - "project.godot"
+  - "*.uproject"
+  - "ProjectSettings/ProjectSettings.asset"
+recommended_mcps:
+  - id: engine-mcp
+    name: "Engine MCP (Unity / Godot / Unreal)"
+    purpose: "Inspect scene hierarchy, component values, assets, and console errors."
+recommended_agents:
+  - role: "Lead Game Designer"
+    purpose: "Core gameplay loops, balancing, player progression, and pacing."
+  - role: "Gameplay Systems Programmer"
+    purpose: "Character controllers, physics interactions, combat, and state machines."
+  - role: "Engine / Technical Specialist"
+    purpose: "Performance optimization, shader integration, memory, and engine architecture."
+starter_systems:
+  - name: "Movement"
+    purpose: "Player input reading, kinematics, velocity, collisions, and states."
+  - name: "Combat"
+    purpose: "Damage calculation, hitboxes/hurtboxes, weapons, and status effects."
+  - name: "Inventory"
+    purpose: "Item definitions, equipment slots, stacking, and storage persistence."
+  - name: "Audio"
+    purpose: "Sound effect triggers, spatial audio playback, and music stems."

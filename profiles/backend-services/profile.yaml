@@ -1,0 +1,31 @@
+id: backend-services
+name: "Backend Microservices & Distributed Systems"
+description: "Scalable backend services and APIs using Go, Rust, Python (FastAPI), Node, or Java with Docker, Redis, and SQL/NoSQL databases."
+detection_indicators:
+  - "go.mod"
+  - "Cargo.toml"
+  - "Dockerfile"
+  - "docker-compose.yml"
+recommended_mcps:
+  - id: docker
+    name: "Docker / Container MCP"
+    purpose: "Inspect running containers, service logs, and containerized dependencies."
+  - id: postgres
+    name: "Database / SQL MCP"
+    purpose: "Inspect database schemas, query performance, and connection states."
+recommended_agents:
+  - role: "Systems Architect"
+    purpose: "High-level domain modeling, service boundaries, and messaging topologies."
+  - role: "Backend API Engineer"
+    purpose: "Handler implementations, gRPC/REST contracts, and business logic."
+  - role: "DevOps / Infrastructure Engineer"
+    purpose: "Dockerfile optimizations, CI/CD pipelines, observability, and migrations."
+starter_systems:
+  - name: "ServiceCore"
+    purpose: "Domain models, business logic processing, and dependency injection."
+  - name: "Database"
+    purpose: "Migrations, connection pooling, and repository interfaces."
+  - name: "MessagingQueue"
+    purpose: "Async worker queues, event publishing, and consumer handlers."
+  - name: "Observability"
+    purpose: "Structured logging, Prometheus metrics, and distributed tracing."

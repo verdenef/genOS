@@ -1,0 +1,24 @@
+id: cli-system
+name: "CLI, Systems & Developer Tooling"
+description: "Command-line interfaces, systems utilities, daemon processes, and compilers using Rust, Go, C/C++, or Python."
+detection_indicators:
+  - "Cargo.toml"
+  - "go.mod"
+  - "Makefile"
+  - "CMakeLists.txt"
+recommended_mcps:
+  - id: native-terminal
+    name: "Terminal / Process Runner MCP"
+    purpose: "Execute CLI subcommands, capture exit codes, and inspect stderr/stdout."
+recommended_agents:
+  - role: "Systems Architect"
+    purpose: "Binary performance, memory safety, concurrency, and cross-platform compilation."
+  - role: "CLI UX Specialist"
+    purpose: "Flag parsing, interactive prompts, ANSI color formatting, and help text."
+starter_systems:
+  - name: "CommandDispatcher"
+    purpose: "Subcommand routing, argument parsing, validation, and execution."
+  - name: "ConfigEngine"
+    purpose: "File discovery, environment variable overrides, and serialization."
+  - name: "OutputFormatter"
+    purpose: "Table rendering, JSON export modes, color styling, and logging."

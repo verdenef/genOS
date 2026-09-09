@@ -1,0 +1,26 @@
+id: mobile
+name: "Mobile App Development"
+description: "Cross-platform and native mobile applications using Flutter, React Native, Swift (iOS), or Kotlin (Android)."
+detection_indicators:
+  - "pubspec.yaml"
+  - "app.json"
+  - "Podfile"
+  - "build.gradle"
+recommended_mcps:
+  - id: mobile-tools
+    name: "Mobile Device / Emulator MCP"
+    purpose: "Inspect connected emulators, device logs, and application lifecycle."
+recommended_agents:
+  - role: "Mobile Architect"
+    purpose: "State management, navigation architecture, and offline sync strategies."
+  - role: "Mobile UI Specialist"
+    purpose: "Widget / component layouts, touch interactions, gestures, and animations."
+starter_systems:
+  - name: "Navigation"
+    purpose: "Deep linking, route guards, tabs, and navigation stack management."
+  - name: "LocalCache"
+    purpose: "Offline-first persistence, secure storage, and local state sync."
+  - name: "RemoteClient"
+    purpose: "HTTP client, error interception, auth token refresh, and retry logic."
+  - name: "DesignSystem"
+    purpose: "Mobile typography, color tokens, reusable UI components, and themes."
