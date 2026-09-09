@@ -54,8 +54,10 @@ Immediately after tooling is ready:
    - Verify `brain/20_PROGRESS.yaml` is valid YAML and points to the first active milestone in `50_ROADMAP.md`.
    - Verify index tables in `50_ROADMAP.md` and `30_DECISIONS.md` are synchronized.
    - Verify system files exist in `brain/systems/`.
-2. **CRITICAL GUARDRAIL:** HALT immediately. Do NOT begin writing implementation code, scaffolding mock files, or executing milestones in this chat session.
-3. Print the Day 0 Completion Banner:
+2. **Workspace Hygiene (Prune Unused Profiles):**
+   - Delete the unused profile folders in `profiles/`, keeping only `profiles/README.md` and our active profile (e.g., `profiles/<selected-profile>/`), so the project repository stays clean and unbloated.
+3. **CRITICAL GUARDRAIL:** HALT immediately. Do NOT begin writing implementation code, scaffolding mock files, or executing milestones in this chat session.
+4. Print the Day 0 Completion Banner:
 
 ```markdown
 🎉 Day 0 Setup Complete!
