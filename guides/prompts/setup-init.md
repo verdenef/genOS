@@ -40,9 +40,11 @@ Immediately after I approve the roadmap, transition automatically without waitin
 
 Immediately after tooling is ready:
 
-1. Check the `recommended_agents` from the chosen profile.
-2. Ask me: *"Would you like to install these specialized AI agent roles into `brain/60_AGENTS.md` for this project?"*
-3. If I approve, populate `brain/60_AGENTS.md`. If I decline or skip, keep standard generalist defaults.
+1. Follow the protocol in `integrations/agency_agents.md`.
+2. Audit `00_PROJECT.md` and `50_ROADMAP.md` alongside the profile's `recommended_agents` baseline.
+3. Access the `msitarzewski/agency-agents` catalog to select and recommend the specific specialist agents (Core, Milestone, Optional) best suited for our project's unique roadmap.
+4. Stop and present the recommended workforce with rationale for my approval.
+5. Wait for my approval before recording the approved workforce into `brain/60_AGENTS.md`. If I decline or skip, keep standard generalist defaults.
 
 ---
 
