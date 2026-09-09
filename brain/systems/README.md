@@ -3,7 +3,7 @@
 This directory defines the high-level components ("Systems") of the project. AI-maintained. See `AGENTS.md` → Ownership.
 
 ## What is a System?
-In GameOS, a "System" is a core architectural pillar of the project (e.g., `SaveSystem`, `Combat`, `Authentication`). It represents a discrete area of functionality with a specific purpose, defined boundaries, and clear responsibilities. 
+In genOS, a "System" is a core architectural pillar of the project (e.g., `SaveSystem`, `Combat`, `Authentication`). It represents a discrete area of functionality with a specific purpose, defined boundaries, and clear responsibilities. 
 
 ## Single Source of Truth
 **Status and system knowledge live only in each `brain/systems/<Name>.md`.**
