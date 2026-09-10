@@ -6,7 +6,7 @@ Requirements:
 
 1. **Compare Framework Directories & Prune Obsolete Files:**
    - Compare the active `genOS/` (or `GameOS/`) folder against `_genOS_Update/`.
-   - Identify new and updated framework files (e.g. `profiles/`, `setup-init.md`, `setup-tooling.md`, `setup-workforce.md`, `workflow-doctor.md`).
+   - Identify new and updated framework files (e.g. `profiles/`, `setup-init.md`, `setup-tooling.md`, `setup-workforce.md`, `workflow-autonomous-batch.md`, `workflow-doctor.md`).
    - Identify and **delete obsolete framework files** that no longer exist in the new release (such as deprecated `setup-01-project-onboarding.md`, `setup-01b-existing-project.md`, `setup-02-mcp.md`, and `setup-03-workforce.md`).
 2. **STRICT PRESERVATION OF THE PROJECT BRAIN:**
    - **Never** overwrite or delete any file in `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and all `brain/systems/*.md`).
