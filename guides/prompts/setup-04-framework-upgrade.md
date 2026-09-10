@@ -4,10 +4,10 @@ Your task is to safely upgrade this project's existing framework (whether upgrad
 
 Requirements:
 
-1. **Compare Framework Directories:**
+1. **Compare Framework Directories & Prune Obsolete Files:**
    - Compare the active `genOS/` (or `GameOS/`) folder against `_genOS_Update/`.
-   - Identify new framework files (e.g. `profiles/`, new prompts, `workflow-doctor.md`).
-   - Identify updated framework files (e.g. `AGENTS.md` kernel updates, `guides/guide.md`).
+   - Identify new and updated framework files (e.g. `profiles/`, `setup-init.md`, `setup-tooling.md`, `setup-workforce.md`, `workflow-doctor.md`).
+   - Identify and **delete obsolete framework files** that no longer exist in the new release (such as deprecated `setup-01-project-onboarding.md`, `setup-01b-existing-project.md`, `setup-02-mcp.md`, and `setup-03-workforce.md`).
 2. **STRICT PRESERVATION OF THE PROJECT BRAIN:**
    - **Never** overwrite or delete any file in `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and all `brain/systems/*.md`).
    - All existing milestones, tasks, decisions, progress RAM, and architectural documents must remain 100% intact.
@@ -17,5 +17,5 @@ Requirements:
 4. **Automated Sanity Audit:**
    - Run the Brain Doctor check (`workflow-doctor.md`) on the project's Brain to confirm that the existing memory is 100% compatible and valid under the new kernel.
 5. **Approval Gate:**
-   - Present a concise diff summary of what will be updated.
+   - Present a concise diff summary of what will be updated and what obsolete files will be removed.
    - Wait for my explicit approval before modifying any files or deleting the temporary `_genOS_Update/` folder.
