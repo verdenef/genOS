@@ -21,7 +21,7 @@ Before modifying any project files, you must audit the active AI workforce:
 
 1. Read `brain/60_AGENTS.md`.
 2. Verify that an active **Builder** role (e.g., `unity-architect`, `frontend-developer`, `backend-architect`) is registered.
-3. Verify that an active **QA/Auditor** role (e.g., `game-tester`, `code-reviewer`, `test-automator`, `qa-engineer`) is registered.
+3. Verify that an active **QA/Auditor** role (e.g., `testing-reality-checker`, `game-tester`, `code-reviewer`, `test-automator`, `qa-engineer`, or any testing/auditing specialist) is registered.
 4. **HARD SAFETY HALT IF QA IS MISSING:**
    - If no dedicated QA/Auditor role exists in `brain/60_AGENTS.md`, **STOP IMMEDIATELY**.
    - Do NOT write or modify any code.
