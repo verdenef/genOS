@@ -26,6 +26,7 @@ genOS/
 │       ├── workflow-01-kickoff.md
 │       ├── workflow-02-shutdown.md
 │       ├── workflow-03-resume-session.md
+│       ├── workflow-autonomous-batch.md # Hands-free multi-task autonomous runner
 │       └── workflow-doctor.md
 ├── integrations/             # AI workforce integrations (Agency Agents)
 └── brain/                    # The Project Brain (single source of truth)
@@ -120,6 +121,7 @@ If an agent crash occurs or files feel out of sync, paste `guides/prompts/workfl
 | **Day 0** | [`setup-init.md`](file:///d:/GameOS/guides/prompts/setup-init.md) | One-time interactive setup wizard (stack, brain, tools, workforce) |
 | **Start Coding** | [`workflow-01-kickoff.md`](file:///d:/GameOS/guides/prompts/workflow-01-kickoff.md) | Zero-history BOOT, review criteria, propose plan for human approval |
 | **Mid-Session** | [`workflow-03-resume-session.md`](file:///d:/GameOS/guides/prompts/workflow-03-resume-session.md) | Hot-reload in-flight execution RAM when switching IDEs or after crashes |
+| **Autonomous** | [`workflow-autonomous-batch.md`](file:///d:/GameOS/guides/prompts/workflow-autonomous-batch.md) | Uninterrupted multi-task batch execution with dual-persona QA gates |
 | **Finish Work** | [`workflow-02-shutdown.md`](file:///d:/GameOS/guides/prompts/workflow-02-shutdown.md) | Advance roadmap, update RAM, run mandatory Sanity Gate |
 | **Diagnostics** | [`workflow-doctor.md`](file:///d:/GameOS/guides/prompts/workflow-doctor.md) | Scan and self-repair syntax, index tables, and memory integrity |
 | **Tooling** | [`setup-tooling.md`](file:///d:/GameOS/guides/prompts/setup-tooling.md) | Reconfigure runtime tooling and MCP servers independently |

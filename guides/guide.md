@@ -62,7 +62,17 @@ When a milestone is complete and tests pass, you must save state back to the Bra
 
 The AI updates `50_ROADMAP.md`, logs execution state to `20_PROGRESS.yaml`, updates affected `brain/systems/` documents, and runs the mandatory **Sanity Gate** to guarantee zero corruption.
 
-### 5. Diagnostics & Brain Doctor (On-Demand)
+### 5. Autonomous Batch Development (Hands-Free Execution)
+If you want an advanced AI model (e.g. Fable 5, Claude 3.5 Sonnet in Cursor Composer or Agent mode) to execute multiple tasks or milestones in an uninterrupted loop without pausing to ask for permission:
+
+**`guides/prompts/workflow-autonomous-batch.md`**
+
+- **Pre-flight Safety Gate:** Strictly requires a designated QA/Auditor agent in `brain/60_AGENTS.md` before code generation begins.
+- **Dual-Persona Cycle:** Alternates between a Specialist Builder and an adversarial QA Auditor with a 2-retry self-healing budget.
+- **Atomic Brain Persistence:** Saves state to `brain/systems/`, updates the roadmap/backlog, and passes the Sanity Gate after every completed item.
+- **Smart Backlog Clustering:** In `TARGET_SCOPE: AUTO_RECOMMENDED` mode, automatically selects 2–4 cohesive backlog tasks matching the active project phase.
+
+### 6. Diagnostics & Brain Doctor (On-Demand)
 If your Brain ever feels desynced, you had an unexpected IDE crash, or an agent made an invalid edit, paste:
 
 **`guides/prompts/workflow-doctor.md`**
