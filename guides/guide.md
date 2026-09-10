@@ -23,13 +23,12 @@ This interactive wizard guides you through 4 seamless phases:
 
 ---
 
-### Advanced / Modular Setup Prompts
+### Standalone Configuration Utilities
 
-If you ever need to reconfigure specific parts of Day 0 independently later:
-* **Tooling / MCP Reconfiguration:** `guides/prompts/setup-02-mcp.md`
-* **Workforce Reconfiguration:** `guides/prompts/setup-03-workforce.md`
-* **Existing Code Reverse-Engineering:** `guides/prompts/setup-01b-existing-project.md`
-* **Blank Project Intent Only:** `guides/prompts/setup-01-project-onboarding.md`
+If you ever need to reconfigure tooling or workforce independently later:
+* **Tooling / MCP Reconfiguration:** `guides/prompts/setup-tooling.md`
+* **Workforce Reconfiguration:** `guides/prompts/setup-workforce.md`
+* **Framework Upgrades:** `guides/prompts/setup-04-framework-upgrade.md`
 
 ---
 
