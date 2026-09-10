@@ -54,6 +54,7 @@ The wizard will:
 2. Ask for your vision and initialize `brain/00_PROJECT.md` & `brain/50_ROADMAP.md`.
 3. Configure your recommended runtime MCP tools.
 4. Optionally install tailored AI specialist roles into `brain/60_AGENTS.md`.
+5. Prune unused profiles to keep your repository clean.
 
 ### 2. Day 1: Daily Development
 Whenever you are ready to build a milestone, open a fresh chat and paste:
@@ -63,6 +64,67 @@ Whenever you are ready to build a milestone, open a fresh chat and paste:
 When the milestone is verified and passing, save durable state to the Brain by pasting:
 
 **`guides/prompts/workflow-02-shutdown.md`**
+
+---
+
+## The Workflow in Action
+
+Here is what using genOS looks like in practice:
+
+### 1. Day 0 — Setup & Initialization
+Paste `guides/prompts/setup-init.md` into your IDE chat:
+
+> **Agent:** Detected stack: React / Node.js / PostgreSQL. Suggested profile: `profiles/web-fullstack`. What is your project vision and constraints?  
+> **Human:** "Building TaskPulse, a real-time collaborative task manager."  
+> **Agent:** Initialized `brain/00_PROJECT.md`, starter systems, and proposed M1.0 in `brain/50_ROADMAP.md`. Recommended MCPs: Playwright & PostgreSQL. Recommended workforce: Frontend Developer & Backend Architect. Pruned unused profiles.  
+> **Agent:** 🎉 Day 0 Complete! Close this chat session.
+
+---
+
+### 2. Day 1 — Milestone Kickoff
+Open a fresh chat (clean context window) and paste `guides/prompts/workflow-01-kickoff.md`:
+
+> **Agent:** BOOT sequence complete from Project Brain.  
+> - Active Milestone: **M1.0 — Database Schema & Workspace Seeding**  
+> - Deliverables & Criteria loaded from `50_ROADMAP.md`.  
+> - Proposed Plan: 1) Create Prisma schema, 2) Run migration, 3) Seed sample workspace.  
+> - *Awaiting your approval before modifying code.*  
+> **Human:** "Plan approved. Proceed."  
+> *(Agent implements code, runs tests, inspects runtime)*
+
+---
+
+### 3. Day 1 — Milestone Shutdown
+When work is complete and tested, paste `guides/prompts/workflow-02-shutdown.md`:
+
+> **Agent:** Executing SHUTDOWN:  
+> - Verified M1.0 completion criteria in `50_ROADMAP.md` [done].  
+> - Activated M1.1 (Authentication) in roadmap [active].  
+> - Updated `20_PROGRESS.yaml` with session summary and new milestone pointer.  
+> - Automated Sanity Gate: YAML validity ✓, Index sync ✓, Scope checks ✓.  
+> 🎉 Memory persisted. Close chat or commit to Git!
+
+---
+
+### 4. Diagnostics & Self-Healing (Anytime)
+If an agent crash occurs or files feel out of sync, paste `guides/prompts/workflow-doctor.md`:
+
+> **Agent:** Inspecting all Brain files... Fixed 1 index table desync. Verified all milestone pointers and system scopes. Project Brain is 100% healthy.
+
+---
+
+## Daily Prompt Reference
+
+| Stage | Prompt File | Purpose |
+| :--- | :--- | :--- |
+| **Day 0** | [`setup-init.md`](file:///d:/GameOS/guides/prompts/setup-init.md) | One-time interactive setup wizard (stack, brain, tools, workforce) |
+| **Start Coding** | [`workflow-01-kickoff.md`](file:///d:/GameOS/guides/prompts/workflow-01-kickoff.md) | Zero-history BOOT, review criteria, propose plan for human approval |
+| **Mid-Session** | [`workflow-03-resume-session.md`](file:///d:/GameOS/guides/prompts/workflow-03-resume-session.md) | Hot-reload in-flight execution RAM when switching IDEs or after crashes |
+| **Finish Work** | [`workflow-02-shutdown.md`](file:///d:/GameOS/guides/prompts/workflow-02-shutdown.md) | Advance roadmap, update RAM, run mandatory Sanity Gate |
+| **Diagnostics** | [`workflow-doctor.md`](file:///d:/GameOS/guides/prompts/workflow-doctor.md) | Scan and self-repair syntax, index tables, and memory integrity |
+| **Tooling** | [`setup-tooling.md`](file:///d:/GameOS/guides/prompts/setup-tooling.md) | Reconfigure runtime tooling and MCP servers independently |
+| **Workforce** | [`setup-workforce.md`](file:///d:/GameOS/guides/prompts/setup-workforce.md) | Reconfigure specialist Agency Agents independently |
+| **Upgrades** | [`setup-04-framework-upgrade.md`](file:///d:/GameOS/guides/prompts/setup-04-framework-upgrade.md) | Safely update genOS framework while strictly preserving the Brain |
 
 ---
 
