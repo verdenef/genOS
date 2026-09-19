@@ -8,9 +8,11 @@ Requirements:
    - Compare the active `genOS/` (or `GameOS/`) folder against `_genOS_Update/`.
    - Identify new and updated framework files (e.g. `profiles/`, `setup-init.md`, `setup-tooling.md`, `setup-workforce.md`, `workflow-autonomous-batch.md`, `workflow-doctor.md`).
    - Identify and **delete obsolete framework files** that no longer exist in the new release (such as deprecated `setup-01-project-onboarding.md`, `setup-01b-existing-project.md`, `setup-02-mcp.md`, and `setup-03-workforce.md`).
+   - **Do NOT** flag custom user profiles in `profiles/` (e.g. `profiles/desktop-automation/`) as obsolete just because they aren't in the official update folder.
 2. **STRICT PRESERVATION OF THE PROJECT BRAIN & USER DATA:**
    - **Never** overwrite or delete any file in `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and all `brain/systems/*.md`).
    - **Never** delete or modify the `.obsidian/` directory if it exists.
+   - **Never** delete the project's active custom `profiles/` folder.
    - All existing milestones, tasks, decisions, progress RAM, and architectural documents must remain 100% intact.
 3. **Migration & Compatibility:**
    - If upgrading an existing game project from GameOS, configure the project to use the `profiles/gamedev/` profile. Prune the other unused profiles (`web-fullstack`, `mobile`, etc.) so their game project remains clean and focused.
