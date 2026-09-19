@@ -88,6 +88,10 @@ genOS is designed to be fully compatible with **Obsidian**. By opening the `genO
 - **Edit Properties Easily:** Use Obsidian's properties interface to change metadata.
 - **Separate Human and AI Workspaces:** Use Obsidian to plan, organize, and direct the project as the Human Director, while your AI agent executes the actual code in Cursor/Antigravity.
 
+**Upgrading Legacy Projects to Obsidian:**
+If you upgraded an older genOS project that didn't use `[[wikilinks]]` originally, your Graph View might look empty because your systems use plain-text references. To fix this, open a chat in your project and run this one-time migration prompt:
+> *"Please review `50_ROADMAP.md`, `30_DECISIONS.md`, and all `brain/systems/*.md`. Find any plain-text mentions of systems, milestones, or decisions, and intelligently convert them into Obsidian `[[wikilinks]]` so my Graph View connects properly."*
+
 ---
 
 ## Maintenance & Upgrades
