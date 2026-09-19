@@ -100,6 +100,7 @@ As soon as the QA Auditor approves the implementation:
    - Confirm index tables in `50_ROADMAP.md` and `30_DECISIONS.md` match section headers.
    - Confirm no milestone deliverables leaked into `40_BACKLOG.md`.
    - Confirm all `systems_in_scope` exist in `brain/systems/`.
+   - Confirm all file cross-references within the Brain use Obsidian `[[wikilink]]` syntax.
 
 ---
 

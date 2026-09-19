@@ -81,6 +81,15 @@ The Brain Doctor inspects all 6 brain files, repairs syntax and index mismatches
 
 ---
 
+## 7. Obsidian UI Integration
+
+genOS is designed to be fully compatible with **Obsidian**. By opening the `genOS/brain/` folder (or your repository root) as an Obsidian Vault, you can:
+- **Visualize the Project Graph:** Every `[[wikilink]]` between systems, milestones, and decisions is mapped visually.
+- **Edit Properties Easily:** Use Obsidian's properties interface to change metadata.
+- **Separate Human and AI Workspaces:** Use Obsidian to plan, organize, and direct the project as the Human Director, while your AI agent executes the actual code in Cursor/Antigravity.
+
+---
+
 ## Maintenance & Upgrades
 
 ### Upgrading genOS

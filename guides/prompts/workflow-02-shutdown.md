@@ -25,6 +25,7 @@ Instructions:
    - Confirm index tables in `50_ROADMAP.md` and `30_DECISIONS.md` match section headers.
    - Confirm `40_BACKLOG.md` has no "Doing" tasks or milestone duplicates.
    - Confirm all `systems_in_scope` exist in `brain/systems/`.
+   - Confirm all file cross-references within the Brain use Obsidian `[[wikilink]]` syntax.
 8. Do NOT modify PROJECT.md.
 9. Do NOT modify unrelated systems.
 10. Produce a concise milestone report containing:

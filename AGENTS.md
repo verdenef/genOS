@@ -110,6 +110,15 @@ Never treat chat history as the source of milestone criteria — use `50_ROADMAP
 
 ---
 
+## File Linking (Obsidian Compatibility)
+
+genOS is natively compatible with **Obsidian**.
+When an AI agent links to another markdown file within the `brain/` directory (e.g., cross-referencing a Decision from a System file, or linking to the Roadmap), you MUST use **Obsidian wikilinks** format: `[[filename.md]]` or `[[filename]]`.
+- Do not use standard markdown links for internal brain files (e.g., `[Link](file.md)`).
+- This ensures the human operator can utilize the Obsidian Graph View to visualize the project architecture.
+
+---
+
 ## Zero-history recovery
 
 After BOOT, recover from brain alone:

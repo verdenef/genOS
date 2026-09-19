@@ -17,7 +17,7 @@ _TBD_ <!-- Describe the overarching goal of this system in one or two sentences.
 - _TBD_ <!-- What specific behaviors, endpoints, models, or state does this system own? -->
 
 ## Dependencies
-- _TBD_ <!-- Other systems this system relies upon. -->
+- _TBD_ <!-- Other systems this system relies upon. Use [[wikilinks]] for Obsidian Graph View compatibility. -->
 
 ## Runtime References
 - _TBD_ <!-- Paths to primary source files, modules, models, or configuration in the project source. -->

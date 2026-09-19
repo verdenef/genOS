@@ -66,6 +66,17 @@ When the milestone is verified and passing, save durable state to the Brain by p
 
 **`guides/prompts/workflow-02-shutdown.md`**
 
+To learn how to use genOS, read the [genOS User Guide](guides/guide.md) for a step-by-step walkthrough of the daily workflow, including ready-to-use prompts for kicking off and shutting down milestones.
+
+---
+
+## Obsidian Integration
+
+genOS is natively designed to be viewed and navigated via **Obsidian**. By opening the `genOS/brain/` folder (or your repository root) as an Obsidian Vault, you gain:
+- **Visual Graph Mapping:** See how systems, milestones, and decisions connect via `[[wikilinks]]`.
+- **Properties UI:** Edit YAML frontmatter and status fields via a clean UI.
+- **Lightning-fast Navigation:** Humans can easily navigate the Project Brain using Obsidian's UI, while AI agents continue to operate via your IDE (like Cursor or Antigravity).
+
 ---
 
 ## The Workflow in Action

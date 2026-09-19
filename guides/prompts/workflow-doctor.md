@@ -27,12 +27,15 @@ Perform a comprehensive inspection of all Project Brain files:
    - Confirm every identifier listed in `PROGRESS.systems_in_scope` has a matching `.md` file inside `brain/systems/`.
    - Confirm `brain/systems/README.md` lists all system files without displaying a status column (status is owned exclusively by the individual system files).
 
+6. **Obsidian Compatibility:**
+   - Verify that all internal file cross-references within the Brain use Obsidian `[[wikilink]]` syntax.
+
 ---
 
 ## Action Instructions
 
-1. If any syntax errors, desynced index tables, or broken milestone pointers are found:
-   - **Automatically repair them.** Fix broken formatting, re-sync index tables to match actual content, and correct invalid pointers.
+1. If any syntax errors, desynced index tables, broken milestone pointers, or standard markdown links are found:
+   - **Automatically repair them.** Fix broken formatting, re-sync index tables to match actual content, correct invalid pointers, and heal standard markdown links (`[Title](file.md)`) into Obsidian `[[file.md]]`.
 2. If any human intent decisions or scope questions are unresolved:
    - Stop and present the issue clearly to the user.
 3. Output the **Brain Health Report**:
@@ -48,6 +51,7 @@ Perform a comprehensive inspection of all Project Brain files:
 | `40_BACKLOG.md` | [✓ / ⚠ / ✗] | [Queue health & leakage check] |
 | `50_ROADMAP.md` | [✓ / ⚠ / ✗] | [Milestones count & active milestone status] |
 | `brain/systems/` | [✓ / ⚠ / ✗] | [Systems count & scope verification] |
+| Obsidian Links | [✓ / ⚠ / ✗] | [Check for standard links & auto-healed count] |
 ```
 
 If all checks pass, confirm that the Brain is pristine and ready for daily operations.
