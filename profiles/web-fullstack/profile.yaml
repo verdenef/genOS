@@ -1,0 +1,40 @@
+id: web-fullstack
+name: "Web Full-Stack"
+description: "Modern web applications using React, Next.js, Vue, or Svelte with Node/tRPC/REST backends and relational/NoSQL databases."
+detection_indicators:
+  - "package.json"
+  - "next.config.js"
+  - "vite.config.ts"
+recommended_mcps:
+  - id: playwright
+    name: "Playwright / Chrome DevTools MCP"
+    purpose: "Inspect rendered DOM, verify UI flows, and take automated screenshots."
+  - id: postgres
+    name: "PostgreSQL / Prisma MCP"
+    purpose: "Inspect live schemas, run migrations, and test database queries."
+recommended_agents:
+  - id: "engineering/engineering-frontend-developer.md"
+    name: "Frontend Developer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-frontend-developer.md"
+    purpose: "React/Next.js/Vue component hierarchy, responsive layouts, accessibility, and CSS styling."
+  - id: "engineering/engineering-backend-architect.md"
+    name: "Backend Architect"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-backend-architect.md"
+    purpose: "API routing, server actions, authentication, and database repositories."
+  - id: "design/design-ui-designer.md"
+    name: "UI Designer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ui-designer.md"
+    purpose: "Design system tokens, typography, visual hierarchy, and UI polish."
+  - id: "engineering/engineering-code-reviewer.md"
+    name: "Code Reviewer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-code-reviewer.md"
+    purpose: "Component code quality, bundle size optimization, accessibility, and correctness."
+starter_systems:
+  - name: "Authentication"
+    purpose: "User identity, session management, tokens, and authorization guards."
+  - name: "Database"
+    purpose: "Schema migrations, data models, connection pooling, and repositories."
+  - name: "FrontendUI"
+    purpose: "Design system tokens, component hierarchy, layouts, and routing."
+  - name: "APIGateway"
+    purpose: "Endpoints, request validation, middleware, and rate limiting."

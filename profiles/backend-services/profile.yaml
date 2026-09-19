@@ -1,0 +1,41 @@
+id: backend-services
+name: "Backend Microservices & Distributed Systems"
+description: "Scalable backend services and APIs using Go, Rust, Python (FastAPI), Node, or Java with Docker, Redis, and SQL/NoSQL databases."
+detection_indicators:
+  - "go.mod"
+  - "Cargo.toml"
+  - "Dockerfile"
+  - "docker-compose.yml"
+recommended_mcps:
+  - id: docker
+    name: "Docker / Container MCP"
+    purpose: "Inspect running containers, service logs, and containerized dependencies."
+  - id: postgres
+    name: "Database / SQL MCP"
+    purpose: "Inspect database schemas, query performance, and connection states."
+recommended_agents:
+  - id: "engineering/engineering-backend-architect.md"
+    name: "Backend Architect"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-backend-architect.md"
+    purpose: "High-level domain modeling, service boundaries, and messaging topologies."
+  - id: "engineering/engineering-database-optimizer.md"
+    name: "Database Optimizer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-database-optimizer.md"
+    purpose: "Schema indexing, query performance, and database reliability."
+  - id: "engineering/engineering-devops-automator.md"
+    name: "DevOps Automator"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-devops-automator.md"
+    purpose: "Dockerfile optimizations, CI/CD pipelines, container orchestration."
+  - id: "engineering/engineering-code-reviewer.md"
+    name: "Code Reviewer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-code-reviewer.md"
+    purpose: "Quality gates, PR reviews, security inspection, and style compliance."
+starter_systems:
+  - name: "ServiceCore"
+    purpose: "Domain models, business logic processing, and dependency injection."
+  - name: "Database"
+    purpose: "Migrations, connection pooling, and repository interfaces."
+  - name: "MessagingQueue"
+    purpose: "Async worker queues, event publishing, and consumer handlers."
+  - name: "Observability"
+    purpose: "Structured logging, Prometheus metrics, and distributed tracing."

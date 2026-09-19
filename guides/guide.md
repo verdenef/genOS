@@ -1,79 +1,90 @@
-# GameOS User Guide
+# genOS User Guide
 
-Welcome to GameOS! This guide explains how to interact with the framework day-to-day. GameOS relies on you (the human) to provide intent, while the AI agents handle implementation and memory management.
+Welcome to genOS! This guide explains how to use the framework day-to-day. genOS is a universal, stack-agnostic AI operating system: it relies on you (the human) to provide intent, while the AI agents handle implementation, state tracking, and memory management.
+
+---
 
 ## Day 0: Setup & Initialization
 
-Before you can use GameOS for daily development, it needs to be initialized for your specific project.
+Before you can use genOS for daily development, it needs to be initialized for your specific project.
 
-### 1. Project Onboarding
-**Important:** You must create your actual game/engine project (e.g. via Unity Hub) *before* running this setup prompt. GameOS is an observer, it is not designed to generate engine scaffolds from scratch for you.
+### 1. The All-in-One Setup Wizard (Recommended)
 
-Once your engine project is ready and you have copied the GameOS folder into the repository, you need to initialize the Brain. Choose the prompt that matches your situation:
+Once you have placed the `genOS` folder inside your project repository, open a chat with your AI agent in your IDE (e.g. Cursor, Antigravity, Claude Code) and paste:
 
-**Option A: Blank Projects**
-If you are starting a brand new project with no existing code, open a chat with your AI agent and paste the contents of:
-**`guides/prompts/setup-01-project-onboarding.md`**
-This instructs the AI to verify the GameOS installation and prompt you for your project vision to initialize the Empty Brain.
+**`guides/prompts/setup-init.md`**
 
-**Option B: Existing Projects**
-If you are bringing GameOS into a project that already has scripts, assets, or in-progress features, open a chat with your AI agent and paste the contents of:
-**`guides/prompts/setup-01b-existing-project.md`**
-This instructs the AI to halt and ask for your high-level vision *first*, and then retroactively read your existing source code to organize it into the GameOS Brain.
+This interactive wizard guides you through 4 seamless phases:
+1. **Stack Profile Selection:** Inspects your repo, detects whether you're building a blank or existing project, and suggests a curated profile from `profiles/` (e.g., `web-fullstack`, `backend-services`, `mobile`, `ai-data`, `cli-system`, or `gamedev`).
+2. **Project Brain Setup:** Asks for your high-level vision, initializes `brain/00_PROJECT.md`, proposes milestones for `brain/50_ROADMAP.md`, and (for existing projects) reverse-engineers code into starter `brain/systems/*.md`.
+3. **Runtime Tooling / MCP:** Proposes and configures the live runtime MCP servers (e.g., Playwright, Database, Docker, Engine) recommended for your stack.
+4. **AI Workforce (Optional):** Recommends tailored specialist AI agent roles from Agency Agents to populate `brain/60_AGENTS.md`.
+5. **Doctor Check & Handoff:** Runs the automated integrity check and instructs you to start coding.
 
-### 2. MCP Setup
-Once the project vision is established, you need to hook up the necessary Model Context Protocol (MCP) servers so the AI can read your engine's live state. Paste the contents of:
-**`guides/prompts/setup-02-mcp.md`**
+---
 
-The AI will configure the servers based on your stack. It will pause and ask for your help if it needs global packages installed or specific permissions.
+### Standalone Configuration Utilities
 
-### 3. Workforce Setup (Optional)
-If you want to use the Agency Agents integration to assign specialized roles to your AI, paste the contents of:
-**`guides/prompts/setup-03-workforce.md`**
-
-This instructs the AI to evaluate your project scope and recommend a tailored AI workforce for you to approve.
+If you ever need to reconfigure tooling or workforce independently later:
+* **Tooling / MCP Reconfiguration:** `guides/prompts/setup-tooling.md`
+* **Workforce Reconfiguration:** `guides/prompts/setup-workforce.md`
+* **Framework Upgrades:** `guides/prompts/setup-04-framework-upgrade.md`
 
 ---
 
 ## The Daily Workflow
 
-The AI agents in GameOS have no chat history. Every time you start a new conversation or bring in a new agent, they need to read the Project Brain to figure out what is going on.
+AI agents have no chat history. Every time you start a new conversation or switch IDEs, the agent recovers state exclusively from the Project Brain (`brain/`).
 
-To make this seamless, GameOS uses a strict **BOOT** and **SHUTDOWN** cycle.
+To maintain flawless synchronization, genOS uses a strict **BOOT** and **SHUTDOWN** cycle.
 
 ### 1. Starting Work (Milestone Kickoff)
-When you are ready to begin working on a milestone, open a new chat with your AI agent and paste the contents of:
+When you are ready to begin working on a milestone, open a fresh chat with your AI agent and paste:
+
 **`guides/prompts/workflow-01-kickoff.md`**
 
-This instructs the AI to read the kernel (`AGENTS.md`) and boot up the Brain. It will summarize the active milestone and propose an implementation plan for your approval.
+The AI will BOOT from the Brain, summarize the active milestone from `50_ROADMAP.md`, and propose an implementation plan for your approval before modifying any code.
 
 ### 2. Implementation
-Once you approve the plan, the agent will write the code and modify your project files. You can chat back and forth as normal during this phase.
+Once you approve the plan, the agent writes code and modifies project files. You can chat back and forth normally during this phase.
 
 ### 3. Context Switching (Changing IDEs mid-session)
-If you need to switch IDEs (e.g. from Cursor to Antigravity) in the middle of working on a task, you will lose your chat history. To catch the new agent up to speed instantly, open a chat in the new IDE and paste the contents of:
+If you switch IDEs (e.g., from Cursor to Antigravity) in the middle of a task, open a chat in the new IDE and paste:
+
 **`guides/prompts/workflow-03-resume-session.md`**
 
-This instructs the AI to read the execution state (`PROGRESS.yaml`) and summarize exactly what you were in the middle of doing, allowing you to resume work without missing a beat.
+The AI will read execution RAM (`20_PROGRESS.yaml`) and summarize exactly where you left off, allowing you to resume immediately.
 
 ### 4. Ending Work (Milestone Shutdown)
-When the milestone is complete and the code is verified, you must save the state back to the Brain before closing the chat. Paste the contents of:
+When a milestone is complete and tests pass, you must save state back to the Brain before closing the chat:
+
 **`guides/prompts/workflow-02-shutdown.md`**
 
-The AI will update the roadmap, update any system architecture documents that were affected, and log the execution state in `PROGRESS.yaml`. 
+The AI updates `50_ROADMAP.md`, logs execution state to `20_PROGRESS.yaml`, updates affected `brain/systems/` documents, and runs the mandatory **Sanity Gate** to guarantee zero corruption.
 
-Once the shutdown is complete, you can safely close the chat. The next time you open your IDE, you can start back at step 1 and the new agent will seamlessly pick up exactly where you left off.
+### 5. Autonomous Batch Development (Hands-Free Execution)
+If you want an advanced AI model (e.g. Fable 5, Claude 3.5 Sonnet in Cursor Composer or Agent mode) to execute multiple tasks or milestones in an uninterrupted loop without pausing to ask for permission:
+
+**`guides/prompts/workflow-autonomous-batch.md`**
+
+- **Pre-flight Safety Gate:** Strictly requires a designated QA/Auditor agent in `brain/60_AGENTS.md` before code generation begins.
+- **Dual-Persona Cycle:** Alternates between a Specialist Builder and an adversarial QA Auditor with a 2-retry self-healing budget.
+- **Atomic Brain Persistence:** Saves state to `brain/systems/`, updates the roadmap/backlog, and passes the Sanity Gate after every completed item.
+- **Smart Backlog Clustering:** In `TARGET_SCOPE: AUTO_RECOMMENDED` mode, automatically selects 2–4 cohesive backlog tasks matching the active project phase.
+
+### 6. Diagnostics & Brain Doctor (On-Demand)
+If your Brain ever feels desynced, you had an unexpected IDE crash, or an agent made an invalid edit, paste:
+
+**`guides/prompts/workflow-doctor.md`**
+
+The Brain Doctor inspects all 6 brain files, repairs syntax and index mismatches, and outputs a complete health table.
 
 ---
 
 ## Maintenance & Upgrades
 
-As GameOS evolves, you may want to pull in new framework features or kernel updates without losing your project's Brain. 
-
-### Upgrading GameOS
-1. Download the latest GameOS release.
-2. Extract it into your repository as a temporary folder named `_GameOS_Update/` (placed right next to your active `GameOS/` folder).
-3. Open a chat with your AI agent and paste the contents of:
-**`guides/prompts/setup-04-framework-upgrade.md`**
-
-This instructs the AI to safely compare the new framework against your local one. It will selectively upgrade your kernel (`AGENTS.md`) and tools while preserving all of your project's `brain/` data.
+### Upgrading genOS
+1. Download the latest genOS release.
+2. Extract it into your repository as `_genOS_Update/`.
+3. Paste: **`guides/prompts/setup-04-framework-upgrade.md`**
+4. The AI will selectively upgrade your kernel (`AGENTS.md`) and tools while preserving your project's `brain/` data.

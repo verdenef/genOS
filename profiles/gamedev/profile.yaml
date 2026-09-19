@@ -1,0 +1,38 @@
+id: gamedev
+name: "Game Development (GameOS Profile)"
+description: "Video games, simulations, and real-time interactive experiences using Unity, Unreal Engine, Godot, or Custom Game Engines."
+detection_indicators:
+  - "Assets/"
+  - "project.godot"
+  - "*.uproject"
+  - "ProjectSettings/ProjectSettings.asset"
+recommended_mcps:
+  - id: engine-mcp
+    name: "Engine MCP (Unity / Godot / Unreal)"
+    purpose: "Inspect scene hierarchy, component values, assets, and console errors."
+recommended_agents:
+  - id: "game-development/game-designer.md"
+    name: "Game Designer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/game-development/game-designer.md"
+    purpose: "Core gameplay loops, balancing, mechanics design, and pacing."
+  - id: "game-development/level-designer.md"
+    name: "Level Designer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/game-development/level-designer.md"
+    purpose: "Environment composition, encounter pacing, lighting, and spatial flow."
+  - id: "game-development/technical-artist.md"
+    name: "Technical Artist"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/game-development/technical-artist.md"
+    purpose: "Shader graphs, particle VFX, performance optimization, and asset import pipelines."
+  - id: "game-development/game-audio-engineer.md"
+    name: "Game Audio Engineer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/game-development/game-audio-engineer.md"
+    purpose: "SFX cues, spatial audio, ambience stems, and audio mix states."
+starter_systems:
+  - name: "Movement"
+    purpose: "Player input reading, kinematics, velocity, collisions, and states."
+  - name: "Combat"
+    purpose: "Damage calculation, hitboxes/hurtboxes, weapons, and status effects."
+  - name: "Inventory"
+    purpose: "Item definitions, equipment slots, stacking, and storage persistence."
+  - name: "Audio"
+    purpose: "Sound effect triggers, spatial audio playback, and music stems."

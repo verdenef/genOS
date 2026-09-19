@@ -1,41 +1,47 @@
-# GameOS Hardening & genOS Universal Framework Implementation Plan
+# genOS Universal Transformation Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement the Doctor self-check and unified Day 0 onboarding wizard in GameOS, then scaffold and publish the universal genOS framework repository to `https://github.com/verdenef/genOS.git`.
+**Goal:** Transform the repository into `genOS` (Universal AI Operating System) on branch `feat/genos`, integrating the Brain Doctor, SHUTDOWN sanity gate, plug-and-play Stack Profiles (`profiles/`), and the unified `setup-init.md` onboarding wizard.
 
-**Architecture:** 
-Phase 1 hardens GameOS in-place by adding a pure-markdown Brain Doctor prompt, embedding an automated 5-point sanity gate into the SHUTDOWN protocol, and creating a unified `setup-init.md` wizard. Phase 2 extracts this hardened kernel into a domain-agnostic `genOS` repository featuring a plug-and-play Stack Profiles catalog (`profiles/`).
+**Architecture:**
+Generalize the proven GameOS single-source-of-truth kernel into a universal, stack-agnostic software framework. Preserve game development as a first-class profile (`profiles/gamedev/`) alongside web, backend, mobile, AI/data, and CLI profiles. Add automated integrity checking and streamlined Day 0 onboarding.
 
-**Tech Stack:** Markdown, YAML, Git, GitHub (`verdenef/genOS`).
+**Tech Stack:** Markdown, YAML, Git branch `feat/genos`, GitHub (`verdenef/genOS`).
 
 ## Global Constraints
 
 - **Single Source of Truth:** Never duplicate state across files. Respect ownership tables in `AGENTS.md`.
 - **Zero-History Recovery:** All prompts and protocols must be fully self-contained and recoverable from file state alone.
 - **Dependency-Free Doctor:** The integrity verification tool must be pure markdown and execute natively via LLM reasoning without external language runtimes.
-- **Strict Separation:** GameOS remains specialized for game development; genOS is completely stack-agnostic with plug-and-play profiles.
+- **Backward Compatibility:** Existing game projects can seamlessly use `profiles/gamedev/` without losing any functionality.
+- **Git Branch:** All commits must be made to the `feat/genos` branch.
 
 ---
 
-### Task 1: Create GameOS Brain Doctor Prompt
+### Task 1: Create Pure-Markdown Brain Doctor (`workflow-doctor.md`)
 
 **Files:**
-- Create: `d:/GameOS/guides/prompts/workflow-doctor.md`
+- Create: `guides/prompts/workflow-doctor.md`
 
 **Interfaces:**
-- Consumes: `brain/` files (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`).
-- Produces: Structured health verification and automated repair report.
+- Consumes: Brain files (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`).
+- Produces: Diagnostic analysis, automated repair instructions, and formatted health report.
 
 - [ ] **Step 1: Write `guides/prompts/workflow-doctor.md`**
 
-Create `guides/prompts/workflow-doctor.md` with explicit diagnostic and auto-repair instructions covering YAML validity, pointer integrity, index synchronization, and system scopes.
+Author the doctor prompt with explicit rules to diagnose and repair:
+- YAML syntax and required keys in `20_PROGRESS.yaml`.
+- Milestone pointer validity against `50_ROADMAP.md`.
+- Index table synchronization in `50_ROADMAP.md` and `30_DECISIONS.md`.
+- No state leakage or duplicate "Doing" items in `40_BACKLOG.md`.
+- Systems listed in `systems_in_scope` matching files in `brain/systems/`.
 
-- [ ] **Step 2: Verify prompt content against Brain invariants**
+- [ ] **Step 2: Verify prompt structure and formatting**
 
-Inspect the prompt to verify it enforces all rules from `AGENTS.md`.
+Check that the prompt contains clear diagnostic checklists and output templates.
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Commit to `feat/genos`**
 
 ```bash
 git add guides/prompts/workflow-doctor.md
@@ -44,25 +50,25 @@ git commit -m "feat(doctor): add standalone Brain doctor diagnostic prompt"
 
 ---
 
-### Task 2: Integrate Mandatory SHUTDOWN Sanity Gate into GameOS
+### Task 2: Integrate Mandatory SHUTDOWN Sanity Gate into Kernel
 
 **Files:**
-- Modify: `d:/GameOS/AGENTS.md:155-175`
-- Modify: `d:/GameOS/guides/prompts/workflow-02-shutdown.md`
+- Modify: `AGENTS.md`
+- Modify: `guides/prompts/workflow-02-shutdown.md`
 
 **Interfaces:**
 - Consumes: Task 1 verification rules.
-- Produces: Automated sanity check step before closing any session.
+- Produces: Enforced 5-point sanity audit before any session completion.
 
 - [ ] **Step 1: Update SHUTDOWN sequence in `AGENTS.md`**
 
-Add the 5-point Sanity Gate (YAML Validity, Milestone Pointer, Index Sync, No State Leakage, System Scopes) as Step 6 of the SHUTDOWN sequence.
+Add Step 6: Sanity Gate to the SHUTDOWN sequence in `AGENTS.md`.
 
 - [ ] **Step 2: Update `guides/prompts/workflow-02-shutdown.md`**
 
-Add the Sanity Gate verification step to the shutdown prompt instructions.
+Add the Sanity Gate verification checklist to the shutdown prompt.
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Commit to `feat/genos`**
 
 ```bash
 git add AGENTS.md guides/prompts/workflow-02-shutdown.md
@@ -71,203 +77,146 @@ git commit -m "feat(kernel): add mandatory SHUTDOWN sanity gate"
 
 ---
 
-### Task 3: Create Unified Day 0 Onboarding Master Wizard for GameOS
+### Task 3: Generalize Kernel to Universal `genOS` (`AGENTS.md`)
 
 **Files:**
-- Create: `d:/GameOS/guides/prompts/setup-init.md`
-
-**Interfaces:**
-- Consumes: Blank repo detection, existing code scan, `setup-02-mcp`, `setup-03-workforce`.
-- Produces: Single guided conversational onboarding flow.
-
-- [ ] **Step 1: Write `guides/prompts/setup-init.md`**
-
-Implement the 4-phase interactive wizard: Phase 1 (Project Detection & Brain Setup), Phase 2 (Automatic MCP Tooling Transition), Phase 3 (Optional AI Workforce Integration), Phase 4 (Doctor Check & Handoff).
-
-- [ ] **Step 2: Verify wizard instructions**
-
-Ensure the prompt explicitly prevents premature code execution and directs the user to `workflow-01-kickoff.md` only upon completion.
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add guides/prompts/setup-init.md
-git commit -m "feat(setup): add unified Day 0 onboarding master wizard"
-```
-
----
-
-### Task 4: Update GameOS User Guide and Documentation
-
-**Files:**
-- Modify: `d:/GameOS/guides/guide.md`
-- Modify: `d:/GameOS/README.md`
-
-**Interfaces:**
-- Consumes: Tasks 1-3.
-- Produces: Clear, friction-free documentation for developers and their teams.
-
-- [ ] **Step 1: Update `guides/guide.md`**
-
-Replace multi-step onboarding instructions with the primary `setup-init.md` workflow, document `workflow-doctor.md`, and list individual setup prompts as advanced utilities.
-
-- [ ] **Step 2: Update `README.md` Quickstart**
-
-Update the repository README quickstart section to reflect `setup-init.md`.
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add guides/guide.md README.md
-git commit -m "docs: update guide and README for unified setup and doctor"
-```
-
----
-
-### Task 5: Scaffold the `genOS` Repository
-
-**Files:**
-- Target Directory: `d:/genOS`
-- Remote: `https://github.com/verdenef/genOS.git`
-
-**Interfaces:**
-- Consumes: Hardened kernel from GameOS.
-- Produces: Clean, initialized Git repository for genOS.
-
-- [ ] **Step 1: Initialize local directory and Git repository for `genOS`**
-
-Create directory structure for `genOS` (`brain/systems`, `profiles`, `guides/prompts`, `integrations`).
-
-- [ ] **Step 2: Configure Git remote**
-
-Set remote to `https://github.com/verdenef/genOS.git`.
-
-- [ ] **Step 3: Commit initial scaffolding**
-
-```bash
-git commit -m "chore: initialize genOS repository structure"
-```
-
----
-
-### Task 6: Author Universal genOS Kernel & Brain Templates
-
-**Files:**
-- Create: `d:/genOS/AGENTS.md`
-- Create: `d:/genOS/brain/00_PROJECT.md`
-- Create: `d:/genOS/brain/20_PROGRESS.yaml`
-- Create: `d:/genOS/brain/30_DECISIONS.md`
-- Create: `d:/genOS/brain/40_BACKLOG.md`
-- Create: `d:/genOS/brain/50_ROADMAP.md`
-- Create: `d:/genOS/brain/60_AGENTS.md`
-- Create: `d:/genOS/brain/systems/README.md`
-- Create: `d:/genOS/brain/systems/SYSTEM.md`
+- Modify: `AGENTS.md`
+- Modify: `brain/00_PROJECT.md`
+- Modify: `brain/systems/SYSTEM.md`
 
 **Interfaces:**
 - Consumes: Design spec Section 3.1.
-- Produces: Completely domain-agnostic software development kernel.
+- Produces: Universal, domain-agnostic software development kernel.
 
-- [ ] **Step 1: Author universal `AGENTS.md`**
+- [ ] **Step 1: Generalize `AGENTS.md`**
 
-Generalize all game-engine terms to universal software engineering concepts (Runtime Observers, Domain Systems, Endpoints, Components).
+Update title to "genOS Kernel". Replace game-specific terms ("Engine MCP", "scenes/prefabs/assets", "gameplay") with universal software engineering concepts ("Runtime Observers", "Source code / Endpoints / Components", "Domain logic").
 
-- [ ] **Step 2: Author universal Brain templates**
+- [ ] **Step 2: Generalize `brain/00_PROJECT.md` template**
 
-Create standard clean templates for `00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and `brain/systems/SYSTEM.md`.
+Provide clean universal placeholders (Product Vision, Target Platforms/Environments, Core User Loop/Workflow, Architectural Constraints, Tech Stack).
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Generalize `brain/systems/SYSTEM.md` template**
+
+Update system template to fit any software domain (Web, Backend, API, UI, Service, Game).
+
+- [ ] **Step 4: Commit to `feat/genos`**
 
 ```bash
-git add AGENTS.md brain/
-git commit -m "feat(kernel): add universal genOS kernel and brain templates"
+git add AGENTS.md brain/00_PROJECT.md brain/systems/SYSTEM.md
+git commit -m "feat(kernel): generalize kernel and templates to genOS universal framework"
 ```
 
 ---
 
-### Task 7: Author genOS Stack Profiles
+### Task 4: Author Stack Profiles Catalog (`profiles/`)
 
 **Files:**
-- Create: `d:/genOS/profiles/web-fullstack/`
-- Create: `d:/genOS/profiles/backend-services/`
-- Create: `d:/genOS/profiles/mobile/`
-- Create: `d:/genOS/profiles/ai-data/`
-- Create: `d:/genOS/profiles/cli-system/`
-- Create: `d:/genOS/profiles/gamedev/`
+- Create: `profiles/README.md`
+- Create: `profiles/web-fullstack/profile.yaml`
+- Create: `profiles/backend-services/profile.yaml`
+- Create: `profiles/mobile/profile.yaml`
+- Create: `profiles/ai-data/profile.yaml`
+- Create: `profiles/cli-system/profile.yaml`
+- Create: `profiles/gamedev/profile.yaml`
 
 **Interfaces:**
-- Consumes: Stack profiles architecture from spec.
-- Produces: Plug-and-play profile templates with recommended MCPs, agents, and systems.
+- Consumes: Spec Section 3.2.
+- Produces: Modular presets with recommended MCP tools, starter systems, and specialist AI roles.
 
-- [ ] **Step 1: Create web-fullstack and backend-services profiles**
+- [ ] **Step 1: Create `profiles/README.md` catalog guide**
 
-Define metadata, MCP recommendations, specialist agents, and starter systems.
+Document how profiles work, how to create custom profiles, and how `setup-init.md` consumes them.
 
-- [ ] **Step 2: Create mobile, ai-data, cli-system, and gamedev profiles**
+- [ ] **Step 2: Create Web & Backend profiles (`web-fullstack`, `backend-services`)**
 
-Define configurations for mobile apps, data/AI, CLI utilities, and game dev.
+Define configurations for modern web (React/Next.js/Vue, Node, PostgreSQL, Playwright) and backend services (Go, Rust, FastAPI, Docker, Redis).
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Create Mobile, AI/Data, CLI, and GameDev profiles**
+
+Define configurations for Mobile (Flutter/React Native), AI/Data (Python, PyTorch, Vector DBs), CLI (Rust/Go), and GameDev (Unity/Godot/Unreal).
+
+- [ ] **Step 4: Commit to `feat/genos`**
 
 ```bash
 git add profiles/
-git commit -m "feat(profiles): add stack profiles catalog"
+git commit -m "feat(profiles): add stack profiles catalog for web, backend, mobile, ai, cli, and gamedev"
 ```
 
 ---
 
-### Task 8: Author genOS Guides & Workflows
+### Task 5: Author Unified Day 0 Onboarding Master Wizard (`setup-init.md`)
 
 **Files:**
-- Create: `d:/genOS/guides/guide.md`
-- Create: `d:/genOS/guides/prompts/setup-init.md`
-- Create: `d:/genOS/guides/prompts/setup-tooling.md`
-- Create: `d:/genOS/guides/prompts/setup-workforce.md`
-- Create: `d:/genOS/guides/prompts/workflow-01-kickoff.md`
-- Create: `d:/genOS/guides/prompts/workflow-02-shutdown.md`
-- Create: `d:/genOS/guides/prompts/workflow-03-resume.md`
-- Create: `d:/genOS/guides/prompts/workflow-doctor.md`
-- Create: `d:/genOS/README.md`
+- Create: `guides/prompts/setup-init.md`
 
 **Interfaces:**
-- Consumes: Universal kernel & profiles.
-- Produces: Complete user-facing documentation and workflow prompts.
+- Consumes: Stack profiles catalog, blank vs existing repo detection, MCP tooling, and workforce setup.
+- Produces: Single interactive onboarding prompt with profile selection.
 
-- [ ] **Step 1: Author `guides/prompts/setup-init.md` with Profile Selector**
+- [ ] **Step 1: Author `guides/prompts/setup-init.md`**
 
-Create interactive prompt with auto-detection of stack and profile selection.
+Implement 4-phase wizard:
+- Phase 1: Repo Inspection & Profile Selection (auto-detects stack and asks to confirm profile).
+- Phase 2: Project Brain Population (`00_PROJECT.md`, `50_ROADMAP.md`, starter systems).
+- Phase 3: Runtime Tooling / MCP Setup (profile-based MCP configuration).
+- Phase 4: AI Workforce Selection (profile-based specialist roles in `60_AGENTS.md`) & Handoff to `workflow-01-kickoff.md`.
 
-- [ ] **Step 2: Author workflows and user guide**
+- [ ] **Step 2: Verify wizard instructions**
 
-Port kickoff, shutdown, resume, and doctor prompts.
+Ensure strict halt preventing premature code execution.
 
-- [ ] **Step 3: Author `README.md`**
+- [ ] **Step 3: Commit to `feat/genos`**
 
-Write comprehensive README introducing genOS.
+```bash
+git add guides/prompts/setup-init.md
+git commit -m "feat(setup): add unified Day 0 onboarding master wizard with profile selection"
+```
 
-- [ ] **Step 4: Commit**
+---
+
+### Task 6: Update Guides, Workflows & Documentation
+
+**Files:**
+- Modify: `guides/guide.md`
+- Modify: `guides/prompts/workflow-01-kickoff.md`
+- Modify: `guides/prompts/workflow-03-resume-session.md`
+- Modify: `README.md`
+
+**Interfaces:**
+- Consumes: Tasks 1-5.
+- Produces: Cohesive genOS documentation and generalized workflows.
+
+- [ ] **Step 1: Update `guides/guide.md`**
+
+Document genOS Day 0 wizard, profiles catalog, doctor diagnostics, and daily workflows.
+
+- [ ] **Step 2: Generalize `workflow-01-kickoff.md` and `workflow-03-resume-session.md`**
+
+Update references from GameOS to genOS.
+
+- [ ] **Step 3: Overhaul `README.md`**
+
+Rewrite README to introduce genOS as the universal agentic operating system for all software development.
+
+- [ ] **Step 4: Commit to `feat/genos`**
 
 ```bash
 git add guides/ README.md
-git commit -m "docs: add genOS user guide, workflow prompts, and readme"
+git commit -m "docs: overhaul guides and README for genOS universal framework"
 ```
 
 ---
 
-### Task 9: Push genOS to Remote Repository
+### Task 7: Verification & Brain Doctor Run
 
 **Files:**
-- Remote: `https://github.com/verdenef/genOS.git`
+- Test all Brain files against `workflow-doctor.md`
 
-**Interfaces:**
-- Consumes: Complete `d:/genOS` repository.
-- Produces: Published GitHub repository.
+- [ ] **Step 1: Run Doctor validation on repository**
 
-- [ ] **Step 1: Verify genOS Brain with Doctor prompt**
+Audit `brain/` files, verify YAML syntax, check roadmap pointers, and confirm clean state.
 
-Run internal audit on the genOS repository.
+- [ ] **Step 2: Review git status on `feat/genos`**
 
-- [ ] **Step 2: Push to GitHub**
-
-```bash
-git push -u origin main
-```
+Ensure all changes are cleanly committed to branch `feat/genos`.

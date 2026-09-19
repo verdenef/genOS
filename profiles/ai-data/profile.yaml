@@ -1,0 +1,40 @@
+id: ai-data
+name: "AI, Machine Learning & Data Engineering"
+description: "AI agents, LLM orchestration, data processing pipelines, and ML models using Python, PyTorch, LangChain, or Pandas."
+detection_indicators:
+  - "pyproject.toml"
+  - "requirements.txt"
+  - "environment.yml"
+recommended_mcps:
+  - id: jupyter
+    name: "Jupyter / Notebook MCP"
+    purpose: "Execute code cells, inspect in-memory dataframes, and render plots."
+  - id: vectordb
+    name: "Vector Database MCP"
+    purpose: "Inspect embeddings, test similarity queries, and verify indexes."
+recommended_agents:
+  - id: "engineering/engineering-ai-engineer.md"
+    name: "AI Engineer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-ai-engineer.md"
+    purpose: "LLM client wrappers, temperature/token tuning, prompt engineering, and agentic loops."
+  - id: "engineering/engineering-data-engineer.md"
+    name: "Data Engineer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-data-engineer.md"
+    purpose: "ETL pipelines, data validation schemas, streaming ingestion, and warehousing."
+  - id: "engineering/engineering-database-optimizer.md"
+    name: "Database Optimizer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-database-optimizer.md"
+    purpose: "Vector database indexing, query latency tuning, and embedding caching."
+  - id: "testing/testing-reality-checker.md"
+    name: "Reality Checker"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-reality-checker.md"
+    purpose: "Model output evaluation, benchmark assertions, and hallucination checking."
+starter_systems:
+  - name: "IngestionPipeline"
+    purpose: "Source data loading, transformation, chunking, and sanitization."
+  - name: "ModelEngine"
+    purpose: "LLM client wrappers, temperature/token settings, and fallback providers."
+  - name: "VectorStorage"
+    purpose: "Embedding generation, vector indexing, and hybrid retrieval search."
+  - name: "Evaluation"
+    purpose: "Benchmarking, accuracy assertions, hallucination checks, and metrics."

@@ -1,0 +1,36 @@
+id: cli-system
+name: "CLI, Systems & Developer Tooling"
+description: "Command-line interfaces, systems utilities, daemon processes, and compilers using Rust, Go, C/C++, or Python."
+detection_indicators:
+  - "Cargo.toml"
+  - "go.mod"
+  - "Makefile"
+  - "CMakeLists.txt"
+recommended_mcps:
+  - id: native-terminal
+    name: "Terminal / Process Runner MCP"
+    purpose: "Execute CLI subcommands, capture exit codes, and inspect stderr/stdout."
+recommended_agents:
+  - id: "engineering/engineering-developer-tooling-engineer.md"
+    name: "Developer Tooling Engineer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-developer-tooling-engineer.md"
+    purpose: "CLI architecture, subcommand dispatching, terminal UX, and process execution."
+  - id: "engineering/engineering-senior-developer.md"
+    name: "Senior Developer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-senior-developer.md"
+    purpose: "Systems programming, memory safety, cross-platform compilation, and performance."
+  - id: "engineering/engineering-git-workflow-master.md"
+    name: "Git Workflow Master"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-git-workflow-master.md"
+    purpose: "Release tagging, semantic versioning, and changelog automation."
+  - id: "testing/testing-test-engineer.md"
+    name: "Test Engineer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-test-engineer.md"
+    purpose: "CLI test suites, exit code assertions, and stdin/stdout snapshot testing."
+starter_systems:
+  - name: "CommandDispatcher"
+    purpose: "Subcommand routing, argument parsing, validation, and execution."
+  - name: "ConfigEngine"
+    purpose: "File discovery, environment variable overrides, and serialization."
+  - name: "OutputFormatter"
+    purpose: "Table rendering, JSON export modes, color styling, and logging."

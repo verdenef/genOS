@@ -1,8 +1,8 @@
-# GameOS Kernel
+# genOS Kernel
 
 Every AI agent in this repository must follow this file. Read it before any other project file.
 
-GameOS stores **only** knowledge that cannot be reliably inferred from the engine (e.g., scenes, prefabs, assets), source code, or Engine MCP.
+genOS stores **only** knowledge that cannot be reliably inferred from the runtime environment (e.g., containers, endpoints, schemas, assets), source code, or Runtime MCP.
 
 Assume **no chat history**. Recover state from the Project Brain alone.
 
@@ -36,7 +36,7 @@ Assume **no chat history**. Recover state from the Project Brain alone.
 
 - `_TBD_` and `null` mean **unknown / unset**.
 - Do **not** invent content to fill them.
-- Do **not** treat them as an invitation to design gameplay or rewrite intent.
+- Do **not** treat them as an invitation to design domain architecture or rewrite intent.
 - Ask the human, or leave unset, until real information exists.
 
 ---
@@ -51,18 +51,18 @@ The Project Brain is **uninitialized** when **any** of these is true:
 
 ### When uninitialized, agents MUST
 
-1. Run BOOT (read files) but **stop before inventing** vision, gameplay, systems design, roadmap fiction, or backlog fiction.
+1. Run BOOT (read files) but **stop before inventing** vision, domain logic, systems design, roadmap fiction, or backlog fiction.
 2. Tell the human the brain is empty and ask for intent (vision, scope, constraints, first goal).
 3. Only perform structural maintenance: fix templates, clarify wording, sync format — without inventing project content.
 4. On SHUTDOWN, write an honest `session_summary` (e.g. brain still uninitialized; waiting on human for Vision/first goal).
 
 ### When uninitialized, agents MUST NOT
 
-- Invent Vision, Scope, Core Gameplay Loop, or Success Criteria
+- Invent Vision, Scope, Core User Flow, or Success Criteria
 - Invent roadmap milestones or fill `50_ROADMAP.md` with guessed phases
-- Fill system Purpose/Invariants/Responsibilities with guessed gameplay
+- Fill system Purpose/Invariants/Responsibilities with guessed features
 - Create fake `TASK` / `DEC` / milestone items to look productive
-- Scaffold a full game design “to get started”
+- Scaffold a full architecture or mock project “to get started”
 
 Once the human provides intent (or accepts a proposed decision), update PROJECT / DECISIONS / ROADMAP / PROGRESS accordingly, then normal work may proceed.
 
@@ -76,10 +76,10 @@ Once the human provides intent (or accepts a proposed decision), update PROJECT 
 - Prefer brain + repo work (templates, decisions, backlog) until an implementation project exists.
 - Ask the human before creating an engine/implementation project unless they already requested it.
 
-### Engine MCP unavailable
+### Runtime / Tooling MCP unavailable
 
-- Use source code / asset files on disk when present.
-- Do not invent runtime hierarchy, component values, or console state.
+- Use source code / configuration files on disk when present.
+- Do not invent runtime hierarchy, database records, container state, or console output.
 - Note MCP-unavailable in `session_summary` or `known_issues` if it blocked verification.
 - Still run SHUTDOWN.
 
@@ -94,7 +94,7 @@ Once the human provides intent (or accepts a proposed decision), update PROJECT 
 
 ### Brain stores
 
-- Design intent, research constraints, gameplay rules (as design)
+- Design intent, research constraints, domain rules (as design)
 - Cross-system invariants, architectural decisions
 - Roadmap milestone definitions and status
 - Current **execution** state (progress pointer, blockers, session handoff)
@@ -102,7 +102,7 @@ Once the human provides intent (or accepts a proposed decision), update PROJECT 
 
 ### Brain must NOT store
 
-Anything reliably inferable from the engine (scenes, prefabs, assets), source code, or Engine MCP.
+Anything reliably inferable from the runtime environment (containers, endpoints, schemas, assets), source code, or Runtime MCP.
 
 Never duplicate APIs, hierarchies, component values, or asset lists. Point to Runtime paths instead.
 
@@ -167,7 +167,14 @@ Mandatory. Incomplete SHUTDOWN breaks the next agent.
 3. Record decisions in `brain/30_DECISIONS.md` when applicable; keep Index in sync with entries
 4. Update `brain/50_ROADMAP.md` when a milestone is started, completed, cancelled, or its definition changes (status + Index row)
 5. Update `brain/40_BACKLOG.md` for ad-hoc queue columns only — never milestone status
-6. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions
+6. **Sanity Gate (Mandatory Integrity Audit):**
+   - Confirm `20_PROGRESS.yaml` is valid, parseable YAML with all required keys.
+   - Verify `current_milestone` in `PROGRESS.yaml` matches an existing, active ID in `50_ROADMAP.md`.
+   - Ensure all index tables in `50_ROADMAP.md` and `30_DECISIONS.md` match their section headers.
+   - Ensure no milestone tasks or "Doing" states leaked into `40_BACKLOG.md`.
+   - Ensure all `systems_in_scope` exist in `brain/systems/`.
+   - Auto-repair any syntax or index desyncs before reporting completion.
+7. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions
 
 Clear or rewrite stale `systems_in_scope` / `working_on` so the next agent is not misled.
 
@@ -179,7 +186,7 @@ If PROJECT intent must change, ask the human first. If a new **program-level** r
 
 ## Location-Agnostic Pathing
 
-- GameOS may be installed at the repository root or inside a subdirectory (e.g., `GameOS/`).
+- genOS may be installed at the repository root or inside a subdirectory (e.g., `genOS/`).
 - **CRITICAL:** All file paths mentioned in this kernel (e.g., `brain/00_PROJECT.md`) are relative to the directory containing this `AGENTS.md` file, *not* the repository root.
 - Do not store project truth in IDE-local memory or chat.
 
@@ -187,13 +194,13 @@ If PROJECT intent must change, ask the human first. If a new **program-level** r
 
 ## Optional Integrations
 
-GameOS supports optional integrations (such as AI workforce management) stored in the `integrations/` directory.
-- The GameOS kernel remains fully independent of these integrations.
+genOS supports optional integrations (such as AI workforce management) stored in the `integrations/` directory.
+- The genOS kernel remains fully independent of these integrations.
 - Do not auto-install or assume any specific integration is active unless requested or defined in the Brain.
 
 ---
 
-## Engine MCP
+## Runtime / Tooling MCP
 
 - MCP + source = implementation truth.
 - Brain = semantic truth.
@@ -242,7 +249,7 @@ Statuses: `planned` | `active` | `done` | `cancelled` — keep the Index in sync
 
 ## Prohibitions
 
-- Do not invent PROJECT intent or gameplay under Empty Brain Protocol
+- Do not invent PROJECT intent or domain logic under Empty Brain Protocol
 - Do not invent roadmap program milestones without human approval
 - Do not duplicate state across brain files
 - Do not store milestone criteria or milestone status in PROGRESS or BACKLOG
