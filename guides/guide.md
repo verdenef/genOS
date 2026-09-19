@@ -90,7 +90,8 @@ genOS is designed to be fully compatible with **Obsidian**. By opening the `genO
 
 **Upgrading Legacy Projects to Obsidian:**
 If you upgraded an older genOS project that didn't use `[[wikilinks]]` originally, your Graph View might look empty because your systems use plain-text references. To fix this, open a chat in your project and run this one-time migration prompt:
-> *"Please review `50_ROADMAP.md`, `30_DECISIONS.md`, and all `brain/systems/*.md`. Find any plain-text mentions of systems, milestones, or decisions, and intelligently convert them into Obsidian `[[wikilinks]]` so my Graph View connects properly."*
+
+**`guides/prompts/setup-obsidian-migration.md`**
 
 ---
 

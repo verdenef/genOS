@@ -138,6 +138,7 @@ If an agent crash occurs or files feel out of sync, paste `guides/prompts/workfl
 | **Tooling** | [`setup-tooling.md`](file:///d:/GameOS/guides/prompts/setup-tooling.md) | Reconfigure runtime tooling and MCP servers independently |
 | **Workforce** | [`setup-workforce.md`](file:///d:/GameOS/guides/prompts/setup-workforce.md) | Reconfigure specialist Agency Agents independently |
 | **Upgrades** | [`setup-04-framework-upgrade.md`](file:///d:/GameOS/guides/prompts/setup-04-framework-upgrade.md) | Safely update genOS framework while strictly preserving the Brain |
+| **Migration** | [`setup-obsidian-migration.md`](file:///d:/GameOS/guides/prompts/setup-obsidian-migration.md) | One-time migration for legacy projects to auto-link Obsidian `[[wikilinks]]` |
 
 ---
 
