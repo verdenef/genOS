@@ -28,7 +28,9 @@ genOS/
 │       ├── workflow-03-resume-session.md
 │       ├── workflow-autonomous-batch.md # Hands-free multi-task autonomous runner
 │       └── workflow-doctor.md
-├── integrations/             # AI workforce integrations (Agency Agents)
+├── integrations/             # AI workforce integrations (Agency Agents & Virtual Office)
+│   ├── agency_agents.md      # Workforce selection protocol
+│   └── virtual-office/       # Grok Bot Virtual Office team integration
 └── brain/                    # The Project Brain (single source of truth)
     ├── 00_PROJECT.md         # Intent, scope, architecture constraints
     ├── 20_PROGRESS.yaml      # Cold-start execution RAM
@@ -139,6 +141,8 @@ If an agent crash occurs or files feel out of sync, paste `guides/prompts/workfl
 | **Workforce** | [`setup-workforce.md`](file:///d:/GameOS/guides/prompts/setup-workforce.md) | Reconfigure specialist Agency Agents independently |
 | **Upgrades** | [`setup-04-framework-upgrade.md`](file:///d:/GameOS/guides/prompts/setup-04-framework-upgrade.md) | Safely update genOS framework while strictly preserving the Brain |
 | **Migration** | [`setup-obsidian-migration.md`](file:///d:/GameOS/guides/prompts/setup-obsidian-migration.md) | One-time migration for legacy projects to auto-link Obsidian `[[wikilinks]]` |
+| **Virtual Office Setup** | [`setup-virtual-office.md`](file:///d:/GameOS/integrations/virtual-office/setup-virtual-office.md) | Generate Grok Bot Virtual Office personas and prompts |
+| **Virtual Office Daily** | [`workflow-virtual-office.md`](file:///d:/GameOS/guides/prompts/workflow-virtual-office.md) | Daily multi-bot dispatch and coordinator workflow in Grok Bot |
 
 ---
 

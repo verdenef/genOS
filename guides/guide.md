@@ -28,6 +28,7 @@ This interactive wizard guides you through 4 seamless phases:
 If you ever need to reconfigure tooling or workforce independently later:
 * **Tooling / MCP Reconfiguration:** `guides/prompts/setup-tooling.md`
 * **Workforce Reconfiguration:** `guides/prompts/setup-workforce.md`
+* **Virtual Office Setup (Grok Bots):** `integrations/virtual-office/setup-virtual-office.md`
 * **Framework Upgrades:** `guides/prompts/setup-04-framework-upgrade.md`
 
 ---
@@ -72,7 +73,19 @@ If you want an advanced AI model (e.g. Fable 5, Claude 3.5 Sonnet in Cursor Comp
 - **Atomic Brain Persistence:** Saves state to `brain/systems/`, updates the roadmap/backlog, and passes the Sanity Gate after every completed item.
 - **Smart Backlog Clustering:** In `TARGET_SCOPE: AUTO_RECOMMENDED` mode, automatically selects 2–4 cohesive backlog tasks matching the active project phase.
 
-### 6. Diagnostics & Brain Doctor (On-Demand)
+### 6. Virtual Office (Remote Grok Bot Workforce)
+If you want to run a persistent, remote multi-agent development team via the Grok Bot mobile/desktop app while keeping your genOS Project Brain as the single source of truth:
+
+**`guides/prompts/workflow-virtual-office.md`**
+
+- **Lead Bot Coordinator:** Directs the daily schedule by reading `50_ROADMAP.md` and proposing assignments for human approval.
+- **Git Branch Isolation:** Builder bots create and work in `bot/<agent-name>` branches, keeping `main` pristine.
+- **Adversarial QA Gate:** QA bot validates changes before pull requests are submitted.
+- **One-Click Human Approvals:** You review and merge pull requests on GitHub, automatically updating your local Obsidian Graph View.
+
+To set up the bots initially, run the setup prompt: `integrations/virtual-office/setup-virtual-office.md`.
+
+### 7. Diagnostics & Brain Doctor (On-Demand)
 If your Brain ever feels desynced, you had an unexpected IDE crash, or an agent made an invalid edit, paste:
 
 **`guides/prompts/workflow-doctor.md`**
@@ -81,7 +94,7 @@ The Brain Doctor inspects all 6 brain files, repairs syntax and index mismatches
 
 ---
 
-## 7. Obsidian UI Integration
+## 8. Obsidian UI Integration
 
 genOS is designed to be fully compatible with **Obsidian**. By opening the `genOS/brain/` folder (or your repository root) as an Obsidian Vault, you can:
 - **Visualize the Project Graph:** Every `[[wikilink]]` between systems, milestones, and decisions is mapped visually.
