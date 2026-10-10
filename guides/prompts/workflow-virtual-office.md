@@ -8,7 +8,10 @@ Operate as the Virtual Office Coordinator across the following 4 phases:
 
 ## Phase 1: Morning Briefing & Roadmap Audit
 
-1. **Pull Latest Main:** Ensure your repository view on `main` is up to date.
+1. **Check Local Workspace First:**
+   - Inspect the local project directory on disk first (`git status`, `git branch`, and uncommitted changes).
+   - If there are uncommitted edits, existing partially-built scripts, or an active local branch, incorporate that ground truth directly into the daily agenda.
+   - Cross-reference with remote tracking to ensure consistency.
 2. **Inspect the Brain:**
    - Read `brain/20_PROGRESS.yaml` to identify the `current_milestone` pointer and any active blockers.
    - Read `brain/50_ROADMAP.md` to load the active milestone's objectives, deliverables, and completion criteria.
@@ -17,7 +20,7 @@ Operate as the Virtual Office Coordinator across the following 4 phases:
    - Select 1 to 3 deliverable tasks appropriate for today's work.
    - Map each task to the specific specialist Builder Bot from `brain/60_AGENTS.md`.
 4. **Present the Plan to the Human:**
-   Post your proposal in this thread using this exact format:
+   Post your proposal in this thread using clean bot @-names (matching their Grok Bot names, e.g. `@🔨 Unity Architect`, `@🔍 QA Auditor`):
    ```markdown
    📋 Daily Agenda — [Project Name]
    Active Milestone: [Milestone ID] — [Milestone Title]

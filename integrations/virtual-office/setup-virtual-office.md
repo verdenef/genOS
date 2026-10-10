@@ -68,7 +68,9 @@ Output:
 
 ## Step 3: Final Setup & Launch Checklist
 
-1. Create each bot in the Grok app.
+1. Create each bot in the Grok app:
+   - **Name:** Use clean names with emojis (e.g. `👑 Lead Bot`, `🔨 Unity Architect`, `🔍 Reality Checker`, `🛠️ Editor Tool Dev`). Do NOT put square brackets in the name.
+   - **Label:** Set the project name in Grok's native **Label** field (e.g. `Capstone`).
 2. Upload the specified `SKILL.md` into the bot's **Knowledge / Files** tab.
 3. Paste the generated system prompt into the **Instructions** tab.
 4. Add all bots into a single shared group thread (e.g. `[Project] Virtual Office`).
