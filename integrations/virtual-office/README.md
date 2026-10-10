@@ -62,17 +62,23 @@ All durable project state flows strictly through the genOS Project Brain (`brain
 
 ## 4. Bot Roles & Responsibilities
 
+### Importing Full Agency Agent Personas (`SKILL.md`)
+A key superpower of genOS is that each specialist role in `brain/60_AGENTS.md` is backed by a complete **Agency Agent persona** (defined in `.agents/skills/<agent>/SKILL.md`, `.cursor/rules/`, or from the catalog).
+- When configuring Grok Bots, `setup-virtual-office.md` does not merely copy a one-line title; it inspects the agent's full `SKILL.md` to extract its **architectural principles, mandatory rules, anti-patterns, and technical conventions**.
+- You can also upload the raw `SKILL.md` file directly into the Grok Bot's **Knowledge / Files** section in the app to give the bot the complete reference manual.
+
 ### Lead Bot (Coordinator)
 - **Authority:** Reads `brain/50_ROADMAP.md` and `brain/40_BACKLOG.md` on `main`.
 - **Responsibilities:** Formulates daily task assignments, presents proposals to human, dispatches tasks to Builder/QA bots, monitors progress, and prepares daily handoff summaries.
 - **Restrictions:** Never writes application code, modifies system files, or changes architectural decisions.
 
-### Builder Bots (Mapped from `60_AGENTS.md`)
+### Builder Bots (Mapped from `60_AGENTS.md` & `SKILL.md`)
 - **Authority:** Full read/write access to source code and relevant `brain/systems/*.md` files on their branch.
 - **Branch:** `bot/<agent-name>` (e.g. `bot/unity-architect`, `bot/backend-engineer`).
+- **Persona:** Inherits the deep domain constraints from the agent's `SKILL.md` (e.g. ScriptableObject-first design, single-responsibility, modular systems).
 - **Protocol:** Must execute the genOS BOOT sequence, implement assigned deliverables, run local tests, perform SHUTDOWN with Sanity Gate checks, and open a PR.
 
-### QA Bot (Mapped from `60_AGENTS.md`)
+### QA Bot (Mapped from `60_AGENTS.md` & `SKILL.md`)
 - **Authority:** Read-only access to main, checkout access to Builder branches.
 - **Branch:** `bot/<qa-agent-name>`.
 - **Protocol:** Performs adversarial verification per `workflow-autonomous-batch.md` standards. Runs tests, inspects code quality, posts reviews on GitHub PRs, and tags Builder bots if fixes are needed (2-retry budget).
