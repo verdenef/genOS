@@ -64,8 +64,9 @@ All durable project state flows strictly through the genOS Project Brain (`brain
 
 ### Importing Full Agency Agent Personas (`SKILL.md`)
 A key superpower of genOS is that each specialist role in `brain/60_AGENTS.md` is backed by a complete **Agency Agent persona** (defined in `.agents/skills/<agent>/SKILL.md`, `.cursor/rules/`, or from the catalog).
-- When configuring Grok Bots, `setup-virtual-office.md` does not merely copy a one-line title; it inspects the agent's full `SKILL.md` to extract its **architectural principles, mandatory rules, anti-patterns, and technical conventions**.
-- You can also upload the raw `SKILL.md` file directly into the Grok Bot's **Knowledge / Files** section in the app to give the bot the complete reference manual.
+- **Two-Pillar Bot Configuration:**
+  1. **Knowledge Base Attachment:** Upload the actual `SKILL.md` file directly into the Grok Bot's **Knowledge / Files** section in the app. This provides the bot with its full domain manual, design patterns, and anti-pattern watchlists.
+  2. **Operational Instructions:** Paste the generated system prompt from `setup-virtual-office.md` into the bot's **Instructions** box. This establishes the genOS BOOT/SHUTDOWN git lifecycle and links the bot to its attached skill.
 
 ### Lead Bot (Coordinator)
 - **Authority:** Reads `brain/50_ROADMAP.md` and `brain/40_BACKLOG.md` on `main`.
