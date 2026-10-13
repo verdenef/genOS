@@ -62,13 +62,13 @@ Once the Workforce Gate passes:
 Iterate through the batch one task at a time. For each item:
 
 ### Step A: Builder Persona Execution
-1. Adopt the designated **Builder Persona** from `brain/60_AGENTS.md` (e.g., Unity Architect, Backend Developer).
+1. Adopt the designated **Builder Persona** from `brain/60_AGENTS.md` (e.g., Unity Architect, Backend Developer). You MUST inspect and read the agent's full definition file (e.g., `.agents/skills/<agent>/SKILL.md` or `.cursor/rules/<agent>.mdc`) to apply its architectural standards, mandatory design rules, and anti-pattern watchlists.
 2. Load the relevant `brain/systems/<System>.md` documents listed in `systems_in_scope` to respect system invariants.
 3. Implement the required code, assets, and configurations.
 4. Run compiler/build commands to verify clean syntax with zero warnings or compile errors.
 
 ### Step B: QA Auditor Persona Verification
-1. Shift explicitly into the designated **QA Auditor Persona** from `brain/60_AGENTS.md` (e.g., Game Tester, Code Reviewer).
+1. Shift explicitly into the designated **QA Auditor Persona** from `brain/60_AGENTS.md` (e.g., Game Tester, Code Reviewer). Inspect and read its full definition file (e.g., `.agents/skills/<qa-agent>/SKILL.md`) to apply its testing rigor.
 2. **Adversarial Audit:**
    - Verify all acceptance criteria from the roadmap or backlog are satisfied.
    - Audit code quality: enforce defensive null checks, boundary checks, and system invariants.

@@ -22,3 +22,4 @@ Rules:
 - Treat the Project Brain as authoritative.
 - Do not begin future milestones.
 - Only implement the current milestone after approval.
+- **Agency Agent Auto-Load:** Upon receiving approval to proceed (e.g., "proceed", "approved"), you MUST automatically read and adopt the full persona rules from the identified Agency Agent definition files (inspecting `.agents/skills/<agent>/SKILL.md` or `.cursor/rules/<agent>.mdc`) using your file viewing tool BEFORE writing any code. Do not rely on generic assumptions when a specialist skill definition exists.
