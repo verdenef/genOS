@@ -1,4 +1,7 @@
-.agents/
-.cursor/
-.obsidian/
+# genOS Repository Gitignore
+
+# Ignore Obsidian workspace state
+.obsidian/workspace*
+
+# Binaries
 *.exe
