@@ -1,3 +1,9 @@
+# Framework Upgrade
+
+> Previously `setup-04-framework-upgrade.md`. Renamed for clarity in genOS v3.
+
+---
+
 I have downloaded the latest genOS framework release and placed it in a temporary folder named `_genOS_Update/` in the root of my repository.
 
 Your task is to safely upgrade this project's existing framework (whether upgrading an older GameOS or a previous genOS version) to the latest genOS framework.

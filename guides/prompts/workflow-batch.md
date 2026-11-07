@@ -1,3 +1,13 @@
+# Autonomous Batch — Reference & Alternative Trigger
+
+> **Primary trigger:** Type `batch` in any AI chat where genOS is loaded.
+> **Alternative trigger:** `@workflow-batch.md` for explicit confirmation.
+> **Full protocol definition:** `AGENTS.md` → Commands → `batch`
+
+This file provides detailed reference for the autonomous batch workflow and serves as an alternative trigger mechanism.
+
+---
+
 # Target Configuration
 # Set your desired execution scope below:
 # - AUTO_RECOMMENDED : Agent analyzes backlogs and selects a safe, cohesive batch of 2-4 tasks.

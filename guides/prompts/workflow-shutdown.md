@@ -1,3 +1,13 @@
+# Shutdown — Reference & Alternative Trigger
+
+> **Primary trigger:** Type `shutdown` in any AI chat where genOS is loaded.
+> **Alternative trigger:** `@workflow-shutdown.md` for explicit confirmation.
+> **Full protocol definition:** `AGENTS.md` → SHUTDOWN sequence
+
+This file provides detailed reference for the shutdown workflow and serves as an alternative trigger mechanism.
+
+---
+
 The current milestone has been successfully implemented and verified.
 
 Perform the genOS SHUTDOWN procedure.

@@ -1,3 +1,13 @@
+# Kickoff — Reference & Alternative Trigger
+
+> **Primary trigger:** Type `kickoff` in any AI chat where genOS is loaded.
+> **Alternative trigger:** `@workflow-kickoff.md` for explicit confirmation.
+> **Full protocol definition:** `AGENTS.md` → Commands → `kickoff`
+
+This file provides detailed reference for the kickoff workflow and serves as an alternative trigger mechanism.
+
+---
+
 Begin the next development cycle using genOS.
 
 Follow AGENTS.md exactly.
@@ -11,7 +21,7 @@ Before writing any code:
 1. Summarize your understanding of the current project state.
 2. Identify the active milestone.
 3. Explain why it is the next milestone.
-4. **Identify and Load Agency Agents (Mandatory Tool Call):**
+4. **Hard Persona Gate (Mandatory Tool Call):**
    - Check `brain/60_AGENTS.md` for designated specialist roles.
    - Use your file viewing tool to read the agent's full definition file (e.g., `.agents/skills/<agent>/SKILL.md` or `.cursor/rules/<agent>.mdc`).
    - In your response, explicitly cite the file path you inspected and list 2–3 governing rules or anti-patterns from that skill that will dictate how you implement this milestone.
@@ -19,10 +29,16 @@ Before writing any code:
 6. Identify any architectural risks or dependencies.
 7. Wait for my approval before modifying the implementation.
 
+## Variants
+
+- `kickoff` — standard milestone kickoff (or resume if mid-work)
+- `kickoff <intent>` — scoped session with user-directed goal
+- `kickoff tooling` — reconfigure MCP servers (reads profile's `recommended_mcps`)
+- `kickoff workforce` — reconfigure AI workforce (follows `integrations/agency_agents.md`)
+
 Rules:
 - Do not skip BOOT.
 - Do not use chat history as project memory.
 - Treat the Project Brain as authoritative.
 - Do not begin future milestones.
 - Only implement the current milestone after approval.
-- **Hard Persona Gate:** You must physically read the Agency Agent definition file using your file viewing tool before presenting the plan; do not guess or rely on generic assumptions when a specialist skill definition exists on disk.
