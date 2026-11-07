@@ -1,0 +1,6 @@
+---
+description: "genOS doctor — diagnose and repair brain integrity."
+alwaysApply: false
+---
+
+Execute the `doctor` command as defined in `AGENTS.md` → Doctor Protocol. Include auto-repair and Brain Health Report.

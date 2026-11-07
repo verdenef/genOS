@@ -1,0 +1,6 @@
+---
+description: "genOS kernel loader — ensures AGENTS.md is read on every session."
+alwaysApply: true
+---
+
+Read and follow `AGENTS.md` in the project root. It defines the genOS operating system, including commands (`kickoff`, `shutdown`, `doctor`, `status`, `batch`), BOOT/SHUTDOWN protocols, and all project memory rules.
