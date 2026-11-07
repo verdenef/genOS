@@ -17,7 +17,7 @@ Assume **no chat history**. Recover state from the Project Brain alone.
 | Decisions | `brain/30_DECISIONS.md` | AI records; human approves intent-affecting decisions | Sole decision log |
 | Durable ad-hoc queue | `brain/40_BACKLOG.md` | AI | Todo / Done / Icebox / Rejected for **non-milestone** work — **not** in-progress; **not** milestone definitions |
 | Roadmap / milestones | `brain/50_ROADMAP.md` | AI maintains; human approves new program-level scope | **Sole** milestone authority: IDs, objectives, deliverables, completion criteria, dependencies, status |
-| System knowledge + status | `brain/systems/<Name>.md` | AI | Each file owns its own Status and design knowledge |
+| System knowledge + status | `brain/systems/**/<Name>.md` | AI | Each file owns its own Status and design knowledge (flat or categorized) |
 | Systems navigation | `brain/systems/README.md` | AI | Index and links only — **no** status column |
 | AI Workforce | `brain/60_AGENTS.md` | AI maintains; human approves/installs | Active roster of approved specialist AI agents |
 
@@ -199,8 +199,8 @@ The `kickoff` command automatically determines session type from brain state:
    - If pointer is invalid, log error and ask human which milestone is active.
 6. Read `brain/60_AGENTS.md` if it exists, to understand the current approved AI workforce.
 7. Read `brain/systems/README.md` (navigation only)
-8. Read only `brain/systems/<Name>.md` listed in `systems_in_scope` (plus any system the task directly touches)
-   - VALIDATE: Every entry in `systems_in_scope` has a corresponding file.
+8. Read only `brain/systems/<Name>.md` (or within 1-level category subdirectories `brain/systems/**/<Name>.md`) listed in `systems_in_scope` (plus any system the task directly touches)
+   - VALIDATE: Every entry in `systems_in_scope` has a corresponding file (searched recursively).
    - If a file is missing, remove the entry and log a warning.
 9. Read `brain/40_BACKLOG.md` if ad-hoc queue context is needed
 10. **System Initialization Protocol:** Detect whether `brain/systems/` contains only `README.md` and `SYSTEM.md`. If so, recognize that the project has not yet initialized its systems architecture. Read `00_PROJECT.md`, `50_ROADMAP.md`, and `30_DECISIONS.md`. Propose the initial set of project systems and wait for human approval. Upon approval, generate one system document per approved system using `SYSTEM.md`.
@@ -251,7 +251,7 @@ Run every check. If ANY check fails, repair it before completing SHUTDOWN.
 - [ ] No system outside `systems_in_scope` was modified
 
 **System Scopes:**
-- [ ] Every entry in `systems_in_scope` has a file in `brain/systems/`
+- [ ] Every entry in `systems_in_scope` has a file in `brain/systems/` (flat or in a 1-level category subfolder)
 - [ ] `brain/systems/README.md` has NO status column
 
 **Cross-References:**
@@ -279,7 +279,7 @@ Run when the user issues the `doctor` command. Perform a comprehensive inspectio
 2. **Milestone Pointer Integrity:** Check `current_milestone` points to an actual milestone ID in `50_ROADMAP.md`. Confirm that milestone's status is `active`.
 3. **Index Synchronization:** Verify every milestone in `50_ROADMAP.md` has an Index row with matching status. Verify every decision in `30_DECISIONS.md` has an Index row with matching status.
 4. **State Isolation:** Confirm `40_BACKLOG.md` has no "Doing" column, no in-progress markers, and no milestone deliverable duplicates. Confirm `00_PROJECT.md` is not empty (unless uninitialized).
-5. **System Scopes:** Confirm every entry in `systems_in_scope` has a matching file in `brain/systems/`. Confirm `brain/systems/README.md` has no status column.
+5. **System Scopes:** Confirm every entry in `systems_in_scope` has a matching file in `brain/systems/` (flat or in a 1-level category subfolder). Confirm `brain/systems/README.md` has no status column.
 6. **Obsidian Compatibility:** Verify all internal brain file cross-references use `[[wikilink]]` syntax.
 
 ### Auto-Repair Actions
