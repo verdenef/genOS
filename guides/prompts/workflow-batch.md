@@ -124,7 +124,7 @@ Immediately after Atomic Brain Persistence:
      - **DO NOT ASK "Should I continue?" or prompt for human input.**
      - Immediately advance to the next item, select the appropriate Builder persona, and loop back to Phase 2.
    - **If all tasks in the batch are finished:**
-     - Run the Brain Doctor diagnostic check (`workflow-doctor.md`).
+     - Run the Brain Doctor diagnostic check (`doctor` protocol in `AGENTS.md`).
      - Print the **Batch Completion Summary**:
        ```markdown
        🎉 Autonomous Batch Completed Successfully!

@@ -66,7 +66,7 @@ All project memory is locked into the Brain, runtime tools are configured, and t
 To keep context windows 100% clean and avoid context rot:
 1. Close this chat session.
 2. Open a fresh chat in your IDE whenever you are ready to build Milestone 1.
-3. Paste either:
-   - `guides/prompts/workflow-01-kickoff.md` (for interactive, step-by-step development)
-   - `guides/prompts/workflow-autonomous-batch.md` (for uninterrupted, hands-free batch development)
+3. Either type `kickoff` / `batch` or paste:
+   - `kickoff` or `guides/prompts/workflow-kickoff.md` (for interactive, step-by-step development)
+   - `batch` or `guides/prompts/workflow-batch.md` (for uninterrupted, hands-free batch development)
 ```
