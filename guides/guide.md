@@ -16,8 +16,24 @@ genOS uses simple keyword commands. Type them in any AI chat where genOS is load
 | `status` | Quick read-only summary of current project state |
 | `doctor` | Diagnose and auto-repair brain integrity issues |
 | `batch` | Hands-free autonomous execution with QA verification |
+| `update` | Safely upgrade genOS to the latest release while strictly shielding the Brain |
 
 You can also `@`-mention the corresponding prompt file (e.g., `@workflow-kickoff.md`) for explicit confirmation that the workflow is loaded.
+
+---
+
+## The Unified AI Engineering Stack
+
+genOS coordinates four complementary disciplines into one frictionless workflow:
+
+| Layer | System | Responsibility |
+|:---|:---|:---|
+| **1. Memory & State** | **genOS** | Project Brain, zero-history recovery, milestone criteria, and atomic SHUTDOWN gates. |
+| **2. Specialist Identity** | **Agency Agents** | Domain-specific engineering rules (e.g. `unity-architect`, `backend-architect`) loaded before planning. |
+| **3. Senior Restraint** | **Ponytail** | The Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) cuts over-engineering before writing code. |
+| **4. Execution Rigor** | **Superpowers** | Test-driven development, bite-sized tasks, and verification before completion. |
+
+You do not need to invoke 4 separate tools. Typing `kickoff` automatically engages all four disciplines.
 
 ---
 
@@ -100,7 +116,7 @@ Prompt files are retained as detailed protocol references and alternative trigge
 | File | Command Equivalent | Purpose |
 |:---|:---|:---|
 | `setup-init.md` | *(Day 0 only — paste)* | One-time interactive setup wizard |
-| `setup-upgrade.md` | *(paste)* | Safely update genOS framework |
+| `update.md` | `update` | Safely update genOS framework |
 | `workflow-kickoff.md` | `kickoff` | Start/resume development session |
 | `workflow-shutdown.md` | `shutdown` | End session, persist state |
 | `workflow-batch.md` | `batch` | Autonomous multi-task execution |
@@ -120,7 +136,7 @@ genOS is natively compatible with **Obsidian**. Open the `genOS/brain/` folder a
 
 ### Upgrading genOS
 
-When a new version of genOS is released, paste `guides/prompts/setup-upgrade.md` to safely update the framework while preserving your project's Brain.
+When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS will automatically fetch the latest release from GitHub, update framework files, strictly shield your Project Brain, and run the Doctor health check.
 
 ### Standalone Reconfiguration
 

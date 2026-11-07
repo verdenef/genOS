@@ -42,4 +42,5 @@ See the [genOS User Guide](guides/guide.md) for setup, daily workflow, and comma
 1. **Zero-Chat-History Recovery:** Agents recover state from the Project Brain alone.
 2. **Deterministic Ownership:** Every piece of project truth has exactly one authoritative file.
 3. **Automated Sanity Gates:** Mandatory integrity audits guarantee the Brain is never corrupted.
-4. **Stack Profiles:** One unified framework for web apps, microservices, mobile, data science, CLIs, and game development.
+4. **Unified Engineering Stack:** Seamlessly orchestrates genOS memory, Agency Agents specialist roles, Ponytail YAGNI restraint, and Superpowers test-driven rigor.
+5. **Stack Profiles:** One unified framework for web apps, microservices, mobile, data science, CLIs, and game development.
