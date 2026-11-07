@@ -247,7 +247,7 @@ Run every check. If ANY check fails, repair it before completing SHUTDOWN.
 **State Isolation (No Bleed):**
 - [ ] `40_BACKLOG.md` has NO "Doing" column or in-progress markers
 - [ ] `40_BACKLOG.md` has NO milestone deliverable duplicates
-- [ ] `working_on` in PROGRESS contains ONLY items actively being worked on (cleared on SHUTDOWN)
+- [ ] `working_on` in PROGRESS contains ONLY open in-flight items for active milestone (cleared to `[]` when milestone is completed)
 - [ ] No system outside `systems_in_scope` was modified
 
 **System Scopes:**
@@ -258,7 +258,9 @@ Run every check. If ANY check fails, repair it before completing SHUTDOWN.
 - [ ] All internal brain file links use `[[wikilink]]` syntax (not `[text](file)`)
 
 ### Post-Gate
-6. Clear stale `working_on` / `systems_in_scope` for the next agent.
+6. Milestone completion vs pause:
+   - If milestone was completed: clear `working_on: []` and update `current_milestone` pointer to next milestone.
+   - If pausing mid-milestone: retain only open, in-flight tasks in `working_on` so the next session can resume.
 7. Set `last_agent` and `last_ide` (use `cursor`, `antigravity`, or other host name as appropriate).
 8. Write self-contained `session_summary`.
 9. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions.
@@ -292,7 +294,7 @@ Run when the user issues the `doctor` command. Perform a comprehensive inspectio
 | State bleed (Doing in Backlog) | Remove the invalid column/markers |
 | Missing system file for scope entry | Remove from `systems_in_scope` |
 | Standard markdown links in brain | Convert to `[[wikilink]]` |
-| Stale `working_on` from prior session | Clear to `[]` |
+| Stale `working_on` from completed milestone | Clear to `[]` |
 
 ### Output
 
@@ -339,20 +341,21 @@ Run when the user issues the `update` command or `@update.md`. Safely upgrades t
 
 genOS recovers from the Project Brain alone. New sessions are always preferred over compacting — a fresh BOOT with a clean context window produces better results than a compacted history.
 
-### Host Platform Detection
+### Model Tier Hierarchy
+- **Flagship / Deep Reasoning Tier:** For planning, architecture, kickoff, and autonomous batch. Maximum reasoning capability.
+- **Balanced / Standard Tier:** For daily feature implementation, iterative coding, and debugging.
+- **Fast / Lightweight Tier:** For SHUTDOWN, Doctor sanity checks, and status reporting. Minimal token overhead.
 
-Check `20_PROGRESS.yaml: last_ide` and the active environment to identify the host platform (Claude Desktop / Claude Code, Antigravity, Cursor, etc.). When stating model recommendations, always output the **exact model name AND thinking / reasoning effort level** tailored to that platform.
+### Platform Mapping
 
-### Per-Command Recommendations
-
-| Command | Claude Desktop / Code | Antigravity / Gemini | Cursor | Session Strategy |
-|---------|-----------------------|----------------------|--------|------------------|
-| `kickoff` (planning) | `Claude 3.7 Sonnet` (Thinking: High) or `Opus` | `Gemini Pro` (Thinking: High) | `Claude 3.7 Sonnet` (Reasoning: High) | **New session** always |
-| `batch` / Complex build | `Claude Opus` (Thinking: High) | `Gemini Pro` (Thinking: High) | `Claude 3.7 Sonnet` (High) / `o3-mini` (High) | **New session** always |
-| Simple fixes / tweaks | `Claude 3.5 Sonnet` or `3.7` (Thinking: Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Sonnet` | Continue if context is clean |
-| `shutdown` | `Claude 3.5 Haiku` (Thinking: Off/Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Haiku` / `GPT-4o-mini` | Continue current session |
-| `doctor` | `Claude 3.5 Haiku` (Thinking: Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Haiku` | **New session** if prior was long |
-| `status` | Lowest available model | Lowest available model | Lowest available model | Either — minimal token use |
+| Workflow | Tier | Claude Desktop / Code | Antigravity / Gemini | Cursor / OpenAI | Session Strategy |
+|:---|:---:|---|---|---|---|
+| `kickoff` (planning) | **Flagship** | `Claude Opus` or `Sonnet (Thinking: High)` | `Gemini Pro (Thinking: High)` | `Sonnet (Reasoning: High)` or `o3/o1` | **New session** always |
+| `batch` / Complex build | **Flagship** | `Claude Opus (Thinking: High)` | `Gemini Pro (Thinking: High)` | `Sonnet (High)` or `o3-mini (High)` | **New session** always |
+| Implementation / tweaks | **Balanced** | `Claude Sonnet (Thinking: Low/Mid)` | `Gemini Flash (Thinking: Low)` | `Claude Sonnet` | Continue if context clean |
+| `shutdown` | **Fast** | `Claude Haiku` | `Gemini Flash` | `Claude Haiku` / `GPT-4o-mini` | Continue current session |
+| `doctor` | **Fast** | `Claude Haiku` | `Gemini Flash` | `Claude Haiku` | **New session** if prior was long |
+| `status` | **Fast** | Lowest available model | Lowest available model | Lowest available model | Either — minimal tokens |
 
 ### Rules
 - Detect host platform on BOOT.
