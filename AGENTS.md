@@ -148,16 +148,59 @@ Never write “as discussed in chat.” Use `DEC-XXX`, `TASK-XXX`, roadmap IDs (
 
 ---
 
+## Commands
+
+When the user's message begins with a command keyword below (case-insensitive, optionally followed by context), execute the corresponding protocol. The user does not need to paste a prompt file. Users may also `@`-mention the corresponding prompt file in `guides/prompts/` as an alternative trigger — both paths produce the same result.
+
+**Syntax:** `<command>` or `<command> <user intent>`
+
+When user intent follows the command keyword, it takes priority over default behavior. The agent still executes the full protocol (BOOT, validation, brain reads) but scopes its plan to the user's stated goal. The agent must validate that the intent aligns with the active milestone and roadmap criteria.
+
+| Command | Protocol |
+|---------|----------|
+| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate:** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`), cite 2-3 governing rules — do not guess agent rules from memory → propose implementation plan → wait for human approval |
+| `shutdown` | Run full SHUTDOWN sequence with mandatory Sanity Gate |
+| `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
+| `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
+| `batch` | Run Autonomous Batch protocol with `TARGET_SCOPE: AUTO_RECOMMENDED` unless user specifies scope (e.g. `batch M1.2, M1.3`) |
+
+If the message does not match a command, proceed with normal conversation while respecting AGENTS.md rules.
+
+### Kickoff Smart Routing
+
+The `kickoff` command automatically determines session type from brain state:
+
+| Brain state | Agent behavior |
+|-------------|---------------|
+| `session_summary` exists + `working_on` has items | Resume: "You were mid-work on X. Here's where you left off." |
+| `working_on` is empty + `current_milestone` is active | Fresh start: "Active milestone is Mx.y. Here's a plan." |
+| Milestone just completed, next milestone exists | Advance: "Mx.y is done. Next up is Mx.z. Here's the plan." |
+| User provided intent after `kickoff` | Scoped: Use user's directive as session goal, still validate against roadmap |
+
+---
+
 ## BOOT sequence
 
 1. Read this file (`AGENTS.md`)
 2. Read `brain/00_PROJECT.md`
+   - VALIDATE: If Vision is `_TBD_`, activate Empty Brain Protocol and stop.
 3. Read `brain/20_PROGRESS.yaml`
+   - VALIDATE: File is parseable YAML. All required keys exist:
+     `current_milestone`, `working_on`, `systems_in_scope`, `blocked`,
+     `session_summary`, `last_agent`, `last_ide`, `known_issues`
+   - VALIDATE: If any key is missing, add it with `null` and log a warning.
 4. Read `brain/30_DECISIONS.md` — while the log is small, read **all** non-rejected entries (use Index; skip only clearly irrelevant rejected/superseded noise)
+   - VALIDATE: Index table row count matches decision section count.
+     If mismatched, log warning but continue (Doctor will repair).
 5. Read `brain/50_ROADMAP.md` — Index always; then the section for `PROGRESS.current_milestone` (and its parent program milestone if needed for success criteria)
+   - VALIDATE: `current_milestone` from PROGRESS points to a valid milestone ID.
+   - VALIDATE: That milestone's status is `active` (not `done`/`cancelled`).
+   - If pointer is invalid, log error and ask human which milestone is active.
 6. Read `brain/60_AGENTS.md` if it exists, to understand the current approved AI workforce.
 7. Read `brain/systems/README.md` (navigation only)
 8. Read only `brain/systems/<Name>.md` listed in `systems_in_scope` (plus any system the task directly touches)
+   - VALIDATE: Every entry in `systems_in_scope` has a corresponding file.
+   - If a file is missing, remove the entry and log a warning.
 9. Read `brain/40_BACKLOG.md` if ad-hoc queue context is needed
 10. **System Initialization Protocol:** Detect whether `brain/systems/` contains only `README.md` and `SYSTEM.md`. If so, recognize that the project has not yet initialized its systems architecture. Read `00_PROJECT.md`, `50_ROADMAP.md`, and `30_DECISIONS.md`. Propose the initial set of project systems and wait for human approval. Upon approval, generate one system document per approved system using `SYSTEM.md`.
 11. **Optional Integrations:** If the human requests an integration (e.g., AI workforce evaluation), read the relevant protocol in `integrations/` and execute it only *after* the roadmap is defined.
@@ -171,25 +214,154 @@ Never write “as discussed in chat.” Use `DEC-XXX`, `TASK-XXX`, roadmap IDs (
 
 Mandatory. Incomplete SHUTDOWN breaks the next agent.
 
+### State Updates
 1. Update relevant `brain/systems/<Name>.md` if design intent, invariants, dependencies, or **Status** changed (not for pure code edits)
 2. Update `brain/20_PROGRESS.yaml` (execution fields only, including honest `session_summary` and `current_milestone` ID)
 3. Record decisions in `brain/30_DECISIONS.md` when applicable; keep Index in sync with entries
 4. Update `brain/50_ROADMAP.md` when a milestone is started, completed, cancelled, or its definition changes (status + Index row)
 5. Update `brain/40_BACKLOG.md` for ad-hoc queue columns only — never milestone status
-6. **Sanity Gate (Mandatory Integrity Audit):**
-   - Confirm `20_PROGRESS.yaml` is valid, parseable YAML with all required keys.
-   - Verify `current_milestone` in `PROGRESS.yaml` matches an existing, active ID in `50_ROADMAP.md`.
-   - Ensure all index tables in `50_ROADMAP.md` and `30_DECISIONS.md` match their section headers.
-   - Ensure no milestone tasks or "Doing" states leaked into `40_BACKLOG.md`.
-   - Ensure all `systems_in_scope` exist in `brain/systems/`.
-   - Auto-repair any syntax or index desyncs before reporting completion.
-7. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions
 
-Clear or rewrite stale `systems_in_scope` / `working_on` so the next agent is not misled.
+### Sanity Gate (Mandatory — Zero Tolerance)
+
+Run every check. If ANY check fails, repair it before completing SHUTDOWN.
+
+**YAML Integrity:**
+- [ ] `20_PROGRESS.yaml` parses as valid YAML
+- [ ] All required keys present: `current_milestone`, `working_on`, `systems_in_scope`, `blocked`, `session_summary`, `last_agent`, `last_ide`, `known_issues`
+- [ ] No unquoted special characters (colons in values, brackets, etc.)
+- [ ] `working_on` and `systems_in_scope` are arrays (not strings)
+
+**Milestone Pointer Integrity:**
+- [ ] `current_milestone` points to a valid ID in `50_ROADMAP.md`
+- [ ] That milestone's status is `active` (not `done`, `planned`, or `cancelled`)
+- [ ] If milestone was just completed: old milestone set to `done`, next milestone set to `active`, pointer updated
+
+**Index Synchronization:**
+- [ ] Every milestone section header in `50_ROADMAP.md` has a matching Index row
+- [ ] Every Index row has a matching section header
+- [ ] All statuses in Index match the status in the section body
+- [ ] Every decision header in `30_DECISIONS.md` has a matching Index row
+- [ ] All decision statuses in Index match their section body
+
+**State Isolation (No Bleed):**
+- [ ] `40_BACKLOG.md` has NO "Doing" column or in-progress markers
+- [ ] `40_BACKLOG.md` has NO milestone deliverable duplicates
+- [ ] `working_on` in PROGRESS contains ONLY items actively being worked on (cleared on SHUTDOWN)
+- [ ] No system outside `systems_in_scope` was modified
+
+**System Scopes:**
+- [ ] Every entry in `systems_in_scope` has a file in `brain/systems/`
+- [ ] `brain/systems/README.md` has NO status column
+
+**Cross-References:**
+- [ ] All internal brain file links use `[[wikilink]]` syntax (not `[text](file)`)
+
+### Post-Gate
+6. Clear stale `working_on` / `systems_in_scope` for the next agent.
+7. Set `last_agent` and `last_ide` (use `cursor`, `antigravity`, or other host name as appropriate).
+8. Write self-contained `session_summary`.
+9. Brief human summary in chat; durable record is ROADMAP + PROGRESS + Backlog + Decisions.
 
 When advancing milestones: set the finished milestone to `done` in ROADMAP, set the next to `active`, and point `PROGRESS.current_milestone` at the new ID.
 
 If PROJECT intent must change, ask the human first. If a new **program-level** roadmap phase needs invented scope, ask the human first (do not fill `_TBD_` stubs).
+
+---
+
+## Doctor Protocol
+
+Run when the user issues the `doctor` command. Perform a comprehensive inspection of all Project Brain files.
+
+### Diagnostic Checklist
+
+1. **YAML Validity (`brain/20_PROGRESS.yaml`):** Verify valid YAML. Confirm all required keys exist. Confirm `working_on` is either `null` or an array. Confirm `systems_in_scope` is an array.
+2. **Milestone Pointer Integrity:** Check `current_milestone` points to an actual milestone ID in `50_ROADMAP.md`. Confirm that milestone's status is `active`.
+3. **Index Synchronization:** Verify every milestone in `50_ROADMAP.md` has an Index row with matching status. Verify every decision in `30_DECISIONS.md` has an Index row with matching status.
+4. **State Isolation:** Confirm `40_BACKLOG.md` has no "Doing" column, no in-progress markers, and no milestone deliverable duplicates. Confirm `00_PROJECT.md` is not empty (unless uninitialized).
+5. **System Scopes:** Confirm every entry in `systems_in_scope` has a matching file in `brain/systems/`. Confirm `brain/systems/README.md` has no status column.
+6. **Obsidian Compatibility:** Verify all internal brain file cross-references use `[[wikilink]]` syntax.
+
+### Auto-Repair Actions
+
+| Check failure | Repair |
+|---------------|--------|
+| Missing YAML keys | Add key with `null` default |
+| Invalid milestone pointer | Ask human (cannot guess) |
+| Index/section desync | Rebuild Index from section headers |
+| State bleed (Doing in Backlog) | Remove the invalid column/markers |
+| Missing system file for scope entry | Remove from `systems_in_scope` |
+| Standard markdown links in brain | Convert to `[[wikilink]]` |
+| Stale `working_on` from prior session | Clear to `[]` |
+
+### Output
+
+After diagnostics and repairs, output the Brain Health Report:
+
+| Component | Status | Details |
+|:---|:---:|:---|
+| `00_PROJECT.md` | [✅ / ⚠️ / ❌] | [Status description] |
+| `20_PROGRESS.yaml` | [✅ / ⚠️ / ❌] | [YAML validity & current milestone ID] |
+| `30_DECISIONS.md` | [✅ / ⚠️ / ❌] | [Decisions count & index sync status] |
+| `40_BACKLOG.md` | [✅ / ⚠️ / ❌] | [Queue health & leakage check] |
+| `50_ROADMAP.md` | [✅ / ⚠️ / ❌] | [Milestones count & active milestone status] |
+| `brain/systems/` | [✅ / ⚠️ / ❌] | [Systems count & scope verification] |
+| Obsidian Links | [✅ / ⚠️ / ❌] | [Standard links found & auto-healed count] |
+
+---
+
+## Model & Session Guidance
+
+genOS recovers from the Project Brain alone. New sessions are always preferred over compacting — a fresh BOOT with a clean context window produces better results than a compacted history.
+
+### Per-Command Recommendations
+
+| Command | Recommended Model Tier | Session Strategy |
+|---------|----------------------|------------------|
+| `kickoff` | Mid-tier (e.g. Flash High, Sonnet) | **New session** always |
+| `shutdown` | Low-tier (e.g. Flash Low, Haiku) | Continue current session |
+| `doctor` | Low-tier (e.g. Flash Low, Haiku) | **New session** if prior session was long |
+| `status` | Lowest available | Either — minimal token use |
+| `batch` | High-tier (e.g. Opus, Pro) | **New session** always |
+| Complex implementation | High-tier (e.g. Opus, Pro) | **New session** after every ~50 exchanges |
+| Simple fixes / tweaks | Mid-tier | Continue if context is clean |
+
+### Rules
+- After SHUTDOWN, always start a **new session** for the next milestone.
+- If context feels degraded (repetition, forgetting instructions), start a new session.
+- Never compact as a substitute for SHUTDOWN → new session.
+- When presenting recommendations, agents should state: "💡 Recommended: [Model tier] in a [new/continued] session."
+
+---
+
+## Bootstrapping
+
+genOS commands require the agent to know this kernel exists. How this happens depends on the tool.
+
+### Tier 1: Auto-Load (Zero Setup)
+
+IDEs that automatically inject repo-root rules into every session.
+
+| Tool | Mechanism | User action per session |
+|------|-----------|----------------------|
+| Antigravity | `AGENTS.md` auto-loaded as `<RULE>` | Type `kickoff` |
+| Cursor | `.cursor/rules/genos.mdc` with `alwaysApply: true` | Type `kickoff` |
+| Claude Code | `CLAUDE.md` references `AGENTS.md` | Type `kickoff` |
+| Codex | `AGENTS.md` auto-detected at repo root | Type `kickoff` |
+
+### Tier 2: File Access, No Auto-Load
+
+Tools that can read files but don't auto-inject rules.
+
+| Tool | One-time setup | User action per session |
+|------|---------------|----------------------|
+| Claude Desktop (with filesystem MCP) | Add `AGENTS.md` as Project Knowledge | Type `kickoff` |
+| Grok Bot (with file tools) | Pin `AGENTS.md` path in system prompt | Type `kickoff` |
+
+If no Project/pin support: type `Read AGENTS.md and kickoff`.
+
+### Tier 3: No File Access
+
+Plain web chats without filesystem access cannot read or write brain files. genOS requires filesystem access.
 
 ---
 
