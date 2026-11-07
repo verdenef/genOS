@@ -4,101 +4,125 @@ Welcome to genOS! This guide explains how to use the framework day-to-day. genOS
 
 ---
 
+## Commands
+
+genOS uses simple keyword commands. Type them in any AI chat where genOS is loaded:
+
+| Command | What it does |
+|---------|-------------|
+| `kickoff` | Start or resume a development session — BOOTs from brain, proposes plan |
+| `kickoff <intent>` | Scoped session — e.g., `kickoff let's build the save system today` |
+| `shutdown` | End a session — persists state, runs integrity checks |
+| `status` | Quick read-only summary of current project state |
+| `doctor` | Diagnose and auto-repair brain integrity issues |
+| `batch` | Hands-free autonomous execution with QA verification |
+
+You can also `@`-mention the corresponding prompt file (e.g., `@workflow-kickoff.md`) for explicit confirmation that the workflow is loaded.
+
+---
+
 ## Day 0: Setup & Initialization
 
 Before you can use genOS for daily development, it needs to be initialized for your specific project.
 
-### 1. The All-in-One Setup Wizard (Recommended)
+### The All-in-One Setup Wizard
 
-Once you have placed the `genOS` folder inside your project repository, open a chat with your AI agent in your IDE (e.g. Cursor, Antigravity, Claude Code) and paste:
+Once you have placed the `genOS` folder inside your project repository, open a chat with your AI agent and paste:
 
 **`guides/prompts/setup-init.md`**
 
-This interactive wizard guides you through 4 seamless phases:
-1. **Stack Profile Selection:** Inspects your repo, detects whether you're building a blank or existing project, and suggests a curated profile from `profiles/` (e.g., `web-fullstack`, `backend-services`, `mobile`, `ai-data`, `cli-system`, or `gamedev`).
-2. **Project Brain Setup:** Asks for your high-level vision, initializes `brain/00_PROJECT.md`, proposes milestones for `brain/50_ROADMAP.md`, and (for existing projects) reverse-engineers code into starter `brain/systems/*.md`.
-3. **Runtime Tooling / MCP:** Proposes and configures the live runtime MCP servers (e.g., Playwright, Database, Docker, Engine) recommended for your stack.
-4. **AI Workforce (Optional):** Recommends tailored specialist AI agent roles from Agency Agents to populate `brain/60_AGENTS.md`.
-5. **Doctor Check & Handoff:** Runs the automated integrity check and instructs you to start coding.
-
----
-
-### Standalone Configuration Utilities
-
-If you ever need to reconfigure tooling or workforce independently later:
-* **Tooling / MCP Reconfiguration:** `guides/prompts/setup-tooling.md`
-* **Workforce Reconfiguration:** `guides/prompts/setup-workforce.md`
-* **Framework Upgrades:** `guides/prompts/setup-04-framework-upgrade.md`
+This interactive wizard guides you through:
+1. **Stack Profile Selection:** Detects your stack and suggests a profile from `profiles/`.
+2. **Project Brain Setup:** Asks for your vision, initializes `brain/00_PROJECT.md`, proposes milestones.
+3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack.
+4. **AI Workforce (Optional):** Recommends specialist AI agent roles.
+5. **Doctor Check & Handoff:** Runs integrity check and directs you to start coding.
 
 ---
 
 ## The Daily Workflow
 
-AI agents have no chat history. Every time you start a new conversation or switch IDEs, the agent recovers state exclusively from the Project Brain (`brain/`).
+AI agents have no chat history. Every time you start a new conversation, the agent recovers state exclusively from the Project Brain.
 
-To maintain flawless synchronization, genOS uses a strict **BOOT** and **SHUTDOWN** cycle.
+### 1. Starting Work
 
-### 1. Starting Work (Milestone Kickoff)
-When you are ready to begin working on a milestone, open a fresh chat with your AI agent and paste:
-
-**`guides/prompts/workflow-01-kickoff.md`**
-
-The AI will BOOT from the Brain, summarize the active milestone from `50_ROADMAP.md`, and propose an implementation plan for your approval before modifying any code.
+Open a new session and type `kickoff`. The agent will:
+- BOOT from the brain and recover full project context
+- Summarize where you left off (if mid-milestone) or propose a new plan
+- Load specialist agent personas and cite their rules
+- Wait for your approval before writing code
 
 ### 2. Implementation
-Once you approve the plan, the agent writes code and modifies project files. You can chat back and forth normally during this phase.
 
-### 3. Context Switching (Changing IDEs mid-session)
-If you switch IDEs (e.g., from Cursor to Antigravity) in the middle of a task, open a chat in the new IDE and paste:
+Once you approve the plan, the agent writes code and modifies project files. Chat normally during this phase.
 
-**`guides/prompts/workflow-03-resume-session.md`**
+### 3. Ending Work
 
-The AI will read execution RAM (`20_PROGRESS.yaml`) and summarize exactly where you left off, allowing you to resume immediately.
+Type `shutdown`. The agent will:
+- Update the roadmap, progress, and system documents
+- Run the mandatory Sanity Gate (18-point integrity audit)
+- Instruct you to close the chat
 
-### 4. Ending Work (Milestone Shutdown)
-When a milestone is complete and tests pass, you must save state back to the Brain before closing the chat:
+### 4. Next Session
 
-**`guides/prompts/workflow-02-shutdown.md`**
+Open a new session. Type `kickoff`. The agent picks up exactly where you left off.
 
-The AI updates `50_ROADMAP.md`, logs execution state to `20_PROGRESS.yaml`, updates affected `brain/systems/` documents, and runs the mandatory **Sanity Gate** to guarantee zero corruption.
+> **Always prefer a new session over compacting.** genOS is designed for zero-history recovery — a fresh BOOT with a clean context window produces better results than a compacted history.
 
-### 5. Autonomous Batch Development (Hands-Free Execution)
-If you want an advanced AI model (e.g. Fable 5, Claude 3.5 Sonnet in Cursor Composer or Agent mode) to execute multiple tasks or milestones in an uninterrupted loop without pausing to ask for permission:
+### 5. Autonomous Batch Development
 
-**`guides/prompts/workflow-autonomous-batch.md`**
+Type `batch` for hands-free execution. The agent alternates between a Builder persona and an adversarial QA Auditor with a 2-retry self-healing budget. Requires a QA agent in `brain/60_AGENTS.md`.
 
-- **Pre-flight Safety Gate:** Strictly requires a designated QA/Auditor agent in `brain/60_AGENTS.md` before code generation begins.
-- **Dual-Persona Cycle:** Alternates between a Specialist Builder and an adversarial QA Auditor with a 2-retry self-healing budget.
-- **Atomic Brain Persistence:** Saves state to `brain/systems/`, updates the roadmap/backlog, and passes the Sanity Gate after every completed item.
-- **Smart Backlog Clustering:** In `TARGET_SCOPE: AUTO_RECOMMENDED` mode, automatically selects 2–4 cohesive backlog tasks matching the active project phase.
+### 6. Diagnostics
 
-### 6. Diagnostics & Brain Doctor (On-Demand)
-If your Brain ever feels desynced, you had an unexpected IDE crash, or an agent made an invalid edit, paste:
-
-**`guides/prompts/workflow-doctor.md`**
-
-The Brain Doctor inspects all 6 brain files, repairs syntax and index mismatches, and outputs a complete health table.
+Type `doctor` to scan all brain files, auto-repair issues, and output a health report.
 
 ---
 
-## 7. Obsidian UI Integration
+## Tool Setup (Bootstrapping)
 
-genOS is designed to be fully compatible with **Obsidian**. By opening the `genOS/brain/` folder (or your repository root) as an Obsidian Vault, you can:
-- **Visualize the Project Graph:** Every `[[wikilink]]` between systems, milestones, and decisions is mapped visually.
-- **Edit Properties Easily:** Use Obsidian's properties interface to change metadata.
-- **Separate Human and AI Workspaces:** Use Obsidian to plan, organize, and direct the project as the Human Director, while your AI agent executes the actual code in Cursor/Antigravity.
+genOS commands work when the agent knows the kernel (`AGENTS.md`) exists.
 
-**Upgrading Legacy Projects to Obsidian:**
-If you upgraded an older genOS project that didn't use `[[wikilinks]]` originally, your Graph View might look empty because your systems use plain-text references. To fix this, open a chat in your project and run this one-time migration prompt:
+| Your tool | One-time setup | Then just type... |
+|-----------|---------------|-------------------|
+| **Antigravity** | Nothing — already auto-loads `AGENTS.md` | `kickoff` |
+| **Cursor** | Add `.cursor/rules/genos.mdc` with `alwaysApply: true` | `kickoff` |
+| **Claude Code** | Add `Read and follow AGENTS.md.` to `CLAUDE.md` | `kickoff` |
+| **Claude Desktop** | Add `AGENTS.md` as Project Knowledge | `kickoff` |
+| **Other** (with file access) | Type `Read AGENTS.md and kickoff` | 6 words, not 30 lines |
 
-**`guides/prompts/setup-obsidian-migration.md`**
+---
+
+## Prompt Reference
+
+Prompt files are retained as detailed protocol references and alternative triggers:
+
+| File | Command Equivalent | Purpose |
+|:---|:---|:---|
+| `setup-init.md` | *(Day 0 only — paste)* | One-time interactive setup wizard |
+| `setup-upgrade.md` | *(paste)* | Safely update genOS framework |
+| `workflow-kickoff.md` | `kickoff` | Start/resume development session |
+| `workflow-shutdown.md` | `shutdown` | End session, persist state |
+| `workflow-batch.md` | `batch` | Autonomous multi-task execution |
+
+---
+
+## Obsidian Integration
+
+genOS is natively compatible with **Obsidian**. Open the `genOS/brain/` folder as an Obsidian Vault for:
+- **Visual Graph Mapping:** See how systems, milestones, and decisions connect via `[[wikilinks]]`.
+- **Properties UI:** Edit YAML frontmatter and status fields via a clean UI.
+- **Human-AI Separation:** Plan and direct in Obsidian; let AI execute in your IDE.
 
 ---
 
 ## Maintenance & Upgrades
 
 ### Upgrading genOS
-1. Download the latest genOS release.
-2. Extract it into your repository as `_genOS_Update/`.
-3. Paste: **`guides/prompts/setup-04-framework-upgrade.md`**
-4. The AI will selectively upgrade your kernel (`AGENTS.md`) and tools while preserving your project's `brain/` data.
+
+When a new version of genOS is released, paste `guides/prompts/setup-upgrade.md` to safely update the framework while preserving your project's Brain.
+
+### Standalone Reconfiguration
+
+- **Tooling / MCP:** `kickoff tooling`
+- **Workforce:** `kickoff workforce`
