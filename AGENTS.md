@@ -158,11 +158,12 @@ When user intent follows the command keyword, it takes priority over default beh
 
 | Command | Protocol |
 |---------|----------|
-| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate:** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`), cite 2-3 governing rules — do not guess agent rules from memory → propose implementation plan → wait for human approval |
+| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → wait for human approval |
 | `shutdown` | Run full SHUTDOWN sequence with mandatory Sanity Gate |
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
 | `batch` | Run Autonomous Batch protocol with `TARGET_SCOPE: AUTO_RECOMMENDED` unless user specifies scope (e.g. `batch M1.2, M1.3`) |
+| `update` | Run Framework Update protocol: smart fetch latest genOS release (git remote or GitHub archive), upgrade framework files while strictly shielding `brain/` and custom profiles, run Doctor |
 
 If the message does not match a command, proceed with normal conversation while respecting AGENTS.md rules.
 
@@ -309,27 +310,56 @@ After diagnostics and repairs, output the Brain Health Report:
 
 ---
 
+## Framework Update Protocol
+
+Run when the user issues the `update` command or `@update.md`. Safely upgrades the genOS framework while guaranteeing zero data loss in the Project Brain.
+
+### Upgrade Steps
+1. **Fetch Latest Framework (Dual-Method):**
+   - Check if git remote `upstream` or `origin` tracks `verdenef/genOS`. If yes, fetch the latest commit.
+   - If not a tracking clone, download the latest release archive from `https://github.com/verdenef/genOS/archive/refs/heads/main.zip` via curl or PowerShell `Invoke-WebRequest` into a temporary `_genOS_Update/` directory and unpack it.
+2. **Strict Brain & User Protection:**
+   - **NEVER** overwrite, modify, or delete any file in `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and all `brain/systems/*.md`).
+   - **NEVER** delete the `.obsidian/` directory if present.
+   - **NEVER** delete custom user profiles in `profiles/`.
+   - **NEVER** touch user source code.
+3. **Apply Framework Refresh:**
+   - Update `AGENTS.md` kernel.
+   - Update `guides/` (user guide and workflow prompt references).
+   - Update official `profiles/` presets.
+   - Update pre-packaged `.agents/skills/` and `.cursor/rules/`.
+4. **Cleanup & Verification:**
+   - Remove temporary `_genOS_Update/` folder if created.
+   - Run the Doctor Protocol to audit the Project Brain.
+   - Output the Upgrade Summary table.
+
+---
+
 ## Model & Session Guidance
 
 genOS recovers from the Project Brain alone. New sessions are always preferred over compacting — a fresh BOOT with a clean context window produces better results than a compacted history.
 
+### Host Platform Detection
+
+Check `20_PROGRESS.yaml: last_ide` and the active environment to identify the host platform (Claude Desktop / Claude Code, Antigravity, Cursor, etc.). When stating model recommendations, always output the **exact model name AND thinking / reasoning effort level** tailored to that platform.
+
 ### Per-Command Recommendations
 
-| Command | Recommended Model Tier | Session Strategy |
-|---------|----------------------|------------------|
-| `kickoff` | Mid-tier (e.g. Flash High, Sonnet) | **New session** always |
-| `shutdown` | Low-tier (e.g. Flash Low, Haiku) | Continue current session |
-| `doctor` | Low-tier (e.g. Flash Low, Haiku) | **New session** if prior session was long |
-| `status` | Lowest available | Either — minimal token use |
-| `batch` | High-tier (e.g. Opus, Pro) | **New session** always |
-| Complex implementation | High-tier (e.g. Opus, Pro) | **New session** after every ~50 exchanges |
-| Simple fixes / tweaks | Mid-tier | Continue if context is clean |
+| Command | Claude Desktop / Code | Antigravity / Gemini | Cursor | Session Strategy |
+|---------|-----------------------|----------------------|--------|------------------|
+| `kickoff` (planning) | `Claude 3.7 Sonnet` (Thinking: High) or `Opus` | `Gemini Pro` (Thinking: High) | `Claude 3.7 Sonnet` (Reasoning: High) | **New session** always |
+| `batch` / Complex build | `Claude Opus` (Thinking: High) | `Gemini Pro` (Thinking: High) | `Claude 3.7 Sonnet` (High) / `o3-mini` (High) | **New session** always |
+| Simple fixes / tweaks | `Claude 3.5 Sonnet` or `3.7` (Thinking: Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Sonnet` | Continue if context is clean |
+| `shutdown` | `Claude 3.5 Haiku` (Thinking: Off/Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Haiku` / `GPT-4o-mini` | Continue current session |
+| `doctor` | `Claude 3.5 Haiku` (Thinking: Low) | `Gemini Flash` (Thinking: Low) | `Claude 3.5 Haiku` | **New session** if prior was long |
+| `status` | Lowest available model | Lowest available model | Lowest available model | Either — minimal token use |
 
 ### Rules
+- Detect host platform on BOOT.
+- Format recommendation as: "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session."
 - After SHUTDOWN, always start a **new session** for the next milestone.
 - If context feels degraded (repetition, forgetting instructions), start a new session.
 - Never compact as a substitute for SHUTDOWN → new session.
-- When presenting recommendations, agents should state: "💡 Recommended: [Model tier] in a [new/continued] session."
 
 ---
 
