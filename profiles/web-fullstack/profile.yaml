@@ -12,6 +12,9 @@ recommended_mcps:
   - id: postgres
     name: "PostgreSQL / Prisma MCP"
     purpose: "Inspect live schemas, run migrations, and test database queries."
+  - id: graphify-mcp
+    name: "Graphify MCP (Code Topology & AST)"
+    purpose: "Query AST call graphs, trace dependencies, and compute blast radius before editing code."
 recommended_agents:
   - id: "engineering/engineering-frontend-developer.md"
     name: "Frontend Developer"

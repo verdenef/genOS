@@ -10,6 +10,9 @@ recommended_mcps:
   - id: engine-mcp
     name: "Engine MCP (Unity / Godot / Unreal)"
     purpose: "Inspect scene hierarchy, component values, assets, and console errors."
+  - id: graphify-mcp
+    name: "Graphify MCP (Code Topology & AST)"
+    purpose: "Query AST call graphs, trace dependencies, and compute blast radius before editing code."
 recommended_agents:
   - id: "game-development/game-designer.md"
     name: "Game Designer"

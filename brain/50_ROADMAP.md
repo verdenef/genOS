@@ -56,6 +56,7 @@ Do not copy milestone criteria into Progress or Backlog. Progress stores only `c
   - Timeless 3-Tier Model Guidance (Flagship, Balanced, Fast) mapping platform models to cognitive complexity ([[DEC-002]]).
   - Dual-method framework auto-updater (`upstream` git tracking or GitHub release archive) with strict shielding of `brain/` and user files ([[DEC-004]]).
   - Copy-pasteable execution handoff blocks output at planning conclusion for frictionless fresh-session transitions ([[DEC-005]]).
+  - Graphify Code Topology Hook ([[DEC-006]]) with dedicated skill and multi-IDE MCP profile presets.
   - Self-hosted Project Brain in `d:\GameOS` with clean starter templates preserved in `templates/brain/`.
   - Canonical system definitions for `Kernel`, `Updater`, `Skills`, and `Workforce` in `brain/systems/`.
 - **Done when:** Self-hosting brain is fully initialized, all canonical systems defined, and passes Doctor with 100% clean check.

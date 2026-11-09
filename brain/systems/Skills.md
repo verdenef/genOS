@@ -11,6 +11,7 @@ Manages specialized agent capabilities, Superpowers execution patterns, and seni
 - Enforce the Ponytail Ladder of Restraint (YAGNI -> Reuse -> Stdlib -> Minimal code) to prune unnecessary complexity before implementation.
 - Support plan formulation and execution workflows (`writing-plans`, `executing-plans`, `subagent-driven-development`).
 - Guide rigorous testing and verification cycles (`test-driven-development`, `verification-before-completion`, `systematic-debugging`).
+- Provide codebase AST call graphs, caller hierarchies, and blast radius calculation via `graphify` for pre-planning topology analysis.
 - Provide IDE-agnostic capability discovery and tool reference mappings.
 
 ## Dependencies
@@ -19,6 +20,7 @@ Manages specialized agent capabilities, Superpowers execution patterns, and seni
 - [[30_DECISIONS.md]]: Governed by canonical architectural decision [[DEC-003]].
 
 ## Runtime References
+- `.agents/skills/graphify/SKILL.md`: Codebase AST call graphs, caller hierarchies, and blast radius calculation.
 - `.agents/skills/ponytail/SKILL.md`: Senior developer restraint and Ladder of Restraint evaluation.
 - `.agents/skills/writing-plans/SKILL.md`: Structured implementation planning protocol.
 - `.agents/skills/executing-plans/SKILL.md`: Checkpoint-driven implementation plan execution.

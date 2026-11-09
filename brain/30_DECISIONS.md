@@ -22,6 +22,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-003 | accepted | 2026-11-09 | Hard Persona Gate and Ponytail Restraint Filter |
 | DEC-004 | accepted | 2026-11-09 | Dual-Method Framework Auto-Updater with Strict Brain Shielding |
 | DEC-005 | accepted | 2026-11-10 | Copy-Pasteable Execution Handoff Blocks |
+| DEC-006 | accepted | 2026-11-10 | Graphify Code Topology Integration |
 
 ---
 
@@ -41,6 +42,13 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-006: Graphify Code Topology Integration
+- **Status:** accepted
+- **Date:** 2026-11-10
+- **Reason:** In large or sprawling codebases, navigating call chains and calculating blast radius with standard text search (`grep`, file globs) requires multiple tool turns and high token usage. Pre-mapped AST call graphs accelerate pre-planning exploration without context rot.
+- **Impact:** Integrated Graphify as an optional Pre-Planning Code Topology Hook during `kickoff`. Added `.agents/skills/graphify/SKILL.md`, `.cursor/rules/graphify.mdc`, and MCP configuration templates across stack profiles. Enforced zero Brain contamination (AST caches remain in `.graphify/`, never in `brain/`) and silent fallback to native text tools when Graphify is unconfigured.
+- **Supersedes:** none
 
 ### DEC-005: Copy-Pasteable Execution Handoff Blocks
 - **Status:** accepted

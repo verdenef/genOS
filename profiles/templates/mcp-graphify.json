@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "graphify": {
+      "command": "npx",
+      "args": ["-y", "@graphify/mcp-server"]
+    }
+  }
+}

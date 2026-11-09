@@ -5,3 +5,8 @@
 
 # Binaries
 *.exe
+
+# Graphify AST cache & local indexes
+.graphify/
+*.graphify
+
