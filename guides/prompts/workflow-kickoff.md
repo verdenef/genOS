@@ -27,7 +27,8 @@ Before writing any code:
    - In your response, explicitly cite the file path you inspected and list 2–3 governing rules or anti-patterns from that skill that will dictate how you implement this milestone.
 5. Present a concise implementation plan that strictly adheres to those cited agent rules.
 6. Identify any architectural risks or dependencies.
-7. Wait for my approval before modifying the implementation.
+7. State your **Model & Session recommendation** per AGENTS.md (e.g. "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session.").
+8. Wait for my approval before modifying the implementation.
 
 ## Variants
 

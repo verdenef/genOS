@@ -158,7 +158,7 @@ When user intent follows the command keyword, it takes priority over default beh
 
 | Command | Protocol |
 |---------|----------|
-| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → wait for human approval |
+| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → output Model & Session recommendation → wait for human approval |
 | `shutdown` | Run full SHUTDOWN sequence with mandatory Sanity Gate |
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
