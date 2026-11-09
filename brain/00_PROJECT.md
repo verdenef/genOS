@@ -4,50 +4,35 @@ Authoritative file for project intent. See `AGENTS.md` → Ownership.
 
 **Ownership:** Humans own vision and intent. AI may reorganize, summarize, clarify, and maintain this document. AI must never change intent without explicit human approval.
 
-Fill sections when decided. Use `_TBD_` until then. `_TBD_` means unknown — do not invent content.
-
-If Vision is still `_TBD_`, Empty Brain Protocol in `AGENTS.md` applies.
-
 ---
 
 ## Vision
 
-_TBD_
-
-<!-- What the project is trying to achieve at a high level. -->
+Zero-context-loss, location-agnostic operating kernel for AI-assisted software development across multiple IDEs (Antigravity, Cursor, Claude Code, Codex) and LLM models.
 
 ## Research Goal
 
-_TBD_
-
-<!-- What is being explored or proven (if applicable). -->
+Prove that a strictly partitioned, filesystem-backed Project Brain enables flawless multi-agent and cross-session handoffs without context compaction or memory degradation.
 
 ## Scope
 
-_TBD_
-
-<!-- In scope / out of scope. Keep concise. -->
+- **In scope:** Kernel protocols (`AGENTS.md`), memory surfaces (`brain/`), pre-packaged skills (Superpowers, Ponytail, genOS lifecycle), and update distribution pipeline.
+- **Out of scope:** Proprietary cloud databases, language-specific runtime locks.
 
 ## Target Environment & Stack
 
-_TBD_
-
-<!-- e.g. Web (Next.js/Node), Cloud/Docker (Go/Postgres), Mobile (Flutter), Game Engine (Unity 6), etc. -->
+Cross-IDE / Filesystem-first. Markdown (`[[wikilink]]` Obsidian-compatible), YAML (`20_PROGRESS.yaml`), Git.
 
 ## Core User Workflow / Domain Loop
 
-_TBD_
-
-<!-- The primary end-to-end user workflow or domain loop that this system powers. -->
+BOOT -> Milestone/Intent Resolution -> Restrained TDD Implementation -> SHUTDOWN with Sanity Gate.
 
 ## Constraints
 
-_TBD_
-
-<!-- Hard limits: tech, time, design, research, platform. -->
+Filesystem-only persistence (no hidden external DB/server state), strict single source of truth, Obsidian wikilink compatibility.
 
 ## Success Criteria
 
-_TBD_
-
-<!-- How we know the project (or milestone) succeeded. -->
+- 100% zero-history recovery on session cold start.
+- Seamless cross-IDE handoffs.
+- Zero data loss during framework upgrades.

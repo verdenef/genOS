@@ -49,6 +49,9 @@ genOS supports two organizational layouts:
 
 ## Systems Index
 
-| System | Category | File |
-|--------|----------|------|
-<!-- Add systems here as they are instantiated -->
+| System | Category | Description | File |
+|--------|----------|-------------|------|
+| [[Kernel]] | Core | Governs session lifecycle, state handoff, and execution protocols across AI agents. | `brain/systems/Kernel.md` |
+| [[Updater]] | Maintenance | Manages framework upgrade lifecycle while strictly preserving user project brain, custom configurations, and source code. | `brain/systems/Updater.md` |
+| [[Skills]] | Execution | Manages specialized agent capabilities, Superpowers execution patterns, and senior developer restraint protocols. | `brain/systems/Skills.md` |
+| [[Workforce]] | Governance | Coordinates active, deferred, and milestone-specific AI agents, enforcing the Hard Persona Gate before planning. | `brain/systems/Workforce.md` |
