@@ -158,7 +158,7 @@ When user intent follows the command keyword, it takes priority over default beh
 
 | Command | Protocol |
 |---------|----------|
-| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → output Model & Session recommendation → wait for human approval |
+| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → output Model & Session recommendation with copy-pasteable execution command blocks → wait for human approval |
 | `shutdown` | Run full SHUTDOWN sequence with mandatory Sanity Gate |
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
@@ -360,6 +360,15 @@ genOS recovers from the Project Brain alone. New sessions are always preferred o
 ### Rules
 - Detect host platform on BOOT.
 - Format recommendation as: "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session."
+- At the end of planning/kickoff, always provide **copy-pasteable execution command blocks** so the user can easily copy and paste into the new session:
+  - Standard execution:
+    ```
+    kickoff execute the approved plan: <path-to-plan>
+    ```
+  - Subagent-driven execution:
+    ```
+    kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
+    ```
 - After SHUTDOWN, always start a **new session** for the next milestone.
 - If context feels degraded (repetition, forgetting instructions), start a new session.
 - Never compact as a substitute for SHUTDOWN → new session.

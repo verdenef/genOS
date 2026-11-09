@@ -28,7 +28,16 @@ Before writing any code:
 5. Present a concise implementation plan that strictly adheres to those cited agent rules.
 6. Identify any architectural risks or dependencies.
 7. State your **Model & Session recommendation** per AGENTS.md (e.g. "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session.").
-8. Wait for my approval before modifying the implementation.
+8. Provide **copy-pasteable execution command blocks** so the user can easily copy and paste into the new session:
+   - Standard execution:
+     ```
+     kickoff execute the approved plan: <path-to-plan>
+     ```
+   - Subagent-driven execution:
+     ```
+     kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
+     ```
+9. Wait for my approval before modifying the implementation.
 
 ## Variants
 

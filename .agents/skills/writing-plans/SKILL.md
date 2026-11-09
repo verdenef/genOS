@@ -155,13 +155,19 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, always offer execution choices with **copy-pasteable kickoff commands** for the execution session:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved to `<path-to-plan>`. Two execution options:**
 
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven (recommended)** - Fresh implementer subagent per task, review between tasks, fast iteration:
+```
+kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
+```
 
-**2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
+**2. Inline Execution** - Execute tasks sequentially with review checkpoints:
+```
+kickoff execute the approved plan: <path-to-plan>
+```
 
 **Which approach?"**
 
