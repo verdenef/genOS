@@ -23,6 +23,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-004 | accepted | 2026-11-09 | Dual-Method Framework Auto-Updater with Strict Brain Shielding |
 | DEC-005 | accepted | 2026-11-10 | Copy-Pasteable Execution Handoff Blocks |
 | DEC-006 | accepted | 2026-11-10 | Graphify Code Topology Integration |
+| DEC-007 | accepted | 2026-11-10 | Zero-App Agency Agents Auto-Installer & Clean Core |
 
 ---
 
@@ -42,6 +43,20 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-007: Zero-App Agency Agents Auto-Installer & Clean Core
+- **Status:** accepted
+- **Date:** 2026-11-10
+- **Reason:**
+  Previously, onboarding domain specialist agents into genOS required users to download and run the third-party Agency Agents desktop application, followed by manual format conversions. Furthermore, repository checkouts carried 14 project-specific `.mdc` rule leftovers from earlier game development projects, polluting non-game codebases and conflating core framework rules with downstream project agents.
+- **Impact:**
+  - Built a zero-dependency Python 3 stdlib auto-installer (`guides/scripts/install_agent.py`) supporting catalog search (`--list`), repo-root autodetection, and dual-target installation into `.agents/skills/<slug>/SKILL.md` and `.cursor/rules/<slug>.mdc`.
+  - Preserved upstream persona markdown verbatim with safely quoted YAML frontmatter.
+  - Retained the human approval gate: AI agents audit project requirements and recommend agents, but cannot install without explicit human consent.
+  - Purged 14 project-specific `.mdc` leftovers from `.cursor/rules/`, establishing a clean core repository containing only framework-essential rules (`genos*`, `ponytail`, `graphify`).
+  - Implemented update shielding across `AGENTS.md` and `guides/prompts/update.md`: future framework updates refresh core rules/skills only and strictly preserve project-installed Agency Agents.
+  - Governed by [[Workforce]], [[Updater]], and [[Kernel]].
+- **Supersedes:** none
 
 ### DEC-006: Graphify Code Topology Integration
 - **Status:** accepted

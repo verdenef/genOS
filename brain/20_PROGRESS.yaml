@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Self-hosted genOS Brain initialized (templates/brain/ archived, M2 active, DEC-001..DEC-006). Graphify code-topology skill, Cursor rule, MCP template, and kickoff hook aligned to real graphifyy CLI/MCP (graphify-out/, graphify-mcp) and merged from genos-v3 into main."
+session_summary: "Completed Agency Agents auto-installer implementation, clean core rules cleanup, and update shielding (DEC-007). Verified install_agent.py with 9 unit tests, live catalog listing, and live temporary install. Pruned 14 project-specific .mdc leftovers, leaving 7 core rules. Wired auto-installer and update shielding into AGENTS.md, prompts, guides, and brain systems/roadmap."

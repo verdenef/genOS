@@ -38,7 +38,7 @@
   - `list_catalog(query: str = "", fetcher=...) -> list[str]`
   - `<repo_root>/.agents/skills/<slug>/SKILL.md` and `<repo_root>/.cursor/rules/<slug>.mdc`
 
-- [ ] **Step 1: Write the failing tests in `guides/scripts/test_install_agent.py`**
+- [x] **Step 1: Write the failing tests in `guides/scripts/test_install_agent.py`**
 
 ```python
 import json
@@ -212,12 +212,12 @@ if __name__ == "__main__":
     unittest.main()
 ```
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 Run: `python -m unittest discover -s guides/scripts -p "test_*.py" -v`
 Expected: FAIL with `ModuleNotFoundError: No module named 'install_agent'`.
 
-- [ ] **Step 3: Write minimal implementation in `guides/scripts/install_agent.py`**
+- [x] **Step 3: Write minimal implementation in `guides/scripts/install_agent.py`**
 
 ```python
 """Fetch and install msitarzewski/agency-agents personas into .agents/skills/ and .cursor/rules/."""
@@ -391,12 +391,12 @@ if __name__ == "__main__":
     raise SystemExit(main())
 ```
 
-- [ ] **Step 4: Run unit tests & verify live fetch**
+- [x] **Step 4: Run unit tests & verify live fetch**
 
 Run: `python -m unittest discover -s guides/scripts -p "test_*.py" -v`
 Expected: `Ran 7 tests ... OK`
 
-- [ ] **Step 5: Commit Task 1**
+- [x] **Step 5: Commit Task 1**
 
 ```bash
 git add guides/scripts/install_agent.py guides/scripts/test_install_agent.py
@@ -427,13 +427,13 @@ git commit -m "feat(workforce): add zero-dependency stdlib Agency Agents auto-in
 - Consumes: Clean core specification (`docs/superpowers/specs/2026-11-10-agency-agents-auto-installer-design.md`).
 - Produces: Minimal core `.cursor/rules/` directory (`genos*.mdc`, `ponytail.mdc`, `graphify.mdc` only).
 
-- [ ] **Step 1: Delete the 14 project-specific `.mdc` files from `d:\GameOS\.cursor\rules/`**
-- [ ] **Step 2: Verify exact remaining `.cursor/rules/` directory contents (7 core files only)**
+- [x] **Step 1: Delete the 14 project-specific `.mdc` files from `d:\GameOS\.cursor\rules/`**
+- [x] **Step 2: Verify exact remaining `.cursor/rules/` directory contents (7 core files only)**
 
 Run: `Get-ChildItem d:\GameOS\.cursor\rules | Select-Object -ExpandProperty Name`
 Expected: `genos-doctor.mdc`, `genos-kickoff.mdc`, `genos-shutdown.mdc`, `genos-update.mdc`, `genos.mdc`, `graphify.mdc`, `ponytail.mdc`.
 
-- [ ] **Step 3: Commit Task 2**
+- [x] **Step 3: Commit Task 2**
 
 ```bash
 git add -A .cursor/rules/
@@ -456,16 +456,16 @@ git commit -m "chore(rules): remove project-specific Agency Agent leftovers for 
 - Consumes: `guides/scripts/install_agent.py` CLI interface.
 - Produces: Automatic Agency Agent installation workflow and upgrade preservation guarantees.
 
-- [ ] **Step 1: Update `integrations/agency_agents.md`**
+- [x] **Step 1: Update `integrations/agency_agents.md`**
   - Replace manual installation steps with running `python <genos>/guides/scripts/install_agent.py <id_or_url>...` after explicit human approval, plus `--list [keyword]` for catalog browsing and manual URL fallback if offline.
-- [ ] **Step 2: Update `guides/prompts/setup-init.md`**
+- [x] **Step 2: Update `guides/prompts/setup-init.md`**
   - In Phase 3 step 1, run `python <genos>/guides/scripts/install_agent.py ...` for approved `recommended_agents` from the active profile so both `.agents/skills/<slug>/SKILL.md` and `.cursor/rules/<slug>.mdc` are created cleanly without the Agency desktop app.
-- [ ] **Step 3: Update `AGENTS.md` & `guides/prompts/update.md`**
+- [x] **Step 3: Update `AGENTS.md` & `guides/prompts/update.md`**
   - In `Framework Update Protocol` step 2 & step 3 (`AGENTS.md`) and `Strict Brain Shield` (`guides/prompts/update.md`), explicitly shield project-installed Agency Agents inside `.agents/skills/` and `.cursor/rules/` (only refreshing core genOS framework skills/rules: `genos*`, `ponytail`, `graphify`, Superpowers).
   - In `Optional Integrations` (`AGENTS.md`), reference `guides/scripts/install_agent.py` for automated workforce installation.
-- [ ] **Step 4: Update `README.md` & `guides/guide.md`**
+- [x] **Step 4: Update `README.md` & `guides/guide.md`**
   - Document `guides/scripts/install_agent.py` in repository structure and note zero-app automated installation of `msitarzewski/agency-agents` on approval.
-- [ ] **Step 5: Commit Task 3**
+- [x] **Step 5: Commit Task 3**
 
 ```bash
 git add integrations/agency_agents.md guides/prompts/setup-init.md AGENTS.md guides/prompts/update.md README.md guides/guide.md
@@ -486,11 +486,11 @@ git commit -m "docs(workforce): integrate auto-installer workflow and shield pro
 - Consumes: Approved spec and completed tasks 1–3.
 - Produces: Synchronized Project Brain (`DEC-007`, `M2` deliverables, `Workforce.md` runtime paths, `session_summary`).
 
-- [ ] **Step 1: Record `DEC-007: Zero-App Agency Agents Auto-Installer & Clean Core` in `brain/30_DECISIONS.md`** (Index row + detailed entry).
-- [ ] **Step 2: Add `[[DEC-007]]` deliverable to `M2` in `brain/50_ROADMAP.md`**.
-- [ ] **Step 3: Update `brain/systems/Workforce.md`** with `guides/scripts/install_agent.py` and clean core/update shielding invariants.
-- [ ] **Step 4: Update `brain/20_PROGRESS.yaml`** `session_summary` cleanly.
-- [ ] **Step 5: Run full verification**
+- [x] **Step 1: Record `DEC-007: Zero-App Agency Agents Auto-Installer & Clean Core` in `brain/30_DECISIONS.md`** (Index row + detailed entry).
+- [x] **Step 2: Add `[[DEC-007]]` deliverable to `M2` in `brain/50_ROADMAP.md`**.
+- [x] **Step 3: Update `brain/systems/Workforce.md`** with `guides/scripts/install_agent.py` and clean core/update shielding invariants.
+- [x] **Step 4: Update `brain/20_PROGRESS.yaml`** `session_summary` cleanly.
+- [x] **Step 5: Run full verification**
   - Run `python -m unittest discover -s guides/scripts -p "test_*.py" -v` (confirm all unit tests pass).
   - Run `python guides/scripts/install_agent.py --list frontend` and a live install into a temp dir (`--root <temp>`) to verify live upstream integration.
   - Run Doctor diagnostic audit (`8/8` checks PASS).
