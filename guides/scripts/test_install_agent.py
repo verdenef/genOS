@@ -47,6 +47,17 @@ class TestInstallAgent(unittest.TestCase):
         self.assertEqual(rel3, "design/design-ui-designer.md")
         self.assertEqual(slug3, "design-ui-designer")
 
+        # Test URL with query string and fragment
+        rel4, slug4, url4 = install_agent.normalize_agent_ref(
+            "https://raw.githubusercontent.com/msitarzewski/agency-agents/main/design/ui.md?plain=1#L5"
+        )
+        self.assertEqual(rel4, "design/ui.md")
+        self.assertEqual(slug4, "ui")
+        self.assertEqual(
+            url4,
+            "https://raw.githubusercontent.com/msitarzewski/agency-agents/main/design/ui.md",
+        )
+
     def test_normalize_rejects_traversal_and_foreign_urls(self):
         with self.assertRaises(ValueError):
             install_agent.normalize_agent_ref("../secrets.md")
@@ -67,11 +78,13 @@ class TestInstallAgent(unittest.TestCase):
     def test_detect_repo_root_standalone_and_nested(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            # Standalone genOS repo at root
-            standalone_script_dir = root / "guides" / "scripts"
-            standalone_script_dir.mkdir(parents=True)
-            (root / "AGENTS.md").write_text("# kernel", encoding="utf-8")
-            self.assertEqual(install_agent.detect_repo_root(standalone_script_dir), root)
+            # Standalone genOS repo at root (even if named genOS, has .git)
+            standalone_git_dir = root / "genOS"
+            standalone_git_script_dir = standalone_git_dir / "guides" / "scripts"
+            standalone_git_script_dir.mkdir(parents=True)
+            (standalone_git_dir / "AGENTS.md").write_text("# kernel", encoding="utf-8")
+            (standalone_git_dir / ".git").mkdir()
+            self.assertEqual(install_agent.detect_repo_root(standalone_git_script_dir), standalone_git_dir)
 
             # Nested inside <project>/genOS/
             project = Path(tmp) / "my-game"
@@ -162,6 +175,11 @@ class TestInstallAgent(unittest.TestCase):
         )
         filtered = install_agent.list_catalog(query="frontend", fetcher=lambda _u: fake_tree)
         self.assertEqual(filtered, ["engineering/engineering-frontend-developer.md"])
+
+    def test_list_catalog_raises_on_missing_tree_key(self):
+        bad_response = json.dumps({"message": "API rate limit exceeded"})
+        with self.assertRaises(ValueError):
+            install_agent.list_catalog(fetcher=lambda _u: bad_response)
 
 
 if __name__ == "__main__":

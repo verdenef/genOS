@@ -28,6 +28,11 @@ def fetch_text(url: str, timeout: int = 15) -> str:
 def normalize_agent_ref(ref: str) -> tuple[str, str, str]:
     """Convert an agent ID or GitHub URL into (rel_path, slug, raw_url)."""
     cleaned = ref.strip().replace("\\", "/")
+    # Strip URL query strings or fragments (? / #)
+    for sep in ("?", "#"):
+        if sep in cleaned:
+            cleaned = cleaned.split(sep, 1)[0]
+
     if cleaned.startswith(RAW_BASE):
         rel = cleaned[len(RAW_BASE):]
     elif cleaned.startswith(BLOB_PREFIX):
@@ -72,8 +77,8 @@ def detect_repo_root(start_dir: Path | None = None) -> Path:
     cur = (start_dir or Path(__file__).resolve().parent).resolve()
     for candidate in [cur, *cur.parents]:
         if (candidate / "AGENTS.md").exists():
-            # If installed inside <project>/genOS/, install rules/skills at <project>/
-            if candidate.name.lower() == "genos" and candidate.parent != candidate:
+            # If installed inside <project>/genOS/ (without its own .git), install rules/skills at <project>/
+            if candidate.name.lower() == "genos" and candidate.parent != candidate and not (candidate / ".git").exists():
                 return candidate.parent
             return candidate
     return Path.cwd().resolve()
@@ -118,6 +123,9 @@ def install_agent(
 def list_catalog(query: str = "", fetcher=fetch_text) -> list[str]:
     """Fetch and filter available agent markdown IDs from upstream tree API."""
     data = json.loads(fetcher(TREE_API_URL))
+    if "tree" not in data:
+        msg = data.get("message", "Unknown GitHub API error")
+        raise ValueError(f"Invalid catalog response from GitHub API: {msg}")
     needle = query.strip().lower()
     agents = []
     for entry in data.get("tree", []):
