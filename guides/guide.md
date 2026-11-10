@@ -1,6 +1,6 @@
 # genOS User Guide
 
-Welcome to genOS! This guide explains how to use the framework day-to-day. genOS is a universal, stack-agnostic AI operating system: it relies on you (the human) to provide intent, while the AI agents handle implementation, state tracking, and memory management.
+Welcome to genOS! This guide explains how to use the framework day-to-day. genOS is a universal, stack-agnostic AI operating system: it relies on you (the human) to provide intent, while AI agents handle implementation, state tracking, and memory management.
 
 ---
 
@@ -10,13 +10,13 @@ genOS uses simple keyword commands. Type them in any AI chat where genOS is load
 
 | Command | What it does |
 |---------|-------------|
-| `kickoff` | Start or resume a development session — BOOTs from brain, proposes plan |
-| `kickoff <intent>` | Scoped session — e.g., `kickoff let's build the save system today` |
-| `shutdown` | End a session — persists state, runs integrity checks |
+| `kickoff` | Start or resume a session — BOOTs from brain, checks specialist rules, runs optional Graphify topology check, applies Ponytail restraint, and proposes a plan |
+| `kickoff <intent>` | Scoped session — e.g., `kickoff let's build the save system today` or `kickoff execute the approved plan: <path>` |
+| `shutdown` | End a session — persists state, verifies Sanity Gate checks, records `session_summary` |
 | `status` | Quick read-only summary of current project state |
 | `doctor` | Diagnose and auto-repair brain integrity issues |
 | `batch` | Hands-free autonomous execution with QA verification |
-| `update` | Safely upgrade genOS to the latest release while strictly shielding the Brain |
+| `update` | Safely upgrade genOS to the latest release on `main` while strictly shielding the Brain |
 
 You can also `@`-mention the corresponding prompt file (e.g., `@workflow-kickoff.md`) for explicit confirmation that the workflow is loaded.
 
@@ -24,35 +24,39 @@ You can also `@`-mention the corresponding prompt file (e.g., `@workflow-kickoff
 
 ## The Unified AI Engineering Stack
 
-genOS coordinates four complementary disciplines into one frictionless workflow:
+genOS coordinates five complementary disciplines into one frictionless workflow:
 
 | Layer | System | Responsibility |
 |:---|:---|:---|
 | **1. Memory & State** | **genOS** | Project Brain, zero-history recovery, milestone criteria, and atomic SHUTDOWN gates. |
-| **2. Specialist Identity** | **Agency Agents** | Domain-specific engineering rules (e.g. `unity-architect`, `backend-architect`) loaded before planning. |
-| **3. Senior Restraint** | **Ponytail** | The Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) cuts over-engineering before writing code. |
-| **4. Execution Rigor** | **Superpowers** | Test-driven development, bite-sized tasks, and verification before completion. |
+| **2. Specialist Identity** | **Agency Agents** | Domain-specific engineering rules (e.g. `unity-architect`, `backend-architect`) verified before planning. |
+| **3. Code Topology *(Optional)*** | **Graphify** | Local `--code-only` Tree-sitter AST call graphs (`graphifyy[mcp]`) for instant caller/callee queries. |
+| **4. Senior Restraint** | **Ponytail** | The Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) cuts over-engineering before writing code. |
+| **5. Execution Rigor** | **Superpowers** | Test-driven development, subagent-driven task plans, copy-paste handoffs, and verification before completion. |
 
-You do not need to invoke 4 separate tools. Typing `kickoff` automatically engages all four disciplines.
+You do not need to invoke five separate tools. Typing `kickoff` automatically engages the entire stack (and skips Graphify silently if unconfigured).
 
 ---
 
 ## Day 0: Setup & Initialization
 
-Before you can use genOS for daily development, it needs to be initialized for your specific project.
+Before you can use genOS for daily development, initialize it for your specific project:
+
+1. **Clean Starter Brain:** Because `brain/` inside the upstream genOS repo tracks genOS itself, copy the clean `_TBD_` files from `templates/brain/` into your project's `brain/` directory (the setup wizard also verifies this).
+2. **Root Discovery (if placed in a subfolder like `genOS/`):** Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at the repository root.
 
 ### The All-in-One Setup Wizard
 
-Once you have placed the `genOS` folder inside your project repository, open a chat with your AI agent and paste:
+Once genOS is inside your project repository, open a chat with your AI agent and paste:
 
 **`guides/prompts/setup-init.md`**
 
 This interactive wizard guides you through:
 1. **Stack Profile Selection:** Detects your stack and suggests a profile from `profiles/`.
 2. **Project Brain Setup:** Asks for your vision, initializes `brain/00_PROJECT.md`, proposes milestones.
-3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack.
-4. **AI Workforce (Optional):** Recommends specialist AI agent roles.
-5. **Doctor Check & Handoff:** Runs integrity check and directs you to start coding.
+3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack (including optional `graphify-mcp`).
+4. **AI Workforce & Skills:** Recommends specialist AI agent roles and confirms Ponytail, Graphify, and Superpowers skills.
+5. **Doctor Check & Handoff:** Runs integrity check and directs you to start coding in a fresh session.
 
 ---
 
@@ -60,23 +64,26 @@ This interactive wizard guides you through:
 
 AI agents have no chat history. Every time you start a new conversation, the agent recovers state exclusively from the Project Brain.
 
-### 1. Starting Work
+### 1. Starting Work (`kickoff`)
 
 Open a new session and type `kickoff`. The agent will:
 - BOOT from the brain and recover full project context
-- Summarize where you left off (if mid-milestone) or propose a new plan
-- Load specialist agent personas and cite their rules
+- Read active specialist agent files (`Hard Persona Gate`) and cite 2–3 governing rules
+- Optionally verify Graphify code graph freshness and inspect callers/dependencies
+- Prune unnecessary complexity via Ponytail's Ladder of Restraint
+- Propose a test-driven plan, recommend a **Model Tier** (**Flagship** / **Balanced** / **Fast**), and print **copy-pasteable execution command blocks**
 - Wait for your approval before writing code
 
-### 2. Implementation
+### 2. Execution
 
-Once you approve the plan, the agent writes code and modifies project files. Chat normally during this phase.
+Once you approve the plan, start a fresh execution session and paste one of the handoff command blocks (standard sequential or `subagent-driven-development`).
 
-### 3. Ending Work
+### 3. Ending Work (`shutdown`)
 
 Type `shutdown`. The agent will:
 - Update the roadmap, progress, and system documents
-- Run the mandatory Sanity Gate (18-point integrity audit)
+- Run the mandatory Sanity Gate
+- Persist a self-contained `session_summary` and clear or retain `working_on` appropriately
 - Instruct you to close the chat
 
 ### 4. Next Session
@@ -95,17 +102,37 @@ Type `doctor` to scan all brain files, auto-repair issues, and output a health r
 
 ---
 
+## Optional: Code Topology with Graphify
+
+For medium-to-large codebases, Graphify (PyPI `graphifyy`) maps classes, methods, and call edges locally so agents don't waste tokens hunting across files:
+
+1. **Install once per machine:**
+   ```bash
+   uv tool install "graphifyy[mcp]"
+   ```
+2. **Scope & build locally (offline, no API key):**
+   - Create a `.graphifyignore` at repo root to restrict parsing to your source folders (excluding third-party packs, docs, and builds).
+   - Add `graphify-out/` to `.gitignore`.
+   - Build the initial graph: `graphify extract . --code-only`
+   - Refresh incrementally after code edits: `graphify update .`
+3. **Wire MCP (optional alongside CLI `graphify explain`):**
+   - Use [`profiles/templates/mcp-graphify.json`](profiles/templates/mcp-graphify.json) in `.mcp.json` / `.cursor/mcp.json` (for Claude Code / Cursor).
+   - For standalone desktop apps launched outside a project folder (like Claude Desktop's Chat tab), point `command` and `--graph` to their absolute paths.
+4. **Important Limit:** Code graphs are syntactic—agents still run `grep` for string-based lookups (`GameObject.Find`, `FindProperty`, menu paths, scene/prefab files) and Grep-confirm `INFERRED` edges.
+
+---
+
 ## Tool Setup (Bootstrapping)
 
-genOS commands work when the agent knows the kernel (`AGENTS.md`) exists.
+genOS commands work when the agent knows the kernel (`AGENTS.md`) exists. Skills in `.agents/skills/` are read directly off disk during `kickoff`—you do **not** need to upload them manually into Claude settings.
 
 | Your tool | One-time setup | Then just type... |
 |-----------|---------------|-------------------|
-| **Antigravity** | Nothing — already auto-loads `AGENTS.md` | `kickoff` |
-| **Cursor** | Add `.cursor/rules/genos.mdc` with `alwaysApply: true` | `kickoff` |
-| **Claude Code** | Add `Read and follow AGENTS.md.` to `CLAUDE.md` | `kickoff` |
-| **Claude Desktop** | Add `AGENTS.md` as Project Knowledge | `kickoff` |
-| **Other** (with file access) | Type `Read AGENTS.md and kickoff` | 6 words, not 30 lines |
+| **Antigravity** | Nothing — auto-loads `AGENTS.md` | `kickoff` |
+| **Cursor** | Keep `.cursor/rules/genos.mdc` (`alwaysApply: true`) at repo root | `kickoff` |
+| **Claude Code** | Keep `CLAUDE.md` pointing to `AGENTS.md` at repo root | `kickoff` |
+| **Claude Desktop** | Use `.mcp.json` in the Code tab, or add `AGENTS.md` + absolute MCP paths for Chat tab | `kickoff` |
+| **Other** (with file access) | Type `Read AGENTS.md and kickoff` | Plain text |
 
 ---
 
@@ -125,9 +152,9 @@ Prompt files are retained as detailed protocol references and alternative trigge
 
 ## Obsidian Integration
 
-genOS is natively compatible with **Obsidian**. Open the `genOS/brain/` folder as an Obsidian Vault for:
-- **Visual Graph Mapping:** See how systems, milestones, and decisions connect via `[[wikilinks]]`.
-- **Properties UI:** Edit YAML frontmatter and status fields via a clean UI.
+genOS is natively compatible with **Obsidian**. Open your `brain/` folder as an Obsidian Vault for:
+- **Visual Graph Mapping:** See how systems, milestones, and decisions connect via `[[wikilinks]]` (`brain/systems/` supports flat files or 1-level category subfolders).
+- **Properties UI:** Edit YAML frontmatter and status fields cleanly.
 - **Human-AI Separation:** Plan and direct in Obsidian; let AI execute in your IDE.
 
 ---
@@ -136,7 +163,7 @@ genOS is natively compatible with **Obsidian**. Open the `genOS/brain/` folder a
 
 ### Upgrading genOS
 
-When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS will automatically fetch the latest release from GitHub, update framework files, strictly shield your Project Brain, and run the Doctor health check.
+When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS automatically fetches the latest `main` release from GitHub, updates framework files (`AGENTS.md`, `guides/`, `profiles/`, `.agents/skills/`, `.cursor/rules/`), strictly shields your Project Brain, and runs the Doctor health check.
 
 ### Standalone Reconfiguration
 
