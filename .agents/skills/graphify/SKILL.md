@@ -1,54 +1,46 @@
 ---
 name: graphify
-description: "Query codebase AST call graphs, caller hierarchies, and calculate blast radius for implementation planning."
+description: "Query the code graph (callers, callees, shortest path, communities) built by Graphify, and rebuild it when stale, before planning edits."
 ---
 
-# Graphify: Code Topology & Call Graph Analysis
+# Graphify: Code Topology
 
 ## Purpose
-Provide deterministic, AST-level code topology and call graph analysis via Tree-sitter. Graphify transforms the codebase into a pre-mapped call graph and dependency topology, enabling agents to navigate deep caller/callee hierarchies and calculate refactoring blast radius instantly without expensive exploratory search loops.
+Graphify (PyPI `graphifyy`) parses source with tree-sitter into `graphify-out/graph.json`: classes, methods, and `calls` / `references` / `inherits` / `imports` edges. Use it to find callers and dependencies of a symbol without search loops.
 
 ## Invariants
-1. **Never guess call hierarchies:** When Graphify is available, query the AST call graph before asserting whether a method, class, or interface is safe to refactor or remove.
-2. **Silent fallback:** If Graphify is not configured, unindexed, or unavailable on the host machine, fall back immediately and silently to native file search tools (`find_files`, `grep`, `read_file`) without throwing errors or halting the workflow.
-3. **Keep queries targeted:** Query specific symbols or files (`get_callers`, `get_dependencies`, `get_blast_radius`) rather than dumping the entire global graph into the context window.
-4. **Zero Brain contamination:** Graphify AST caches, databases, and temporary index files belong in `.graphify/` (gitignored) and architectural summaries belong in `reports/architecture/`. Never store Graphify output or caches inside `brain/`.
+1. **Code only, local:** build with `--code-only`. This needs no API key and nothing leaves the machine. Never run a build that sends documents to an LLM without the human asking.
+2. **Never guess call hierarchies** when the graph is available: query it before saying a method is safe to change or remove.
+3. **The graph is syntactic.** It cannot see references that live in strings or assets: `GameObject.Find("...")`, `FindProperty("...")`, menu paths, scene and prefab files, reflection, `SendMessage`. Grep those. Edges marked `INFERRED` (cross-class calls resolved by name) are leads, not proof; confirm with Grep when a decision depends on one.
+4. **Silent fallback:** if the graph or the tool is missing, use `grep` and file reads without comment and carry on.
+5. **Keep queries targeted:** one symbol or file at a time; never dump the whole graph into context.
+6. **Zero Brain contamination:** `graphify-out/` is gitignored and never goes in `brain/`.
 
-## Available MCP Tools
-When the `@graphify/mcp-server` is configured, the following tools are available:
-- `get_callers`: Retrieve all direct and indirect callers of a specific symbol/function.
-- `get_dependencies`: Retrieve all downstream dependencies and symbols called by a component.
-- `get_blast_radius`: Calculate the full impact radius (impacted files, dependent classes, test suites) of modifying a target file or symbol.
-- `graph_freshness`: Check whether the local `.graphify/` AST cache matches the current git HEAD commit.
+## Setup (once per machine)
+```
+uv tool install "graphifyy[mcp]"
+graphify extract . --code-only
+```
+Scope is set by `.graphifyignore` at the repo root (which folders count as code). Do **not** run `graphify install` or `graphify claude install`; this skill replaces them.
 
-## Workflow
+## Freshness
+Before relying on the graph, compare `graphify-out/graph.json` with `git log -1 --format=%cd`. If the graph is older than the last commit or the working tree has code changes, run `graphify update .` (re-extracts code only; no LLM).
 
-### Step 1: Check Graph Freshness
-- Compare `.graphify/` cache freshness against recent git commits (`git status`, `git log -1`).
-- If Graphify is available but the index is missing or stale, invoke index refresh (`graphify index`) or proceed with fallback if indexing cannot be run.
+## Query (CLI works without MCP)
+- `graphify explain "Class.Method()"`: node plus incoming (`<--` callers) and outgoing (`-->` callees) edges; add `--all` for every edge.
+- `graphify path "A" "B"`: shortest path between two nodes.
+- `graphify query "<question>" --seed X`: BFS from a node.
+- Use the exact label shown in the "No exact match" hint, e.g. `Class.Method()`.
 
-### Step 2: Query Callers and Dependencies
-- For symbols, interfaces, or classes identified in the active milestone or task:
-  - Run `get_callers` to identify all upstream consumers.
-  - Run `get_dependencies` to identify all downstream dependencies.
+## MCP tools (when the `graphify` server is registered)
+`query_graph`, `get_node`, `get_neighbors`, `get_community`, `god_nodes`, `graph_stats`, `shortest_path`. The server is `graphify-mcp --graph graphify-out/graph.json`.
 
-### Step 3: Compute Blast Radius
-- Before planning file edits, breaking changes, or refactoring:
-  - Run `get_blast_radius` on the target files or symbols.
-  - Identify all affected modules, downstream consumers, and associated test suites.
-
-### Step 4: Enrich Plan Interfaces Block
-- Use the deterministic signatures and caller dependencies returned by Graphify to enrich the plan's `Task N: Interfaces` block:
-  ```markdown
-  **Interfaces:**
-  - Consumes: [exact signatures and callers verified from AST call graph]
-  - Produces: [exact return types and exported symbols verified from AST call graph]
-  ```
-
-## Graceful Fallback Protocol
-If Graphify tools return an error, are absent from the MCP server list, or encounter an unsupported language:
-1. Do not raise an exception or abort the workflow.
-2. Silently switch to native tools:
-   - Use `grep` / text search to locate references and call sites.
-   - Use file reading to inspect component signatures.
-3. Proceed with standard implementation planning.
+## Use in planning
+1. For each symbol in scope, list its callers (`<--  [calls]`) and callees.
+2. Add the strings-and-assets check from Invariant 3 by Grep.
+3. Put the verified signatures and callers into the plan's `Task N: Interfaces` block:
+   ```markdown
+   **Interfaces:**
+   - Consumes: [signatures and callers from the graph, Grep-confirmed where INFERRED]
+   - Produces: [return types and exported symbols]
+   ```

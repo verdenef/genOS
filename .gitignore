@@ -6,7 +6,6 @@
 # Binaries
 *.exe
 
-# Graphify AST cache & local indexes
-.graphify/
-*.graphify
+# Graphify code graph (rebuilt locally with `graphify extract . --code-only`)
+graphify-out/
 

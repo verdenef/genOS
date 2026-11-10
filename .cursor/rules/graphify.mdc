@@ -1,31 +1,16 @@
 ---
-description: Query codebase AST call graphs, caller hierarchies, and calculate blast radius for implementation planning.
+description: Use the Graphify code graph (callers, callees, paths) when planning code changes.
 globs: "*"
 alwaysApply: false
 ---
 
 # Graphify Code Topology Rule
 
-When activated or when planning complex code changes, use Graphify to inspect deterministic AST call hierarchies and calculate blast radius.
+Read `.agents/skills/graphify/SKILL.md` for the full protocol. In short:
 
-## Core Rules
-
-1. **Check Availability First:**
-   - Look for Graphify MCP tools: `get_callers`, `get_dependencies`, `get_blast_radius`.
-   - If Graphify MCP tools are not registered, fall back silently to native search (`grep`, file search). Do not alert the user or fail the prompt.
-
-2. **Use Before Refactoring & Planning:**
-   - **Identify Callers:** Before modifying or removing any exported function, class, or method, call `get_callers` with the symbol name.
-   - **Map Downstream Dependencies:** Call `get_dependencies` to verify what other components a symbol touches.
-   - **Calculate Blast Radius:** Run `get_blast_radius` on the affected files to identify every downstream file and test suite that could break.
-
-3. **Targeted Queries Only:**
-   - Never dump entire graph databases into context.
-   - Target queries specifically to the symbols and files in scope for the active task.
-
-4. **Zero Brain Contamination:**
-   - Never write Graphify caches, trees, or AST data into `brain/`.
-   - Graphify artifacts belong exclusively in `.graphify/` (gitignored) or `reports/architecture/`.
-
-5. **Enrich Implementation Plans:**
-   - When drafting task plans, use the verified AST output to populate the `Interfaces: Consumes / Produces` sections of each task.
+1. **Check availability first:** `graphify-out/graph.json` exists and the `graphify` CLI or MCP tools (`query_graph`, `get_node`, `get_neighbors`, `shortest_path`, `get_community`, `god_nodes`, `graph_stats`) respond. If not, fall back silently to grep and file reads.
+2. **Refresh if stale:** graph older than the last commit or the working tree changed, then `graphify update .` (code only, no LLM).
+3. **Before changing or removing a symbol:** `graphify explain "Class.Method()"` for its callers and callees.
+4. **The graph is syntactic:** it misses string-based references (`GameObject.Find`, `FindProperty`, menu paths, scene and prefab files). Grep those, and confirm `INFERRED` edges with Grep.
+5. **Targeted queries only;** never dump the graph into context.
+6. **No Brain contamination:** `graphify-out/` is gitignored and never goes in `brain/`.
