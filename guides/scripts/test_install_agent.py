@@ -149,14 +149,15 @@ class TestInstallAgent(unittest.TestCase):
             repo_root = Path(tmp)
 
             def failing_fetch(url):
-                raise urllib.error.HTTPError(url, 404, "Not Found", {}, None)
+                raise urllib.error.HTTPError(url, 404, "Not Found", {}, io.BytesIO(b""))
 
-            with self.assertRaises(urllib.error.HTTPError):
+            with self.assertRaises(urllib.error.HTTPError) as ctx:
                 install_agent.install_agent(
                     "engineering/does-not-exist.md",
                     repo_root=repo_root,
                     fetcher=failing_fetch,
                 )
+            ctx.exception.close()
             self.assertFalse((repo_root / ".agents").exists())
             self.assertFalse((repo_root / ".cursor").exists())
 
