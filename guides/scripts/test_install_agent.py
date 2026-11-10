@@ -1,9 +1,11 @@
+import io
 import json
 import sys
 import tempfile
 import unittest
 import urllib.error
 from pathlib import Path
+from unittest.mock import patch
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -180,6 +182,39 @@ class TestInstallAgent(unittest.TestCase):
         bad_response = json.dumps({"message": "API rate limit exceeded"})
         with self.assertRaises(ValueError):
             install_agent.list_catalog(fetcher=lambda _u: bad_response)
+
+    def test_main_list_catches_value_error_and_prints_stderr(self):
+        stderr_capture = io.StringIO()
+        with patch("install_agent.list_catalog", side_effect=ValueError("Invalid catalog response from GitHub API: rate limit")), patch("sys.stderr", stderr_capture):
+            exit_code = install_agent.main(["--list"])
+        self.assertEqual(exit_code, 1)
+        self.assertIn("ERROR: Could not fetch catalog", stderr_capture.getvalue())
+        self.assertIn("rate limit", stderr_capture.getvalue())
+
+    def test_normalize_agent_ref_supports_tree_urls(self):
+        rel, slug, url = install_agent.normalize_agent_ref(
+            "https://github.com/msitarzewski/agency-agents/tree/main/engineering/backend-architect.md"
+        )
+        self.assertEqual(rel, "engineering/backend-architect.md")
+        self.assertEqual(slug, "backend-architect")
+        self.assertEqual(
+            url,
+            "https://raw.githubusercontent.com/msitarzewski/agency-agents/main/engineering/backend-architect.md",
+        )
+
+    def test_parse_upstream_agent_handles_utf8_bom(self):
+        bom_text = "\ufeff" + SAMPLE_UPSTREAM_MD
+        desc, body = install_agent.parse_upstream_agent(bom_text)
+        self.assertEqual(desc, 'Expert UI builder: handles React, "quotes", and performance')
+        self.assertTrue(body.startswith("# Frontend Developer Agent Personality"))
+        self.assertIn("Always keep components modular.", body)
+
+    def test_fetch_text_decodes_utf8_bom(self):
+        mock_resp = io.BytesIO(b"\xef\xbb\xbf# Hello BOM")
+        with patch("urllib.request.urlopen") as mock_urlopen:
+            mock_urlopen.return_value.__enter__.return_value = mock_resp
+            text = install_agent.fetch_text("https://example.com/file.md")
+            self.assertEqual(text, "# Hello BOM")
 
 
 if __name__ == "__main__":

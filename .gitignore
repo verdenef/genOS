@@ -12,3 +12,7 @@ graphify-out/
 # Superpowers git worktrees
 .worktrees/
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+

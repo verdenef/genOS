@@ -13,6 +13,7 @@ from pathlib import Path
 UPSTREAM_REPO = "msitarzewski/agency-agents"
 RAW_BASE = f"https://raw.githubusercontent.com/{UPSTREAM_REPO}/main/"
 BLOB_PREFIX = f"https://github.com/{UPSTREAM_REPO}/blob/main/"
+TREE_PREFIX = f"https://github.com/{UPSTREAM_REPO}/tree/main/"
 TREE_API_URL = f"https://api.github.com/repos/{UPSTREAM_REPO}/git/trees/main?recursive=1"
 DEFAULT_DESCRIPTION = "Specialist agent persona imported from msitarzewski/agency-agents"
 EXCLUDED_ROOTS = {"docs", ".github", "examples", "scripts", "templates"}
@@ -22,7 +23,7 @@ def fetch_text(url: str, timeout: int = 15) -> str:
     """Download UTF-8 text from an HTTP/HTTPS URL using stdlib urllib."""
     req = urllib.request.Request(url, headers={"User-Agent": "genOS-agent-installer/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read().decode("utf-8")
+        return resp.read().decode("utf-8-sig")
 
 
 def normalize_agent_ref(ref: str) -> tuple[str, str, str]:
@@ -37,6 +38,8 @@ def normalize_agent_ref(ref: str) -> tuple[str, str, str]:
         rel = cleaned[len(RAW_BASE):]
     elif cleaned.startswith(BLOB_PREFIX):
         rel = cleaned[len(BLOB_PREFIX):]
+    elif cleaned.startswith(TREE_PREFIX):
+        rel = cleaned[len(TREE_PREFIX):]
     elif "://" in cleaned:
         raise ValueError(f"Unsupported URL (expected {UPSTREAM_REPO}): {ref}")
     else:
@@ -55,7 +58,7 @@ def normalize_agent_ref(ref: str) -> tuple[str, str, str]:
 
 def parse_upstream_agent(raw_text: str) -> tuple[str, str]:
     """Extract YAML description and return verbatim markdown body after frontmatter."""
-    normalized = raw_text.replace("\r\n", "\n")
+    normalized = raw_text.lstrip("\ufeff").replace("\r\n", "\n")
     match = re.match(r"^---\n(.*?)\n---\n*", normalized, flags=re.DOTALL)
     if not match:
         return DEFAULT_DESCRIPTION, normalized.lstrip("\n")
@@ -153,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
             for item in list_catalog(args.list):
                 print(item)
             return 0
-        except (urllib.error.URLError, json.JSONDecodeError) as exc:
+        except (urllib.error.URLError, json.JSONDecodeError, ValueError) as exc:
             print(f"ERROR: Could not fetch catalog ({TREE_API_URL}): {exc}", file=sys.stderr)
             return 1
 

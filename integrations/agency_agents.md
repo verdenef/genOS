@@ -37,7 +37,7 @@ When tasked with assembling or reviewing the AI workforce, the AI must follow th
      - `.cursor/rules/<slug>.mdc` (for Cursor IDE)
    - Zero external dependencies: uses only Python 3 standard library modules (no desktop app, no pip install).
    - Use `--force` to overwrite existing files if an agent needs updating.
-   - **Offline / Manual Fallback:** If offline or Python is unavailable, manually download raw markdown from `https://github.com/msitarzewski/agency-agents/tree/main/<category>/<agent>.md` and save it to `.agents/skills/<slug>/SKILL.md` and `.cursor/rules/<slug>.mdc`.
+   - **Offline / Manual Fallback:** If offline or Python is unavailable, manually download raw markdown from `https://github.com/msitarzewski/agency-agents/blob/main/<category>/<agent>.md` and save it to `.agents/skills/<slug>/SKILL.md` and `.cursor/rules/<slug>.mdc`.
 7. **Update the Brain:** Once installed, record the active workforce in `brain/60_AGENTS.md`.
 
 ## Lifecycle Maintenance
