@@ -9,3 +9,6 @@
 # Graphify code graph (rebuilt locally with `graphify extract . --code-only`)
 graphify-out/
 
+# Superpowers git worktrees
+.worktrees/
+
