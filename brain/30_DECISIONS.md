@@ -24,6 +24,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-005 | accepted | 2026-11-10 | Copy-Pasteable Execution Handoff Blocks |
 | DEC-006 | accepted | 2026-11-10 | Graphify Code Topology Integration |
 | DEC-007 | accepted | 2026-11-10 | Zero-App Agency Agents Auto-Installer & Clean Core |
+| DEC-008 | accepted | 2026-11-10 | Verify-First & Plan-Gated Framework Updater |
 
 ---
 
@@ -43,6 +44,18 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-008: Verify-First & Plan-Gated Framework Updater
+- **Status:** accepted
+- **Date:** 2026-11-10
+- **Reason:**
+  Blindly overwriting framework files during `update` offered no drift verification, no short-circuit when already up to date, and failed on legacy `v1`/`v2` repositories whose old `AGENTS.md` lacked Doctor/Update rules, left obsolete prompts behind, or missed repository-root `CLAUDE.md`/`.agents/`/`.cursor/` wiring.
+- **Impact:**
+  - Added a `> **Framework Version:** 3.2` marker in `AGENTS.md`.
+  - Upgraded `AGENTS.md` and `guides/prompts/update.md` to a self-contained 5-phase flow: Read-Only Fetch -> Verify Drift (stop cleanly if current) -> Propose Upgrade & Migration Plan and Wait for Approval -> Apply Approved Core Updates + Obsolete Prompt Pruning + Root Bootstrapping -> Run Doctor using the newly updated `AGENTS.md`.
+  - Preserved strict Brain, custom profile, and project Agency Agent shielding (`[[DEC-004]]`, `[[DEC-007]]`).
+  - Aligned `.agents/skills/genos-update/SKILL.md`, `.cursor/rules/genos-update.mdc`, `[[Updater]]`, `README.md`, and `guides/guide.md`.
+- **Supersedes:** none
 
 ### DEC-007: Zero-App Agency Agents Auto-Installer & Clean Core
 - **Status:** accepted

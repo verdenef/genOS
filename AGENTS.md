@@ -1,5 +1,7 @@
 # genOS Kernel
 
+> **Framework Version:** 3.2
+
 Every AI agent in this repository must follow this file. Read it before any other project file.
 
 genOS stores **only** knowledge that cannot be reliably inferred from the runtime environment (e.g., containers, endpoints, schemas, assets), source code, or Runtime MCP.
@@ -163,7 +165,7 @@ When user intent follows the command keyword, it takes priority over default beh
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
 | `batch` | Run Autonomous Batch protocol with `TARGET_SCOPE: AUTO_RECOMMENDED` unless user specifies scope (e.g. `batch M1.2, M1.3`) |
-| `update` | Run Framework Update protocol: smart fetch latest genOS release (git remote or GitHub archive), upgrade framework files while strictly shielding `brain/`, custom profiles, and project-installed agent skills/rules, run Doctor |
+| `update` | Run Framework Update protocol: smart fetch upstream genOS (read-only) → verify if local installation is outdated (stop cleanly if up to date) → present Upgrade & Migration Plan (core files, obsolete v1/v2 prompts, root discovery, strict Brain/agent shields) and wait for human approval → apply updates and run Doctor |
 
 If the message does not match a command, proceed with normal conversation while respecting AGENTS.md rules.
 
@@ -316,27 +318,25 @@ After diagnostics and repairs, output the Brain Health Report:
 
 ## Framework Update Protocol
 
-Run when the user issues the `update` command or `@update.md`. Safely upgrades the genOS framework while guaranteeing zero data loss in the Project Brain.
+Run when the user issues the `update` command, pastes `guides/prompts/update.md`, or uses `@update.md`. Safely verifies drift, plans the upgrade, waits for human approval, and upgrades legacy `v1`/`v2` or outdated `v3` installs with zero data loss in the Project Brain.
 
-### Upgrade Steps
-1. **Fetch Latest Framework (Dual-Method):**
-   - Check if git remote `upstream` or `origin` tracks `verdenef/genOS`. If yes, fetch the latest commit.
-   - If not a tracking clone, download the latest release archive from `https://github.com/verdenef/genOS/archive/refs/heads/main.zip` via curl or PowerShell `Invoke-WebRequest` into a temporary `_genOS_Update/` directory and unpack it.
-2. **Strict Brain & User Protection:**
-   - **NEVER** overwrite, modify, or delete any file in `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, and all `brain/systems/*.md`).
-   - **NEVER** delete the `.obsidian/` directory if present.
-   - **NEVER** delete custom user profiles in `profiles/`.
-   - **NEVER** touch user source code.
-   - **NEVER** overwrite or delete project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`.
-3. **Apply Framework Refresh:**
-   - Update `AGENTS.md` kernel.
-   - Update `guides/` (user guide, workflow prompts, and `guides/scripts/install_agent.py`).
-   - Update official `profiles/` presets.
-   - Refresh ONLY core genOS framework skills and rules (`genos*`, `ponytail`, `graphify`, and Superpowers in `.agents/skills/` and `.cursor/rules/`), strictly shielding all project-installed Agency Agents.
-4. **Cleanup & Verification:**
-   - Remove temporary `_genOS_Update/` folder if created.
-   - Run the Doctor Protocol to audit the Project Brain.
-   - Output the Upgrade Summary table.
+### Upgrade Phases
+1. **Fetch Upstream (Read-Only):**
+   - Check if git remote `upstream` or `origin` tracks `verdenef/genOS`. If yes, fetch `main`.
+   - Otherwise, download `https://github.com/verdenef/genOS/archive/refs/heads/main.zip` into a temporary `_genOS_Update/` directory and unpack it (or inspect a human-specified local `genOS` source). Do **not** modify target files yet.
+2. **Verify Drift & Detect Generation:**
+   - Compare local core files (`AGENTS.md`, `CLAUDE.md` at repo root, `guides/guide.md`, `guides/scripts/install_agent.py`, canonical prompts in `guides/prompts/`, standard `profiles/`, core `.agents/skills/` and `.cursor/rules/`) against upstream, excluding `brain/`.
+   - Detect legacy markers (`v1`/`v2`): missing `> **Framework Version:**` or `## Commands` in `AGENTS.md`, obsolete prompt files (`setup-04-framework-upgrade.md`, `setup-tooling.md`, `setup-workforce.md`, `setup-obsidian-migration.md`, `workflow-01-kickoff.md`, `workflow-02-shutdown.md`, `workflow-03-resume-session.md`, `workflow-doctor.md`, `workflow-autonomous-batch.md`), missing repo-root `CLAUDE.md`/`.agents/`/`.cursor/`, or legacy `brain/` formatting (`Status` column in `systems/README.md`, missing keys in `20_PROGRESS.yaml`).
+   - **Short-circuit if current:** If all core files and repo-root discovery files match upstream and no obsolete prompts remain, delete `_genOS_Update/`, report `genOS is already up to date (v3.2). No changes made.`, and **stop**.
+3. **Propose Upgrade Plan & Wait for Approval:**
+   - Output a concise Upgrade & Migration Plan showing: detected state → target (`e.g., Legacy v1 → v3.2`), files to add/update (including repo-root `CLAUDE.md`, core `.agents/skills/`, and core `.cursor/rules/` when `genOS/` is nested), obsolete v1/v2 prompts to remove, the **Strict Shield List** below, and any non-destructive Doctor schema repairs needed after sync.
+   - **STOP and wait for explicit human approval** before writing any files.
+4. **Strict Shielding & Apply Approved Upgrade:**
+   - **NEVER** overwrite, modify, or delete `brain/` during file sync (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`).
+   - **NEVER** delete `.obsidian/`, custom profiles in `profiles/`, project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`, or user source code.
+   - Update `AGENTS.md`, `guides/` (`guide.md`, canonical prompts, `guides/scripts/install_agent.py`), standard `profiles/`, repo-root `CLAUDE.md`, and ONLY core genOS skills/rules (`genos*`, `ponytail`, `graphify`, Superpowers). Remove approved obsolete v1/v2 prompts and delete `_genOS_Update/`.
+5. **Post-Upgrade Doctor & Proof:**
+   - Read the **newly updated `AGENTS.md`**, run the Doctor Protocol to verify and non-destructively migrate any legacy v1/v2 `brain/` schema gaps, confirm project-installed Agency Agents and Brain history are intact, and output the Upgrade Summary table.
 
 ---
 

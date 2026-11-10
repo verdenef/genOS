@@ -16,7 +16,7 @@ genOS uses simple keyword commands. Type them in any AI chat where genOS is load
 | `status` | Quick read-only summary of current project state |
 | `doctor` | Diagnose and auto-repair brain integrity issues |
 | `batch` | Hands-free autonomous execution with QA verification |
-| `update` | Safely upgrade genOS to the latest release on `main` while strictly shielding the Brain |
+| `update` | Verify if local genOS is outdated, propose an Upgrade & Migration Plan for approval, then refresh core files while strictly shielding the Brain |
 
 You can also `@`-mention the corresponding prompt file (e.g., `@workflow-kickoff.md`) for explicit confirmation that the workflow is loaded.
 
@@ -181,7 +181,7 @@ genOS is natively compatible with **Obsidian**. Open your `brain/` folder as an 
 
 ### Upgrading genOS
 
-When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS automatically fetches the latest `main` release from GitHub, updates framework files (`AGENTS.md`, `guides/`, `profiles/`), refreshes core framework skills and rules, strictly shields your Project Brain and project-installed Agency Agents, and runs the Doctor health check.
+When a new version of genOS is released, type `update` (or `@update.md`)—or paste [`guides/prompts/update.md`](prompts/update.md) and point to a legacy `v1`/`v2` `genOS` folder. genOS fetches `main` read-only, checks whether your installation is outdated (stopping cleanly if already current), shows an Upgrade & Migration Plan for approval, refreshes core files (`AGENTS.md`, `guides/`, `profiles/`, root `CLAUDE.md`, core skills/rules), strictly shields your Project Brain and project-installed Agency Agents, and runs Doctor using the updated `AGENTS.md`.
 
 ### Standalone Reconfiguration
 

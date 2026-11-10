@@ -32,7 +32,7 @@ genOS eliminates prompt boilerplate. In any AI chat (Antigravity, Cursor, Claude
 | `doctor` | Diagnoses and auto-repairs brain integrity issues. |
 | `status` | Quick read-only summary of current milestone and execution RAM. |
 | `batch` | Autonomous multi-task execution with dual-persona (Builder + QA Auditor) loops. |
-| `update` | 1-click framework updater from GitHub `main` with strict shielding for `brain/`, `.obsidian/`, custom profiles, and project-installed agent skills/rules. |
+| `update` | Verifies drift against GitHub `main` (stops if current), proposes an Upgrade & Migration Plan for approval, refreshes core framework files while strictly shielding `brain/`, `.obsidian/`, custom profiles, and project-installed agent skills/rules, then runs Doctor. |
 
 ### Timeless Model Tiers
 genOS recommends models by capability tier rather than hardcoded version strings:
@@ -82,8 +82,8 @@ genOS/
 2. Review the plan, then copy-paste the generated execution command block into a new session.
 3. When done, type **`shutdown`**.
 
-### Upgrading an Existing Project
-Run **`update`** in chat. genOS fetches `main`, updates `AGENTS.md`, `guides/`, `profiles/`, and core `.agents/skills/` & `.cursor/rules/`, strictly shields `brain/`, `.obsidian/`, custom profiles, project-installed Agency Agents, and user source code, then runs `doctor`.
+### Upgrading an Existing Project (`v1`, `v2`, or `v3`)
+Run **`update`** in chat (or paste [`guides/prompts/update.md`](guides/prompts/update.md) and point to an older `v1`/`v2` `genOS` folder). genOS fetches `main` read-only, verifies whether your files are outdated (stopping cleanly if already up to date), shows an Upgrade & Migration Plan for approval, refreshes core files while strictly shielding `brain/`, `.obsidian/`, custom profiles, project-installed Agency Agents, and source code, and runs `doctor`.
 
 ### Optional: Local Code Topology with Graphify
 If you work on large codebases, install Graphify locally (powered by PyPI [`graphifyy`](https://pypi.org/project/graphifyy/)):

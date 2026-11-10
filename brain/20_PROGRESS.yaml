@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Completed Agency Agents auto-installer implementation, clean core rules cleanup, and update shielding (DEC-007). Verified install_agent.py with 13 unit tests, live catalog listing, and live temporary install. Pruned 14 project-specific .mdc leftovers, leaving 7 core rules. Wired auto-installer and update shielding into AGENTS.md, prompts, guides, and brain systems/roadmap."
+session_summary: "Completed Verify-First & Plan-Gated Framework Updater (DEC-008) on top of Agency Agents auto-installer (DEC-007). Added Framework Version 3.2 marker in AGENTS.md and upgraded AGENTS.md, guides/prompts/update.md, genos-update skill/rule, Updater.md, README.md, and guides/guide.md to verify drift read-only (stopping if current), present an Upgrade & Migration Plan for approval (covering legacy v1/v2 cleanup, root CLAUDE.md/.agents/.cursor placement, and strict shields), and run Doctor via the newly updated AGENTS.md."
