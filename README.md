@@ -72,7 +72,19 @@ genOS/
 ## Quickstart
 
 ### Day 0: Install Into a New Project
-1. Copy genOS into your repository (either at root or inside a `genOS/` subfolder).
+
+#### Option A: 1-Prompt Auto-Install *(Recommended — Claude Code, Cursor, Antigravity, Codex)*
+Open your project in an AI IDE/CLI with terminal access and paste:
+```text
+Install genOS into a `genOS/` subfolder in this repository from https://github.com/verdenef/genOS/archive/refs/heads/main.zip (using a temporary `_genOS_Temp/` folder, then deleting it after):
+1. Copy `AGENTS.md`, `guides/`, `profiles/`, `integrations/`, `templates/`, and `README.md` into `genOS/`.
+2. Initialize `genOS/brain/` from `templates/brain/` (do NOT copy the upstream repo's self-hosted `brain/`, `docs/superpowers/`, or `scratch/`).
+3. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
+4. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
+```
+
+#### Option B: Manual Download *(for sandboxed or offline setups)*
+1. Download or clone `verdenef/genOS` into your repository (either at root or inside a `genOS/` subfolder).
 2. Because `brain/` in this upstream repo tracks **genOS itself**, initialize your project's `brain/` directory from [`templates/brain/`](templates/brain/) (or let `setup-init.md` reset it for you).
 3. If installing inside a subfolder like `genOS/`: keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at your repo root so Claude Code and Cursor auto-detect them.
 4. Open your AI chat and paste [`guides/prompts/setup-init.md`](guides/prompts/setup-init.md).
