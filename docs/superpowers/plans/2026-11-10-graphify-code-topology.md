@@ -14,7 +14,7 @@
 
 - **Zero Brain Contamination:** No Graphify caches or AST data in `brain/`. The Project Brain holds only semantic truth.
 - **Graceful Fallback:** If Graphify is not installed on a user's machine, the agent must fall back silently to native search tools (`grep`, `find_files`) with zero errors.
-- **Git Hygiene:** Add `.graphify/` and `*.graphify` to `.gitignore`.
+- **Git Hygiene:** Add `graphify-out/` to `.gitignore`.
 - **Doctor Compliance:** Maintain 100% clean check in `brain/` with matching Indexes, active milestone pointers, and Obsidian `[[wikilink]]` syntax.
 
 ---
@@ -28,17 +28,17 @@
 - Create: `.cursor/rules/graphify.mdc`
 
 **Interfaces:**
-- Consumes: Graphify CLI or MCP tools (`get_callers`, `get_dependencies`, `get_blast_radius`).
+- Consumes: Graphify CLI (`graphify explain`, `graphify path`, `graphify query`) or MCP tools (`query_graph`, `get_node`, `get_neighbors`, `shortest_path`, `get_community`, `god_nodes`, `graph_stats`).
 - Produces: Verified symbol call chains and impacted files for implementation plan interfaces.
 
 - [x] **Step 1: Write `.agents/skills/graphify/SKILL.md`**
-  - Define frontmatter: `name: graphify`, `description: "Query codebase AST call graphs, caller hierarchies, and calculate blast radius for implementation planning."`
-  - Define Invariants: Local AST parsing, never guess call hierarchies, silent fallback if unconfigured.
-  - Define Workflow: Check graph freshness -> Query callers/callees -> Compute blast radius -> Enrich plan `Interfaces:` block.
+  - Define frontmatter: `name: graphify`, `description: "Query the code graph (callers, callees, shortest path, communities) built by Graphify, and rebuild it when stale, before planning edits."`
+  - Define Invariants: Code-only local AST parsing (`--code-only`), never guess call hierarchies, Grep string/asset refs and `INFERRED` edges, silent fallback if unconfigured.
+  - Define Workflow: Check freshness (`graphify update .`) -> Query callers/callees/paths -> Grep-confirm -> Enrich plan `Interfaces:` block.
 
 - [x] **Step 2: Write `.cursor/rules/graphify.mdc`**
-  - Add Cursor IDE matching rule with `globs: *` and `alwaysApply: false`.
-  - Provide instructions for Cursor agent on using Graphify MCP tools.
+  - Add Cursor IDE matching rule with `globs: "*"` and `alwaysApply: false`.
+  - Provide instructions for Cursor agent on using Graphify CLI/MCP tools.
 
 - [x] **Step 3: Verification**
   - Confirm `.agents/skills/graphify/SKILL.md` and `.cursor/rules/graphify.mdc` exist and contain no syntax errors.
@@ -59,16 +59,16 @@
 - Produces: Reusable MCP server configuration snippets for Cursor, Claude Code, and Antigravity.
 
 - [x] **Step 1: Update `.gitignore`**
-  - Append `.graphify/` and `*.graphify` to prevent caching artifacts from entering version control.
+  - Append `graphify-out/` to prevent generated graph artifacts from entering version control.
 
 - [x] **Step 2: Add `graphify-mcp` to profile presets**
   - In `profiles/gamedev/profile.yaml`, `profiles/web-fullstack/profile.yaml`, and `profiles/backend-services/profile.yaml`, add `graphify-mcp` to `recommended_mcps`.
 
 - [x] **Step 3: Create `profiles/templates/mcp-graphify.json`**
-  - Provide ready-to-copy MCP configuration block for `@graphify/mcp-server`.
+  - Provide ready-to-copy MCP configuration block for `graphify-mcp --graph graphify-out/graph.json`.
 
 - [x] **Step 4: Verification**
-  - Verify `.gitignore` contains `.graphify/`.
+  - Verify `.gitignore` contains `graphify-out/`.
   - Validate profile YAML files with `python -c "import yaml; yaml.safe_load(...)"`.
 
 ---

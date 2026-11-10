@@ -46,8 +46,8 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ### DEC-006: Graphify Code Topology Integration
 - **Status:** accepted
 - **Date:** 2026-11-10
-- **Reason:** In large or sprawling codebases, navigating call chains and calculating blast radius with standard text search (`grep`, file globs) requires multiple tool turns and high token usage. Pre-mapped AST call graphs accelerate pre-planning exploration without context rot.
-- **Impact:** Integrated Graphify as an optional Pre-Planning Code Topology Hook during `kickoff`. Added `.agents/skills/graphify/SKILL.md`, `.cursor/rules/graphify.mdc`, and MCP configuration templates across stack profiles. Enforced zero Brain contamination (AST caches remain in `.graphify/`, never in `brain/`) and silent fallback to native text tools when Graphify is unconfigured.
+- **Reason:** In large or sprawling codebases, navigating call chains and calculating blast radius with standard text search (`grep`, file globs) requires multiple tool turns and high token usage. Pre-mapped local AST call graphs accelerate pre-planning exploration without context rot.
+- **Impact:** Integrated Graphify (PyPI `graphifyy[mcp]`, CLI `graphify extract . --code-only` / `graphify update .`, MCP `graphify-mcp --graph graphify-out/graph.json`) as an optional Pre-Planning Code Topology Hook during `kickoff`. Added `.agents/skills/graphify/SKILL.md`, `.cursor/rules/graphify.mdc`, and `profiles/templates/mcp-graphify.json` plus `recommended_mcps` across stack profiles. Enforced zero Brain contamination (graph artifacts stay in `graphify-out/`, gitignored, never in `brain/`), explicit `--code-only` offline privacy, mandatory Grep confirmation for string/asset references and `INFERRED` edges, and silent fallback to native text tools when Graphify is unconfigured.
 - **Supersedes:** none
 
 ### DEC-005: Copy-Pasteable Execution Handoff Blocks
