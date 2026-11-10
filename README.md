@@ -13,7 +13,7 @@ genOS coordinates five complementary disciplines into one frictionless developer
 | Layer | System | Responsibility |
 |:---|:---|:---|
 | **1. Memory & State** | **genOS** | Project Brain (`brain/`), zero-history recovery, milestone tracking, and mandatory Sanity Gates. |
-| **2. Specialist Identity** | **Agency Agents** | Domain engineering rules (e.g. `unity-architect`, `backend-architect`) verified via the Hard Persona Gate before planning. |
+| **2. Specialist Identity** | **Agency Agents** | Domain engineering rules (e.g. `unity-architect`, `backend-architect`) verified via the Hard Persona Gate before planning. Auto-installed via `guides/scripts/install_agent.py` upon human approval (no desktop app required). |
 | **3. Code Topology *(Optional)*** | **Graphify** | Local, offline `--code-only` Tree-sitter AST call graphs (`graphifyy[mcp]`) for instant caller/callee queries and path analysis. |
 | **4. Senior Restraint** | **Ponytail** | The Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) prunes over-engineering before writing code. |
 | **5. Execution Rigor** | **Superpowers** | Test-driven development, subagent-driven task plans, copy-paste handoffs, and verification before completion. |
@@ -32,7 +32,7 @@ genOS eliminates prompt boilerplate. In any AI chat (Antigravity, Cursor, Claude
 | `doctor` | Diagnoses and auto-repairs brain integrity issues. |
 | `status` | Quick read-only summary of current milestone and execution RAM. |
 | `batch` | Autonomous multi-task execution with dual-persona (Builder + QA Auditor) loops. |
-| `update` | 1-click framework updater from GitHub `main` with strict shielding for `brain/`, `.obsidian/`, and custom profiles. |
+| `update` | 1-click framework updater from GitHub `main` with strict shielding for `brain/`, `.obsidian/`, custom profiles, and project-installed agent skills/rules. |
 
 ### Timeless Model Tiers
 genOS recommends models by capability tier rather than hardcoded version strings:
@@ -62,8 +62,9 @@ genOS/
 ├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
 ├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
 ├── guides/                          # User guide (guide.md), workflow prompts, and plans
+│   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
 ├── docs/superpowers/                # Design specifications and implementation plans
-└── integrations/                    # Optional integrations (e.g. agency_agents.md)
+└── integrations/                    # Optional integrations (agency_agents.md)
 ```
 
 ---
@@ -82,7 +83,7 @@ genOS/
 3. When done, type **`shutdown`**.
 
 ### Upgrading an Existing Project
-Run **`update`** in chat. genOS fetches `main`, updates `AGENTS.md`, `guides/`, `profiles/`, `.agents/skills/`, and `.cursor/rules/`, strictly shields `brain/`, `.obsidian/`, custom profiles, and user source code, then runs `doctor`.
+Run **`update`** in chat. genOS fetches `main`, updates `AGENTS.md`, `guides/`, `profiles/`, and core `.agents/skills/` & `.cursor/rules/`, strictly shields `brain/`, `.obsidian/`, custom profiles, project-installed Agency Agents, and user source code, then runs `doctor`.
 
 ### Optional: Local Code Topology with Graphify
 If you work on large codebases, install Graphify locally (powered by PyPI [`graphifyy`](https://pypi.org/project/graphifyy/)):
@@ -104,3 +105,4 @@ For the full walkthrough, see the [genOS User Guide](guides/guide.md).
 3. **Automated Sanity Gates:** Mandatory integrity audits guarantee the Brain is never corrupted.
 4. **Local-Only Code Topology:** Graphify AST parsing uses `--code-only` offline without sending code to external LLMs, paired with Grep checks for runtime strings and scene/prefab refs.
 5. **On-Disk Skills:** Skills in `.agents/skills/` are read dynamically from disk during `kickoff`—no manual UI settings uploads required.
+6. **Zero-App Workforce Automation:** Specialist Agency Agents from `msitarzewski/agency-agents` install directly via `guides/scripts/install_agent.py` upon human approval—requiring only Python 3 stdlib, with zero external tools or desktop apps.

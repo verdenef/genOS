@@ -22,12 +22,13 @@ Follow the Framework Update Protocol from AGENTS.md strictly:
    - **DO NOT TOUCH** `.obsidian/` configuration.
    - **DO NOT TOUCH** custom profiles in `profiles/`.
    - **DO NOT TOUCH** project source code.
+   - **DO NOT TOUCH** project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`.
 
 3. **Framework Synchronization:**
    - Update `AGENTS.md` (kernel).
-   - Update `guides/guide.md` and reference prompts in `guides/prompts/`.
+   - Update `guides/guide.md`, `guides/scripts/install_agent.py`, and reference prompts in `guides/prompts/`.
    - Update standard profiles in `profiles/`.
-   - Update pre-packaged `.agents/skills/` and `.cursor/rules/`.
+   - Refresh ONLY core genOS framework skills and rules (`genos*`, `ponytail`, `graphify`, and Superpowers in `.agents/skills/` and `.cursor/rules/`), strictly preserving all project-installed Agency Agents.
 
 4. **Self-Audit & Cleanup:**
    - Delete `_genOS_Update/` temporary files.
@@ -42,5 +43,6 @@ Follow the Framework Update Protocol from AGENTS.md strictly:
 | Kernel (`AGENTS.md`) | ✅ | Upgraded to latest version |
 | Guides & Prompts | ✅ | Refreshed to latest standards |
 | Project Brain (`brain/`) | 🛡️ | 100% Preserved & untouched |
+| Project Skills & Rules | 🛡️ | Core refreshed; project agents shielded |
 | Brain Doctor Audit | ✅ | All sanity checks passing |
 ```

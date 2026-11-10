@@ -49,9 +49,14 @@ Immediately after I approve the roadmap, transition automatically without waitin
 Immediately after tooling is ready:
 
 1. **Activate Specialist AI Workforce (Agency Agents):**
-   - Audit `00_PROJECT.md` and `50_ROADMAP.md` alongside the profile's `recommended_agents`.
-   - Select the Core and Milestone specialist roles best suited for the active milestone.
-   - Populate `brain/60_AGENTS.md` and confirm the corresponding rules in `.cursor/rules/` and `.agents/skills/`.
+   - Audit `00_PROJECT.md` and `50_ROADMAP.md` alongside the profile's `recommended_agents` and any custom project needs.
+   - Present the recommended Core and Milestone specialist roles with concise rationales and **ask for my confirmation**.
+   - Upon confirmation, install the approved agents using the zero-app automated installer:
+     ```bash
+     python <genos>/guides/scripts/install_agent.py <agent_1> <agent_2> ...
+     ```
+     This automatically writes `.agents/skills/<slug>/SKILL.md` and `.cursor/rules/<slug>.mdc` with valid frontmatter using Python standard library alone (no desktop app required).
+   - Populate `brain/60_AGENTS.md` with the active workforce roster.
 2. **Activate Engineering Restraint (Ponytail):**
    - Confirm `.agents/skills/ponytail/SKILL.md` / `.cursor/rules/ponytail.mdc` is active to prevent over-engineering and code bloat.
 3. **Activate Code Topology *(if enabled in Phase 2)*:**

@@ -163,7 +163,7 @@ When user intent follows the command keyword, it takes priority over default beh
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
 | `batch` | Run Autonomous Batch protocol with `TARGET_SCOPE: AUTO_RECOMMENDED` unless user specifies scope (e.g. `batch M1.2, M1.3`) |
-| `update` | Run Framework Update protocol: smart fetch latest genOS release (git remote or GitHub archive), upgrade framework files while strictly shielding `brain/` and custom profiles, run Doctor |
+| `update` | Run Framework Update protocol: smart fetch latest genOS release (git remote or GitHub archive), upgrade framework files while strictly shielding `brain/`, custom profiles, and project-installed agent skills/rules, run Doctor |
 
 If the message does not match a command, proceed with normal conversation while respecting AGENTS.md rules.
 
@@ -206,7 +206,7 @@ If Graphify is unavailable or unconfigured, the agent silently skips the Code To
    - If a file is missing, remove the entry and log a warning.
 9. Read `brain/40_BACKLOG.md` if ad-hoc queue context is needed
 10. **System Initialization Protocol:** Detect whether `brain/systems/` contains only `README.md` and `SYSTEM.md`. If so, recognize that the project has not yet initialized its systems architecture. Read `00_PROJECT.md`, `50_ROADMAP.md`, and `30_DECISIONS.md`. Propose the initial set of project systems and wait for human approval. Upon approval, generate one system document per approved system using `SYSTEM.md`.
-11. **Optional Integrations:** If the human requests an integration (e.g., AI workforce evaluation), read the relevant protocol in `integrations/` and execute it only *after* the roadmap is defined.
+11. **Optional Integrations:** If the human requests an integration (e.g., AI workforce evaluation), read the relevant protocol in `integrations/` (using `guides/scripts/install_agent.py` for automated workforce installation upon explicit human approval) and execute it only *after* the roadmap is defined.
 12. **If Empty Brain Protocol applies → stop inventing; ask human**
 13. Plan against **ROADMAP completion criteria** for `current_milestone` (not chat)
 14. Implement (only when intent and required facts exist)
@@ -327,11 +327,12 @@ Run when the user issues the `update` command or `@update.md`. Safely upgrades t
    - **NEVER** delete the `.obsidian/` directory if present.
    - **NEVER** delete custom user profiles in `profiles/`.
    - **NEVER** touch user source code.
+   - **NEVER** overwrite or delete project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`.
 3. **Apply Framework Refresh:**
    - Update `AGENTS.md` kernel.
-   - Update `guides/` (user guide and workflow prompt references).
+   - Update `guides/` (user guide, workflow prompts, and `guides/scripts/install_agent.py`).
    - Update official `profiles/` presets.
-   - Update pre-packaged `.agents/skills/` and `.cursor/rules/`.
+   - Refresh ONLY core genOS framework skills and rules (`genos*`, `ponytail`, `graphify`, and Superpowers in `.agents/skills/` and `.cursor/rules/`), strictly shielding all project-installed Agency Agents.
 4. **Cleanup & Verification:**
    - Remove temporary `_genOS_Update/` folder if created.
    - Run the Doctor Protocol to audit the Project Brain.

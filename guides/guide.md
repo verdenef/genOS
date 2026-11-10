@@ -29,7 +29,7 @@ genOS coordinates five complementary disciplines into one frictionless workflow:
 | Layer | System | Responsibility |
 |:---|:---|:---|
 | **1. Memory & State** | **genOS** | Project Brain, zero-history recovery, milestone criteria, and atomic SHUTDOWN gates. |
-| **2. Specialist Identity** | **Agency Agents** | Domain-specific engineering rules (e.g. `unity-architect`, `backend-architect`) verified before planning. |
+| **2. Specialist Identity** | **Agency Agents** | Domain-specific engineering rules (e.g. `unity-architect`, `backend-architect`) verified before planning. Auto-installed via `guides/scripts/install_agent.py` upon human approval (zero-app Python stdlib installer). |
 | **3. Code Topology *(Optional)*** | **Graphify** | Local `--code-only` Tree-sitter AST call graphs (`graphifyy[mcp]`) for instant caller/callee queries. |
 | **4. Senior Restraint** | **Ponytail** | The Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) cuts over-engineering before writing code. |
 | **5. Execution Rigor** | **Superpowers** | Test-driven development, subagent-driven task plans, copy-paste handoffs, and verification before completion. |
@@ -45,6 +45,24 @@ Before you can use genOS for daily development, initialize it for your specific 
 1. **Clean Starter Brain:** Because `brain/` inside the upstream genOS repo tracks genOS itself, copy the clean `_TBD_` files from `templates/brain/` into your project's `brain/` directory (the setup wizard also verifies this).
 2. **Root Discovery (if placed in a subfolder like `genOS/`):** Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at the repository root.
 
+### Repository Structure
+
+```
+genOS/
+├── AGENTS.md                        # Universal kernel — authoritative operational rules
+├── CLAUDE.md                        # Claude Code entry point (points to AGENTS.md)
+├── README.md                        # Repository overview
+├── .agents/skills/                  # On-demand skills (Superpowers, Ponytail, Graphify, genOS commands)
+├── .cursor/rules/                   # Cursor IDE rules (genos, ponytail, graphify, Agency Agents)
+├── brain/                           # Self-hosted Project Brain tracking genOS itself
+├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
+├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
+├── guides/                          # User guide (guide.md), workflow prompts, and plans
+│   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
+├── docs/superpowers/                # Design specifications and implementation plans
+└── integrations/                    # Optional integrations (agency_agents.md)
+```
+
 ### The All-in-One Setup Wizard
 
 Once genOS is inside your project repository, open a chat with your AI agent and paste:
@@ -55,7 +73,7 @@ This interactive wizard guides you through:
 1. **Stack Profile Selection:** Detects your stack and suggests a profile from `profiles/`.
 2. **Project Brain Setup:** Asks for your vision, initializes `brain/00_PROJECT.md`, proposes milestones.
 3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack (including optional `graphify-mcp`).
-4. **AI Workforce & Skills:** Recommends specialist AI agent roles and confirms Ponytail, Graphify, and Superpowers skills.
+4. **AI Workforce & Skills:** Recommends specialist AI agent roles from `msitarzewski/agency-agents`. Upon human approval, automatically installs them via `guides/scripts/install_agent.py` into `.agents/skills/` and `.cursor/rules/` without any external desktop app, then confirms Ponytail, Graphify, and Superpowers skills.
 5. **Doctor Check & Handoff:** Runs integrity check and directs you to start coding in a fresh session.
 
 ---
@@ -163,9 +181,9 @@ genOS is natively compatible with **Obsidian**. Open your `brain/` folder as an 
 
 ### Upgrading genOS
 
-When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS automatically fetches the latest `main` release from GitHub, updates framework files (`AGENTS.md`, `guides/`, `profiles/`, `.agents/skills/`, `.cursor/rules/`), strictly shields your Project Brain, and runs the Doctor health check.
+When a new version of genOS is released, simply type `update` (or `@update.md`) in any AI chat. genOS automatically fetches the latest `main` release from GitHub, updates framework files (`AGENTS.md`, `guides/`, `profiles/`), refreshes core framework skills and rules, strictly shields your Project Brain and project-installed Agency Agents, and runs the Doctor health check.
 
 ### Standalone Reconfiguration
 
 - **Tooling / MCP:** `kickoff tooling`
-- **Workforce:** `kickoff workforce`
+- **Workforce:** `kickoff workforce` (or query and install agents directly with `python guides/scripts/install_agent.py --list [keyword]` and `python guides/scripts/install_agent.py <category>/<agent>`)
