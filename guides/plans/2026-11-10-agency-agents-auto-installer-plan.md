@@ -494,7 +494,7 @@ git commit -m "docs(workforce): integrate auto-installer workflow and shield pro
   - Run `python -m unittest discover -s guides/scripts -p "test_*.py" -v` (confirm all unit tests pass).
   - Run `python guides/scripts/install_agent.py --list frontend` and a live install into a temp dir (`--root <temp>`) to verify live upstream integration.
   - Run Doctor diagnostic audit (`8/8` checks PASS).
-- [ ] **Step 6: Commit & push to `main` and sync `genos-v3`**
+- [x] **Step 6: Commit & push to `main` and sync `genos-v3`**
 
 ```bash
 git add brain/ docs/superpowers/plans/2026-11-10-agency-agents-auto-installer.md guides/plans/2026-11-10-agency-agents-auto-installer-plan.md
