@@ -13,6 +13,9 @@ recommended_mcps:
   - id: postgres
     name: "Database / SQL MCP"
     purpose: "Inspect database schemas, query performance, and connection states."
+  - id: graphify-mcp
+    name: "Graphify MCP (Code Topology & AST)"
+    purpose: "Query AST call graphs, trace dependencies, and compute blast radius before editing code."
 recommended_agents:
   - id: "engineering/engineering-backend-architect.md"
     name: "Backend Architect"

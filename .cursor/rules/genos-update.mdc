@@ -1,0 +1,6 @@
+---
+description: "genOS update — safely upgrade the framework while preserving the Project Brain."
+alwaysApply: false
+---
+
+Execute the `update` command as defined in `AGENTS.md` → Framework Update Protocol. Smart fetch latest release (git remote or GitHub archive), upgrade framework files, strictly shield `brain/`, and run the Doctor.

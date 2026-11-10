@@ -1,0 +1,16 @@
+---
+description: Use the Graphify code graph (callers, callees, paths) when planning code changes.
+globs: "*"
+alwaysApply: false
+---
+
+# Graphify Code Topology Rule
+
+Read `.agents/skills/graphify/SKILL.md` for the full protocol. In short:
+
+1. **Check availability first:** `graphify-out/graph.json` exists and the `graphify` CLI or MCP tools (`query_graph`, `get_node`, `get_neighbors`, `shortest_path`, `get_community`, `god_nodes`, `graph_stats`) respond. If not, fall back silently to grep and file reads.
+2. **Refresh if stale:** graph older than the last commit or the working tree changed, then `graphify update .` (code only, no LLM).
+3. **Before changing or removing a symbol:** `graphify explain "Class.Method()"` for its callers and callees.
+4. **The graph is syntactic:** it misses string-based references (`GameObject.Find`, `FindProperty`, menu paths, scene and prefab files). Grep those, and confirm `INFERRED` edges with Grep.
+5. **Targeted queries only;** never dump the graph into context.
+6. **No Brain contamination:** `graphify-out/` is gitignored and never goes in `brain/`.

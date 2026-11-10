@@ -32,6 +32,13 @@ In genOS, a "System" is a core architectural pillar of the project (e.g., `SaveS
 - **Merge** systems if their boundaries blur to the point where they are functionally a single component.
 - Always update `DECISIONS.md` when splitting or merging systems, and update the `Systems Index` below.
 
+## Directory Structure & Categorization
+genOS supports two organizational layouts:
+1. **Flat Layout (Default):** For small-to-medium projects, place system documents directly in `brain/systems/<Name>.md`.
+2. **1-Level Category Subfolders (Recommended for 10+ Systems):** When systems scale, group them into single-level domain subfolders (e.g. `brain/systems/core/`, `brain/systems/gameplay/`, `brain/systems/ui/`, `brain/systems/network/`, `brain/systems/data/`).
+
+**Critical Invariant — Globally Unique Names:** Every system filename must remain unique across all folders (e.g., only one `Combat.md`). This ensures Obsidian `[[Combat]]` wikilinks and `systems_in_scope: [Combat]` resolve cleanly and deterministically without path ambiguity.
+
 ## AI Maintenance
 - Create new systems by duplicating `SYSTEM.md`.
 - Keep the `Systems Index` table updated.
@@ -42,6 +49,9 @@ In genOS, a "System" is a core architectural pillar of the project (e.g., `SaveS
 
 ## Systems Index
 
-| System | File |
-|--------|------|
-<!-- Add systems here as they are instantiated -->
+| System | Category | Description | File |
+|--------|----------|-------------|------|
+| [[Kernel]] | Core | Governs session lifecycle, state handoff, and execution protocols across AI agents. | `brain/systems/Kernel.md` |
+| [[Updater]] | Maintenance | Manages framework upgrade lifecycle while strictly preserving user project brain, custom configurations, and source code. | `brain/systems/Updater.md` |
+| [[Skills]] | Execution | Manages specialized agent capabilities, Superpowers execution patterns, and senior developer restraint protocols. | `brain/systems/Skills.md` |
+| [[Workforce]] | Governance | Coordinates active, deferred, and milestone-specific AI agents, enforcing the Hard Persona Gate before planning. | `brain/systems/Workforce.md` |

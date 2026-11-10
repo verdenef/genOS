@@ -1,0 +1,6 @@
+---
+description: "genOS kickoff — start or resume a development session."
+alwaysApply: false
+---
+
+Execute the `kickoff` command as defined in `AGENTS.md` → Commands. Follow the full BOOT and kickoff protocol.

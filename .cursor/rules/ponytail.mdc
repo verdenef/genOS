@@ -1,0 +1,15 @@
+---
+description: "Ponytail Senior Developer Restraint — enforce YAGNI and the Ladder of Restraint before writing code."
+alwaysApply: true
+---
+
+# Ponytail Restraint Rules
+
+Before proposing, brainstorming, or writing any code:
+1. **YAGNI First:** Does this feature need to exist? If not, skip it. Reject premature flexibility.
+2. **Reuse:** Check if an existing helper, component, or pattern already exists in the codebase.
+3. **Stdlib / Native Platform:** Prefer standard library and engine/platform-native APIs over custom utility frameworks.
+4. **Existing Dependencies:** Leverage packages already in the project; do not add new dependencies without explicit user approval.
+5. **Shortest Clean Path:** Prefer a clean one-liner or simple function over multi-layer abstractions.
+6. **Minimum Surface Area:** Write the minimum code required to satisfy the active milestone criteria.
+7. **Zero Compromise on Quality:** Never cut corners on security, input validation, error handling, or test verification.

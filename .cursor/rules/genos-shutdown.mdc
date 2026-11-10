@@ -1,0 +1,6 @@
+---
+description: "genOS shutdown — end a development session and persist state."
+alwaysApply: false
+---
+
+Execute the `shutdown` command as defined in `AGENTS.md` → SHUTDOWN sequence. Include the mandatory Sanity Gate.

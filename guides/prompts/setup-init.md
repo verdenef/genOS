@@ -36,15 +36,19 @@ Immediately after I approve the roadmap, transition automatically without waitin
 
 ---
 
-## Phase 3: AI Workforce Setup (Optional)
+## Phase 3: AI Stack Activation (Specialist Workforce & Engineering Disciplines)
 
 Immediately after tooling is ready:
 
-1. Follow the protocol in `integrations/agency_agents.md`.
-2. Audit `00_PROJECT.md` and `50_ROADMAP.md` alongside the profile's `recommended_agents` baseline.
-3. Access the `msitarzewski/agency-agents` catalog to select and recommend the specific specialist agents (Core, Milestone, Optional) best suited for our project's unique roadmap.
-4. Stop and present the recommended workforce with rationale for my approval.
-5. Wait for my approval before recording the approved workforce into `brain/60_AGENTS.md`. If I decline or skip, keep standard generalist defaults.
+1. **Activate Specialist AI Workforce (Agency Agents):**
+   - Audit `00_PROJECT.md` and `50_ROADMAP.md` alongside the profile's `recommended_agents`.
+   - Select the Core and Milestone specialist roles best suited for the active milestone.
+   - Populate `brain/60_AGENTS.md` and activate the corresponding rules in `.cursor/rules/` and `.agents/skills/`.
+2. **Activate Engineering Restraint (Ponytail):**
+   - Confirm the pre-packaged Ponytail Ladder of Restraint rule is active to prevent over-engineering and code bloat.
+3. **Activate Execution Rigor (Superpowers):**
+   - Confirm pre-packaged Superpowers skills (`brainstorming`, `writing-plans`, `test-driven-development`, `verification-before-completion`) are available.
+4. Present the configured AI Stack and wait for my confirmation before proceeding to Phase 4.
 
 ---
 
@@ -66,7 +70,7 @@ All project memory is locked into the Brain, runtime tools are configured, and t
 To keep context windows 100% clean and avoid context rot:
 1. Close this chat session.
 2. Open a fresh chat in your IDE whenever you are ready to build Milestone 1.
-3. Paste either:
-   - `guides/prompts/workflow-01-kickoff.md` (for interactive, step-by-step development)
-   - `guides/prompts/workflow-autonomous-batch.md` (for uninterrupted, hands-free batch development)
+3. Either type `kickoff` / `batch` or paste:
+   - `kickoff` or `guides/prompts/workflow-kickoff.md` (for interactive, step-by-step development)
+   - `batch` or `guides/prompts/workflow-batch.md` (for uninterrupted, hands-free batch development)
 ```

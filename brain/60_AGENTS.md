@@ -6,22 +6,30 @@ AI-maintained. See `integrations/agency_agents.md` for the selection protocol.
 This file tracks which specialist agents (e.g., Agency Agents) are active, deferred, or removed for this project.
 
 ## Core Agents
-- _TBD_ <!-- Agents essential for the entire lifecycle of the project. -->
+- `ponytail`: Senior developer restraint / Ladder of Restraint enforcement.
+- `writing-plans`: Implementation planning and task breakdown.
+- `writing-skills`: Skill authoring, testing, and lifecycle management.
+- `systematic-debugging`: Root-cause analysis and bug tracing before proposing fixes.
+- `test-driven-development`: Red-green-refactor test-driven verification.
+- `verification-before-completion`: Evidence and verification before claiming completion.
 
 ## Milestone Agents
-- _TBD_ <!-- Agents needed specifically for the current active milestone. -->
+- `genos-kickoff`: Automated session boot, state recovery, and plan generation.
+- `genos-shutdown`: Session shutdown with mandatory Sanity Gate verification.
+- `genos-doctor`: Diagnostic auditing and automated healing of Project Brain health.
+- `genos-update`: Safe framework upgrade protocol preserving Project Brain integrity.
 
 ## Optional Specialists
-- _TBD_ <!-- Agents that provide beneficial but non-critical enhancements. -->
+- None
 
 ## Deferred Agents
-- _TBD_ <!-- Agents identified as useful but delayed until a future milestone. -->
+- None
 
 ## Removed Agents
-- _TBD_ <!-- Agents explicitly uninstalled or rejected from the project. -->
+- None
 
 ## Workforce Rationale
-_TBD_ <!-- Brief explanation of the current workforce composition. -->
+Enforces the Ladder of Restraint, rigorous verification before completion, and automated lifecycle commands.
 
 ## Last Workforce Review
-_TBD_ <!-- Date/Milestone of the last time the catalog was evaluated against the roadmap. -->
+2026-11-10 / M2
