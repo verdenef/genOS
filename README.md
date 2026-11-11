@@ -49,6 +49,7 @@ genOS/
 ├── AGENTS.md                        # Universal kernel — authoritative operational rules
 ├── CLAUDE.md                        # Claude Code entry point (points to AGENTS.md)
 ├── README.md                        # Repository overview (this file)
+├── THIRD_PARTY_NOTICES.md           # Upstream open-source attributions & licenses
 ├── .agents/skills/                  # On-demand skills (Superpowers, Ponytail, Graphify, genOS commands)
 ├── .cursor/rules/                   # Cursor IDE rules (genos, ponytail, graphify, Agency Agents)
 ├── brain/                           # Self-hosted Project Brain tracking genOS itself
@@ -118,3 +119,16 @@ For the full walkthrough, see the [genOS User Guide](guides/guide.md).
 4. **Local-Only Code Topology:** Graphify AST parsing uses `--code-only` offline without sending code to external LLMs, paired with Grep checks for runtime strings and scene/prefab refs.
 5. **On-Disk Skills:** Skills in `.agents/skills/` are read dynamically from disk during `kickoff`—no manual UI settings uploads required.
 6. **Zero-App Workforce Automation:** Specialist Agency Agents from `msitarzewski/agency-agents` install directly via `guides/scripts/install_agent.py` upon human approval—requiring only Python 3 stdlib, with zero external tools or desktop apps.
+
+---
+
+## Acknowledgments & Third-Party Licenses
+
+genOS integrates and builds upon these open-source projects:
+
+- **[Superpowers (`obra/superpowers`)](https://github.com/obra/superpowers)** by Jesse Vincent *(MIT License)* — Structured ideation, test-driven execution plans, subagent-driven workflows, and verification gates.
+- **[Ponytail (`DietrichGebert/ponytail`)](https://github.com/DietrichGebert/ponytail)** by DietrichGebert *(MIT License)* — The Ladder of Restraint preventing over-engineering and unnecessary code bloat.
+- **[Agency Agents (`msitarzewski/agency-agents`)](https://github.com/msitarzewski/agency-agents)** by AgentLand Contributors *(MIT License)* — Specialist domain agent personas fetched on demand via `guides/scripts/install_agent.py`.
+- **[Graphify (`Graphify-Labs/graphify`)](https://github.com/Graphify-Labs/graphify)** *(Apache-2.0)* — Local, offline `--code-only` Tree-sitter AST knowledge graphs and MCP tooling (`graphifyy`).
+
+Full license texts and copyright notices are preserved in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
