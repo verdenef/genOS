@@ -1,5 +1,12 @@
 # genOS
 
+[![Framework Version](https://img.shields.io/badge/genOS-v3.2-2563eb?style=flat-square)](AGENTS.md)
+[![Last Commit](https://img.shields.io/github/last-commit/verdenef/genOS/main?style=flat-square)](https://github.com/verdenef/genOS/commits/main)
+[![Supported IDEs](https://img.shields.io/badge/Works%20with-Claude%20Code%20%7C%20Cursor%20%7C%20Antigravity%20%7C%20Codex-4f46e5?style=flat-square)](guides/guide.md#tool-setup-bootstrapping)
+[![Stack Profiles](https://img.shields.io/badge/Stack%20Profiles-7-10b981?style=flat-square)](profiles/README.md)
+[![Obsidian](https://img.shields.io/badge/Obsidian-Graph%20Ready-7c3aed?style=flat-square&logo=obsidian&logoColor=white)](guides/guide.md#obsidian-integration)
+[![License: MIT](https://img.shields.io/badge/License-MIT-f59e0b?style=flat-square)](LICENSE)
+
 **genOS** is a universal, stack-agnostic AI operating system for modern software development: a lightweight, deterministic **Project Brain** that maintains persistent memory across AI agents, chat sessions, and IDEs.
 
 Humans provide intent and approvals. AI maintains the brain. Source code and live runtimes hold implementation truth. genOS stores the architectural and execution knowledge that cannot be inferred from code alone.
@@ -48,6 +55,7 @@ genOS recommends models by capability tier rather than hardcoded version strings
 genOS/
 ├── AGENTS.md                        # Universal kernel — authoritative operational rules
 ├── CLAUDE.md                        # Claude Code entry point (points to AGENTS.md)
+├── LICENSE                          # MIT License for genOS
 ├── README.md                        # Repository overview (this file)
 ├── THIRD_PARTY_NOTICES.md           # Upstream open-source attributions & licenses
 ├── .agents/skills/                  # On-demand skills (Superpowers, Ponytail, Graphify, genOS commands)
@@ -132,3 +140,9 @@ genOS integrates and builds upon these open-source projects:
 - **[Graphify (`Graphify-Labs/graphify`)](https://github.com/Graphify-Labs/graphify)** *(Apache-2.0)* — Local, offline `--code-only` Tree-sitter AST knowledge graphs and MCP tooling (`graphifyy`).
 
 Full license texts and copyright notices are preserved in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
+---
+
+## License
+
+genOS is released under the [MIT License](LICENSE).
