@@ -27,6 +27,90 @@ genOS coordinates five complementary disciplines into one frictionless developer
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TD
+
+subgraph group_workflow["Developer Workflow"]
+  node_kickoff["Kickoff<br/>[SKILL.md]"]
+  node_batch["Batch<br/>[workflow-batch.md]"]
+  node_shutdown["Shutdown<br/>[SKILL.md]"]
+  node_status["Status<br/>[AGENTS.md]"]
+end
+
+subgraph group_brain["Project Brain"]
+  node_projectbrain[("Project Brain")]
+  node_templates["Brain Templates"]
+end
+
+subgraph group_extensions["Specialist Extensions"]
+  node_specialists["Agency Agents<br/>[agency_agents.md]"]
+  node_installer["Agent Installer<br/>[install_agent.py]"]
+  node_idefiles["IDE Skills & Rules<br/>[.agents / .cursor]"]
+  node_graphify["Graphify Topology<br/>[mcp-graphify.json]"]
+  node_ponytail["Ponytail Restraint<br/>[SKILL.md]"]
+  node_profiles["Stack Profiles"]
+end
+
+subgraph group_maintenance["Maintenance"]
+  node_doctor["Doctor<br/>[SKILL.md]"]
+  node_update["Update<br/>[SKILL.md]"]
+end
+
+node_developer(("Developer"))
+
+node_developer -->|"starts session"| node_kickoff
+node_kickoff -->|"boots from"| node_projectbrain
+node_kickoff -->|"verifies rules"| node_specialists
+node_kickoff -.->|"checks optionally"| node_graphify
+node_kickoff -->|"applies filter"| node_ponytail
+node_kickoff -->|"proposes handoff"| node_developer
+node_developer -->|"starts execution"| node_batch
+node_batch -->|"coordinates work"| node_projectbrain
+node_developer -->|"closes session"| node_shutdown
+node_shutdown -->|"persists progress"| node_projectbrain
+node_templates -->|"initializes"| node_projectbrain
+node_developer -->|"approves & installs"| node_installer
+node_installer -->|"fetches personas"| node_specialists
+node_installer -->|"writes skill/rule files"| node_idefiles
+node_developer -->|"requests summary"| node_status
+node_status -->|"reads progress"| node_projectbrain
+node_developer -->|"requests diagnosis"| node_doctor
+node_doctor -->|"repairs integrity"| node_projectbrain
+node_developer -->|"requests upgrade"| node_update
+node_update -->|"verifies drift & runs"| node_doctor
+node_kickoff -.->|"uses guidance"| node_profiles
+
+click node_kickoff "https://github.com/verdenef/genOS/blob/main/.agents/skills/genos-kickoff/SKILL.md"
+click node_batch "https://github.com/verdenef/genOS/blob/main/guides/prompts/workflow-batch.md"
+click node_shutdown "https://github.com/verdenef/genOS/blob/main/.agents/skills/genos-shutdown/SKILL.md"
+click node_status "https://github.com/verdenef/genOS/blob/main/AGENTS.md"
+click node_projectbrain "https://github.com/verdenef/genOS/tree/main/brain"
+click node_templates "https://github.com/verdenef/genOS/tree/main/templates/brain"
+click node_specialists "https://github.com/verdenef/genOS/blob/main/integrations/agency_agents.md"
+click node_installer "https://github.com/verdenef/genOS/blob/main/guides/scripts/install_agent.py"
+click node_idefiles "https://github.com/verdenef/genOS/tree/main/.agents/skills"
+click node_graphify "https://github.com/verdenef/genOS/blob/main/profiles/templates/mcp-graphify.json"
+click node_ponytail "https://github.com/verdenef/genOS/blob/main/.agents/skills/ponytail/SKILL.md"
+click node_profiles "https://github.com/verdenef/genOS/tree/main/profiles"
+click node_doctor "https://github.com/verdenef/genOS/blob/main/.agents/skills/genos-doctor/SKILL.md"
+click node_update "https://github.com/verdenef/genOS/blob/main/.agents/skills/genos-update/SKILL.md"
+
+classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
+classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
+classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+class node_kickoff,node_batch,node_shutdown,node_status toneBlue
+class node_projectbrain,node_templates toneAmber
+class node_specialists,node_installer,node_idefiles,node_graphify,node_ponytail,node_profiles toneMint
+class node_doctor,node_update toneRose
+class node_developer toneIndigo
+```
+
+---
+
 ## Daily Commands
 
 genOS eliminates prompt boilerplate. In any AI chat (Antigravity, Cursor, Claude Code, Claude Desktop, Codex), just type:
