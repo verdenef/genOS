@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Completed Verify-First & Plan-Gated Framework Updater (DEC-008) on top of Agency Agents auto-installer (DEC-007). Added Framework Version 3.2 marker in AGENTS.md and upgraded AGENTS.md, guides/prompts/update.md, genos-update skill/rule, Updater.md, README.md, and guides/guide.md to verify drift read-only (stopping if current), present an Upgrade & Migration Plan for approval (covering legacy v1/v2 cleanup, root CLAUDE.md/.agents/.cursor placement, and strict shields), and run Doctor via the newly updated AGENTS.md."
+session_summary: "Added 7th stack profile (profiles/academic-research/profile.yaml) for non-coding research papers and theses, updated profiles/README.md and setup-init.md, and added 1-prompt Day 0 auto-install instructions to README.md and guides/guide.md on top of DEC-008 Verify-First Updater and DEC-007 Agency Agents Auto-Installer."

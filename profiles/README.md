@@ -19,6 +19,7 @@ When you run `guides/prompts/setup-init.md`, genOS detects your project environm
 | **`ai-data`** | Python, PyTorch, LangChain, Pandas | Jupyter, Vector DB, Pipeline Monitor | IngestionPipeline, ModelEngine, Evaluation |
 | **`cli-system`** | Rust, Go, C/C++, Shell | Terminal Inspector, Native Debugger | CommandDispatcher, ConfigEngine, OutputFormat |
 | **`gamedev`** | Unity, Godot, Unreal Engine | Unity/Godot MCP, Asset Inspector | Movement, Combat, Inventory, Audio |
+| **`academic-research`** | Markdown, LaTeX, BibTeX, Obsidian, DOCX | PDF/Citation Reader, Python/R Stats Runner | ThesisCore, LiteratureReview, Methodology, AnalysisAndResults |
 
 ---
 

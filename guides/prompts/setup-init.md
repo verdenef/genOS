@@ -12,17 +12,17 @@ You are the genOS Setup Guide. Your job is to lead me through the entire Day 0 o
    - **Self-Hosted Brain Check:** Inspect `brain/00_PROJECT.md`. If it contains genOS's own self-hosted framework data (e.g. Vision describes genOS itself rather than `_TBD_`) and `templates/brain/` exists, copy all files from `templates/brain/` into `brain/` first so the project starts with a clean `_TBD_` slate.
    - **Subdirectory Discovery Check:** If genOS is inside a subfolder (e.g. `genOS/`), verify that `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` are placed at the repository root so IDEs auto-discover them.
 2. **Scan the workspace:**
-   - Detect whether this is a brand new project or an existing codebase with source code.
-   - Inspect existing configuration files (e.g., `package.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `Assets/`, `Dockerfile`) and cross-reference them with `profiles/`.
+   - Detect whether this is a brand new project or an existing codebase / manuscript repository.
+   - Inspect existing configuration or manuscript files (e.g., `package.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `Assets/`, `Dockerfile`, `*.tex`, `*.bib`, `manuscript/`, `*.docx`) and cross-reference them with `profiles/`.
 3. **Suggest a Stack Profile:**
-   - Present your detected profile suggestion (`web-fullstack`, `backend-services`, `mobile`, `ai-data`, `cli-system`, `gamedev`, or custom).
+   - Present your detected profile suggestion (`web-fullstack`, `backend-services`, `mobile`, `ai-data`, `cli-system`, `gamedev`, `academic-research`, or custom).
    - **Stop and ask me** to confirm the profile and provide:
      - Project Vision & Core User Value
-     - Target Platforms / Environments
+     - Target Platforms / Environments (or target venue / format for research projects)
      - Scope & Constraints
 4. **Populate the Brain upon my reply:**
    - Save intent to `brain/00_PROJECT.md`.
-   - If this is an existing codebase: scan the code and reverse-engineer it into starter `brain/systems/*.md` documents, and record already-built features as completed (`done`) milestones in `brain/50_ROADMAP.md`.
+   - If this is an existing codebase or manuscript: scan the source or chapters and reverse-engineer them into starter `brain/systems/*.md` documents, and record already-built features or completed paper sections as `done` milestones in `brain/50_ROADMAP.md`.
    - If this is a blank project: scaffold initial system documents using the profile's `starter_systems` and propose initial milestones in `brain/50_ROADMAP.md`.
    - Present the initial roadmap and ask for my approval.
 
@@ -33,8 +33,8 @@ You are the genOS Setup Guide. Your job is to lead me through the entire Day 0 o
 Immediately after I approve the roadmap, transition automatically without waiting for another prompt:
 
 1. Read the `recommended_mcps` from the chosen `profiles/<profile>/profile.yaml`.
-2. Propose the MCP servers needed to observe and interact with our live runtime environment (e.g., browser/Playwright, container runtime, database, or engine).
-3. **Code Topology *(Optional — Graphify)*:** If `graphify-mcp` is recommended (or if the codebase is medium/large), ask whether the human wants local `--code-only` Graphify AST topology enabled:
+2. Propose the MCP servers or local tools needed to observe and verify our live environment (e.g., browser/Playwright, container runtime, database, game engine, or PDF/citation reader and Python/R stats runner).
+3. **Code Topology *(Optional — Graphify)*:** If `graphify-mcp` is recommended (or if the codebase is medium/large — skip for non-coding/prose projects like `academic-research`), ask whether the human wants local `--code-only` Graphify AST topology enabled:
    - Install once per machine: `uv tool install "graphifyy[mcp]"`
    - Add a repo-root `.graphifyignore` restricting scope to source code folders
    - Add `graphify-out/` to `.gitignore` and build locally with `graphify extract . --code-only`

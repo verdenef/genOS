@@ -1,0 +1,43 @@
+id: academic-research
+name: "Academic Research & Thesis Writing"
+description: "Research papers, literature reviews, empirical studies, theses, and panel/peer-review revisions using Markdown, LaTeX, BibTeX, Obsidian, or DOCX workflows."
+detection_indicators:
+  - "*.tex"
+  - "*.bib"
+  - "references.bib"
+  - "manuscript/"
+  - "paper/"
+  - "*.docx"
+recommended_mcps:
+  - id: reference-reader
+    name: "PDF / Document & Citation Reader"
+    purpose: "Read primary-source PDFs, verify exact page numbers and quotes, and audit BibTeX or APA/IEEE reference lists."
+  - id: stats-runner
+    name: "Python / R Data Analysis Runner"
+    purpose: "Compute descriptive and inferential statistics directly from raw CSV/JSON participant data without rounding errors or fabricated numbers."
+recommended_agents:
+  - id: "research/research-synthesist.md"
+    name: "Research Synthesist"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/research/research-synthesist.md"
+    purpose: "Multi-source literature synthesis, evidence triangulation, and identifying research gaps."
+  - id: "academic/academic-statistician.md"
+    name: "Academic Statistician"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/academic/academic-statistician.md"
+    purpose: "Research methodology rigor, sample justification, hypothesis testing, and preventing statistical misinterpretation."
+  - id: "design/design-ux-researcher.md"
+    name: "UX Researcher"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/design/design-ux-researcher.md"
+    purpose: "User-study protocols, questionnaires (SUS, UES-SF), qualitative coding, and thematic analysis."
+  - id: "engineering/engineering-technical-writer.md"
+    name: "Technical Writer"
+    source: "https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-technical-writer.md"
+    purpose: "Clear manuscript structure, concise academic prose, tables, figures, and terminology consistency."
+starter_systems:
+  - name: "ThesisCore"
+    purpose: "Research questions, problem statement, theoretical framework, citation style, and scope boundaries."
+  - name: "LiteratureReview"
+    purpose: "Primary/secondary source matrix, RRL themes, synthesis invariants, and verified citation rules."
+  - name: "Methodology"
+    purpose: "Study design, participant criteria, instruments, ethics/consent rules, and procedure steps."
+  - name: "AnalysisAndResults"
+    purpose: "Raw datasets, verified statistical outputs, figure/table provenance, and discussion constraints."
