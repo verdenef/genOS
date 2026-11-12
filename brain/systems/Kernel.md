@@ -18,7 +18,7 @@ Governs session lifecycle, state handoff, and execution protocols across AI agen
 - [[Updater]]: Invoked for framework maintenance and upgrades via the `update` command.
 - [[Skills]]: Leverages operational skills for plan authoring, execution, and verification.
 - [[Workforce]]: Reads and verifies active agent personas during BOOT and pre-planning gates.
-- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]]).
+- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]], [[DEC-009]], [[DEC-010]]).
 
 ## Runtime References
 - `AGENTS.md`: Canonical genOS operating kernel specification, ownership table, lifecycle protocols, and commands.

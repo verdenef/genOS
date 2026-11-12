@@ -9,13 +9,14 @@ Manages framework upgrade verification, migration planning, and execution while 
 ## Responsibilities
 - Execute the 5-phase Framework Update Protocol triggered by `update`, `@update.md`, or pasting `guides/prompts/update.md` onto legacy `v1`/`v2` installations.
 - Perform read-only upstream fetching (`verdenef/genOS` git remote, GitHub `main.zip`, or local copy) and verify whether core files have drifted before proposing changes (short-circuiting cleanly if already current).
+- Detect existing codebases lacking Graphify topology during drift checks, offering approval-gated local extraction in the Upgrade Plan or clean short-circuit tips ([[DEC-010]]).
 - Propose an explicit Upgrade & Migration Plan (core files, repo-root `CLAUDE.md`/`.agents/`/`.cursor/`, obsolete `v1`/`v2` prompt pruning, shield list, post-sync Doctor repairs) and wait for human approval before modifying files.
 - Enforce strict shielding for `brain/`, `.obsidian/`, custom profiles, user code, and project-installed Agency Agents.
 - Trigger post-upgrade Doctor audits using the **newly installed `AGENTS.md`** so legacy `v1`/`v2` brain schema gaps are migrated safely without losing history.
 
 ## Dependencies
 - [[Kernel]]: Integrated into kernel commands and version header (`> **Framework Version:**`) in `AGENTS.md`, and verified by the Doctor Protocol.
-- [[30_DECISIONS.md]]: Governed by [[DEC-004]], [[DEC-007]], and [[DEC-008]].
+- [[30_DECISIONS.md]]: Governed by [[DEC-004]], [[DEC-007]], [[DEC-008]], and [[DEC-010]].
 
 ## Runtime References
 - `AGENTS.md`: Version header and "Framework Update Protocol" defining the 5-phase Verify → Plan → Approve → Apply → Doctor lifecycle.

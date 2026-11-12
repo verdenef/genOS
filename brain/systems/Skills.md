@@ -11,13 +11,13 @@ Manages specialized agent capabilities, Superpowers execution patterns, and seni
 - Enforce the Ponytail Ladder of Restraint (YAGNI -> Reuse -> Stdlib -> Minimal code) to prune unnecessary complexity before implementation.
 - Support plan formulation and execution workflows (`writing-plans`, `executing-plans`, `subagent-driven-development`).
 - Guide rigorous testing and verification cycles (`test-driven-development`, `verification-before-completion`, `systematic-debugging`).
-- Provide codebase AST call graphs, caller hierarchies, and blast radius calculation via `graphify` for pre-planning topology analysis.
+- Provide codebase AST call graphs, caller hierarchies, and blast radius calculation via `graphify` for pre-planning topology analysis, recommended adaptively for existing codebases ([[DEC-006]], [[DEC-010]]).
 - Provide IDE-agnostic capability discovery and tool reference mappings.
 
 ## Dependencies
 - [[Kernel]]: Integrated into Kickoff Pre-Planning gates and verification checkpoints.
 - [[Workforce]]: Powers the active capabilities assigned to declared agent personas in `[[60_AGENTS.md]]`.
-- [[30_DECISIONS.md]]: Governed by canonical architectural decision [[DEC-003]].
+- [[30_DECISIONS.md]]: Governed by canonical architectural decisions [[DEC-003]], [[DEC-006]], and [[DEC-010]].
 
 ## Runtime References
 - `.agents/skills/graphify/SKILL.md`: Codebase AST call graphs, caller hierarchies, and blast radius calculation.

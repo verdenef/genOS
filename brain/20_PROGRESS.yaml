@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Completed Workforce Gap Check & Lifecycle Routing: wired kickoff workforce/tooling routing into AGENTS.md and workflow-kickoff.md, expanded integrations/agency_agents.md audit scope to 20_PROGRESS.yaml and systems/*.md, updated brain/systems/Workforce.md, recorded DEC-009, and added M2 deliverable in 50_ROADMAP.md."
+session_summary: "Completed codebase-aware Graphify onboarding across Day 0 setup (setup-init.md), framework update (AGENTS.md, guides/prompts/update.md), and kickoff tooling. Scoped hybrid code + paper repos to index source while ignoring manuscript folders in .graphifyignore. Recorded DEC-010, updated M2 in 50_ROADMAP.md, aligned Kernel, Updater, and Skills system docs, and passed all Doctor and test suites."

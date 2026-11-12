@@ -26,6 +26,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-007 | accepted | 2026-11-10 | Zero-App Agency Agents Auto-Installer & Clean Core |
 | DEC-008 | accepted | 2026-11-10 | Verify-First & Plan-Gated Framework Updater |
 | DEC-009 | accepted | 2026-11-12 | Automatic Workforce Gap Check & Kernel Subcommand Routing |
+| DEC-010 | accepted | 2026-11-12 | Codebase-Aware Graphify Recommendation in Setup & Update |
 
 ---
 
@@ -45,6 +46,13 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-010: Codebase-Aware Graphify Recommendation in Setup & Update
+- **Status:** accepted
+- **Date:** 2026-11-12
+- **Reason:** In greenfield vs mature repos, users onboarding to genOS with existing codebases were not prompted to map code topology unless they manually read optional setup docs. Pure prose manuscripts or blank repos do not need AST graphs, but hybrid code + paper or mature code repositories benefit immensely from pre-mapped call graphs during planning ([[DEC-006]]).
+- **Impact:** Keyed Graphify recommendation off actual codebase presence in Day 0 setup (`setup-init.md`), framework `update` (`AGENTS.md`, `guides/prompts/update.md`), and `kickoff tooling` without adding new commands or scripts; preserved approval gate, local `--code-only`, zero brain contamination, and verify-first short-circuit; scoped hybrid repos to code paths while ignoring prose/manuscript folders; governed by [[Updater]], [[Skills]], and [[Kernel]].
+- **Supersedes:** none
 
 ### DEC-009: Automatic Workforce Gap Check & Kernel Subcommand Routing
 - **Status:** accepted
