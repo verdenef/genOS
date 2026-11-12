@@ -9,7 +9,7 @@ Do not evaluate or recommend an AI workforce until the project vision (`00_PROJE
 
 When tasked with assembling or reviewing the AI workforce, the AI must follow these exact steps:
 
-1. **Audit the Project:** Read `00_PROJECT.md`, `50_ROADMAP.md`, and `30_DECISIONS.md`. Determine the specific technical disciplines, workflows, and skills required for the project.
+1. **Audit the Project:** Read `00_PROJECT.md`, `20_PROGRESS.yaml` (`working_on`, `systems_in_scope`), `50_ROADMAP.md`, `30_DECISIONS.md`, and active `brain/systems/*.md` documents. Determine the specific technical disciplines, workflows, and skills required for the project.
 2. **Locate the Catalog:** Browse or query the available Agency Agents catalog from the official repository (`https://github.com/msitarzewski/agency-agents`).
    - genOS relies directly on `msitarzewski/agency-agents` as its official source for specialized agent personas, workflows, and skills.
    - Stack profiles in `profiles/` specify recommended agent paths from this catalog.
@@ -41,4 +41,6 @@ When tasked with assembling or reviewing the AI workforce, the AI must follow th
 7. **Update the Brain:** Once installed, record the active workforce in `brain/60_AGENTS.md`.
 
 ## Lifecycle Maintenance
-The AI must periodically re-evaluate this workforce recommendation whenever the project scope (`00_PROJECT.md`) or the roadmap (`50_ROADMAP.md`) changes significantly. When changing active milestones, prompt the human before installing newly needed Milestone Agents or retiring completed ones.
+The AI must periodically re-evaluate this workforce recommendation whenever the project scope (`00_PROJECT.md`) or the roadmap (`50_ROADMAP.md`) changes significantly, or as active execution progresses:
+- **Workforce Gap Check (Automatic Kickoff):** During the pre-planning Hard Persona Gate of `kickoff`, compare the active milestone, `systems_in_scope`, and user intent against `brain/60_AGENTS.md` (including Deferred Agents). If an uncovered discipline emerges (e.g., security, accessibility, stats), search the catalog (`python <genos>/guides/scripts/install_agent.py --list <keyword>`) and prompt the human for approval to install and add it before formulating the plan.
+- **Explicit Re-Audit (`kickoff workforce`):** Run a comprehensive progress-based re-evaluation across `00_PROJECT.md`, `20_PROGRESS.yaml` (`working_on`, `systems_in_scope`), `50_ROADMAP.md`, `30_DECISIONS.md`, and active `brain/systems/*.md` documents. When changing active milestones, promote Deferred Agents whose milestone has become active, and prompt the human before installing newly needed Milestone Agents or retiring completed ones.
