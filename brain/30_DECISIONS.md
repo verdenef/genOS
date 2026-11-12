@@ -25,6 +25,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-006 | accepted | 2026-11-10 | Graphify Code Topology Integration |
 | DEC-007 | accepted | 2026-11-10 | Zero-App Agency Agents Auto-Installer & Clean Core |
 | DEC-008 | accepted | 2026-11-10 | Verify-First & Plan-Gated Framework Updater |
+| DEC-009 | accepted | 2026-11-12 | Automatic Workforce Gap Check & Kernel Subcommand Routing |
 
 ---
 
@@ -44,6 +45,19 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-009: Automatic Workforce Gap Check & Kernel Subcommand Routing
+- **Status:** accepted
+- **Date:** 2026-11-12
+- **Reason:**
+  While genOS v3.2 established the Hard Persona Gate (`[[DEC-003]]`) and zero-dependency Agency Agents installer (`[[DEC-007]]`), workforce audits were only executed during initial project setup (`integrations/agency_agents.md`) and relied on static intent (`[[00_PROJECT.md]]`, `[[50_ROADMAP.md]]`). As active development progressed, new domain disciplines (e.g., security audits, accessibility, payment integrations, statistics) emerged in active milestones or user intent without being caught until human operators manually noticed the gap. Furthermore, while `guides/prompts/workflow-kickoff.md` supported `kickoff workforce` and `kickoff tooling` prompts, they lacked native routing in `AGENTS.md` `## Commands` and `### Kickoff Smart Routing`.
+- **Impact:**
+  - Wired native kernel routing in `AGENTS.md` for `kickoff workforce` (progress-based workforce re-audit) and `kickoff tooling` (MCP server configuration refresh) without introducing new top-level commands, preserving the 6 canonical plain-text commands (`[[DEC-001]]`).
+  - Enforced an automatic **Workforce Gap Check** within the Hard Persona Gate during every `kickoff`: compares active milestone, `systems_in_scope`, and user intent against `[[60_AGENTS.md]]` (including Deferred Agents); if an uncovered discipline emerges, the agent queries `guides/scripts/install_agent.py --list <keyword>` and seeks explicit human approval before planning.
+  - Expanded project audit scope in `integrations/agency_agents.md` to evaluate live execution state (`[[20_PROGRESS.yaml]]`'s `working_on` and `systems_in_scope`) and active `brain/systems/*.md` documents.
+  - Formalized workforce lifecycle management: promoting `Deferred Agents` when their designated milestone activates and retiring completed Milestone Agents under mandatory human approval.
+  - Governed by [[Workforce]] and [[Kernel]].
+- **Supersedes:** none
 
 ### DEC-008: Verify-First & Plan-Gated Framework Updater
 - **Status:** accepted

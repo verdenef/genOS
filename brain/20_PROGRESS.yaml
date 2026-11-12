@@ -5,7 +5,7 @@
 schema_version: 2
 
 # ISO date of last SHUTDOWN update (YYYY-MM-DD)
-last_updated: "2026-11-10"
+last_updated: "2026-11-12"
 
 # Who last wrote this file (e.g. cursor-agent, agy-agent, agency:unity-specialist)
 last_agent: antigravity
@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Added 7th stack profile (profiles/academic-research/profile.yaml) for non-coding research papers and theses, updated profiles/README.md and setup-init.md, and added 1-prompt Day 0 auto-install instructions to README.md and guides/guide.md on top of DEC-008 Verify-First Updater and DEC-007 Agency Agents Auto-Installer."
+session_summary: "Completed Workforce Gap Check & Lifecycle Routing: wired kickoff workforce/tooling routing into AGENTS.md and workflow-kickoff.md, expanded integrations/agency_agents.md audit scope to 20_PROGRESS.yaml and systems/*.md, updated brain/systems/Workforce.md, recorded DEC-009, and added M2 deliverable in 50_ROADMAP.md."

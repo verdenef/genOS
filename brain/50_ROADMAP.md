@@ -59,6 +59,7 @@ Do not copy milestone criteria into Progress or Backlog. Progress stores only `c
   - Graphify Code Topology Hook ([[DEC-006]]) with dedicated skill and multi-IDE MCP profile presets.
   - Zero-dependency Agency Agents stdlib auto-installer (`guides/scripts/install_agent.py`) fetching approved personas into dual `.agents/skills/` and `.cursor/rules/` formats with clean core repository and update shielding ([[DEC-007]]).
   - Verify-first & plan-gated framework updater (`AGENTS.md` Framework Version `3.2`, self-contained `guides/prompts/update.md`) verifying drift, halting cleanly when current, and supporting legacy `v1`/`v2` migrations after explicit approval ([[DEC-008]]).
+  - Automatic Workforce Gap Check during kickoff and native kernel subcommand routing (`kickoff workforce` / `kickoff tooling`) with progress-based lifecycle audits ([[DEC-009]]).
   - Self-hosted Project Brain in `d:\GameOS` with clean starter templates preserved in `templates/brain/`.
   - Canonical system definitions for `Kernel`, `Updater`, `Skills`, and `Workforce` in `brain/systems/`.
 - **Done when:** Self-hosting brain is fully initialized, all canonical systems defined, and passes Doctor with 100% clean check.
