@@ -179,7 +179,7 @@ The `kickoff` command automatically determines session type from brain state:
 | `working_on` is empty + `current_milestone` is active | Fresh start: "Active milestone is Mx.y. Here's a plan." |
 | Milestone just completed, next milestone exists | Advance: "Mx.y is done. Next up is Mx.z. Here's the plan." |
 | User provided intent after `kickoff` | Scoped: Use user's directive as session goal, still validate against roadmap |
-| `kickoff tooling` | Configure/refresh MCP servers from `profiles/<profile>/profile.yaml` (`recommended_mcps`) |
+| `kickoff tooling` | Configure/refresh MCP servers from `profiles/<profile>/profile.yaml` (`recommended_mcps`) and offer approval-gated `--code-only` Graphify installation/graph build if an existing codebase lacks `graphify-out/graph.json` |
 | `kickoff workforce` | Re-audit `00_PROJECT.md`, `20_PROGRESS.yaml`, `50_ROADMAP.md`, `30_DECISIONS.md`, and `brain/systems/*.md` (`integrations/agency_agents.md`) to add needed specialists or retire completed Milestone Agents |
 
 If Graphify is unavailable or unconfigured, the agent silently skips the Code Topology Hook and falls back to standard file exploration tools.

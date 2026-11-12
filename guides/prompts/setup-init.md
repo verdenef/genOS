@@ -12,17 +12,19 @@ You are the genOS Setup Guide. Your job is to lead me through the entire Day 0 o
    - **Self-Hosted Brain Check:** Inspect `brain/00_PROJECT.md`. If it contains genOS's own self-hosted framework data (e.g. Vision describes genOS itself rather than `_TBD_`) and `templates/brain/` exists, copy all files from `templates/brain/` into `brain/` first so the project starts with a clean `_TBD_` slate.
    - **Subdirectory Discovery Check:** If genOS is inside a subfolder (e.g. `genOS/`), verify that `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` are placed at the repository root so IDEs auto-discover them.
 2. **Scan the workspace:**
-   - Detect whether this is a brand new project or an existing codebase / manuscript repository.
+   - Detect whether this is a brand new project, an existing codebase, a pure prose manuscript repository, or a **hybrid code + research-paper repository**.
+   - Note codebase maturity and size (inspect existing source directories or ~20+ source files, excluding `genOS/`, `node_modules/`, `vendor/`, `build/`, `.git/`).
    - Inspect existing configuration or manuscript files (e.g., `package.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `Assets/`, `Dockerfile`, `*.tex`, `*.bib`, `manuscript/`, `*.docx`) and cross-reference them with `profiles/`.
 3. **Suggest a Stack Profile:**
    - Present your detected profile suggestion (`web-fullstack`, `backend-services`, `mobile`, `ai-data`, `cli-system`, `gamedev`, `academic-research`, or custom).
+   - For **hybrid code + paper repositories**: Note that the repository maintains **one unified `brain/`** and can blend a coding profile with `academic-research` using 1-level `brain/systems/` category subfolders (e.g., `brain/systems/code/` and `brain/systems/research/` with globally unique filenames).
    - **Stop and ask me** to confirm the profile and provide:
      - Project Vision & Core User Value
      - Target Platforms / Environments (or target venue / format for research projects)
      - Scope & Constraints
 4. **Populate the Brain upon my reply:**
    - Save intent to `brain/00_PROJECT.md`.
-   - If this is an existing codebase or manuscript: scan the source or chapters and reverse-engineer them into starter `brain/systems/*.md` documents, and record already-built features or completed paper sections as `done` milestones in `brain/50_ROADMAP.md`.
+   - If this is an existing codebase or manuscript: scan the source or chapters and reverse-engineer them into starter `brain/systems/*.md` documents (using category subfolders if hybrid), and record already-built features or completed paper sections as `done` milestones in `brain/50_ROADMAP.md`.
    - If this is a blank project: scaffold initial system documents using the profile's `starter_systems` and propose initial milestones in `brain/50_ROADMAP.md`.
    - Present the initial roadmap and ask for my approval.
 
@@ -34,11 +36,13 @@ Immediately after I approve the roadmap, transition automatically without waitin
 
 1. Read the `recommended_mcps` from the chosen `profiles/<profile>/profile.yaml`.
 2. Propose the MCP servers or local tools needed to observe and verify our live environment (e.g., browser/Playwright, container runtime, database, game engine, or PDF/citation reader and Python/R stats runner).
-3. **Code Topology *(Optional — Graphify)*:** If `graphify-mcp` is recommended (or if the codebase is medium/large — skip for non-coding/prose projects like `academic-research`), ask whether the human wants local `--code-only` Graphify AST topology enabled:
-   - Install once per machine: `uv tool install "graphifyy[mcp]"`
-   - Add a repo-root `.graphifyignore` restricting scope to source code folders
-   - Add `graphify-out/` to `.gitignore` and build locally with `graphify extract . --code-only`
-   - Register the MCP server from `profiles/templates/mcp-graphify.json` in `.mcp.json` / `.cursor/mcp.json`
+3. **Code Topology *(Graphify)*:**
+   - **Skip** only for pure non-coding/prose repositories (no codebase) or blank greenfield repositories with no source tree yet (note that Graphify can easily be added later via `kickoff tooling`).
+   - **Existing / mature codebase (including hybrid code + paper repos, or if `graphify-mcp` is in `recommended_mcps`):** Check whether the `graphify` CLI and `graphify-out/graph.json` already exist. If missing, **strongly recommend** enabling local `--code-only` Graphify AST topology and ask for human approval before running the setup:
+     1. Install once per machine: `uv tool install "graphifyy[mcp]"` (or `pipx install` / `pip install` fallback)
+     2. Create a repo-root `.graphifyignore` restricting scope to source code folders (and excluding prose/manuscript paths such as `paper/`, `manuscript/`, `docs/`, `*.tex`, `*.bib`, `*.docx` in hybrid repos)
+     3. Add `graphify-out/` to `.gitignore` and build locally with `graphify extract . --code-only`
+     4. Register the MCP server from `profiles/templates/mcp-graphify.json` in `.mcp.json` / `.cursor/mcp.json`
 4. If any step requires manual assistance from me (such as installing global packages, downloading binaries, or configuring IDE permissions), explicitly state what you need me to do.
 5. Wait for my confirmation that tooling is ready before moving to Phase 3.
 
