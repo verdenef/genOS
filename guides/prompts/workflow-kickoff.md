@@ -25,6 +25,7 @@ Before writing any code:
    - Check `brain/60_AGENTS.md` for designated specialist roles.
    - Use your file viewing tool to read the agent's full definition file (e.g., `.agents/skills/<agent>/SKILL.md` or `.cursor/rules/<agent>.mdc`).
    - In your response, explicitly cite the file path you inspected and list 2–3 governing rules or anti-patterns from that skill that will dictate how you implement this milestone.
+   - **Workforce Gap Check:** Compare active milestone, systems_in_scope, and user intent against `brain/60_AGENTS.md` (including Deferred Agents). If an uncovered discipline emerges (e.g., security, accessibility, payments, stats), run `python <genos>/guides/scripts/install_agent.py --list <keyword>` and ask human approval to install and add it before formulating the plan.
 4b. **Code Topology Check (Optional):** If Graphify is available, inspect call chains and blast radius for in-scope components before proposing task breakdowns (otherwise proceed with standard file tools).
 5. Present a concise implementation plan that strictly adheres to those cited agent rules.
 6. Identify any architectural risks or dependencies.

@@ -160,7 +160,7 @@ When user intent follows the command keyword, it takes priority over default beh
 
 | Command | Protocol |
 |---------|----------|
-| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory → **Code Topology Hook (Optional):** if Graphify is available, verify graph freshness and query blast radius/callers → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → output Model & Session recommendation with copy-pasteable execution command blocks → wait for human approval |
+| `kickoff` | Run BOOT sequence → summarize project state → identify active milestone → **Hard Persona Gate (Pre-Planning):** read `60_AGENTS.md`, physically open and read each active agent's full definition file (`.cursor/rules/<agent>.mdc` or `.agents/skills/<agent>/SKILL.md`) **before** thinking or formulating the plan, cite 2-3 governing rules — do not guess agent rules from memory, check for domain gaps against active milestone, systems_in_scope, or user intent (if uncovered—e.g. security, stats, accessibility—query install_agent.py --list and ask approval before planning) → **Code Topology Hook (Optional):** if Graphify is available, verify graph freshness and query blast radius/callers → **Ponytail Restraint Filter:** evaluate the Ladder of Restraint (YAGNI, reuse, stdlib, 1-liner) to prune unnecessary code/features before proposing the plan → propose test-driven implementation plan → output Model & Session recommendation with copy-pasteable execution command blocks → wait for human approval |
 | `shutdown` | Run full SHUTDOWN sequence with mandatory Sanity Gate |
 | `doctor` | Run Diagnostic Checklist → auto-repair all fixable issues → output Brain Health Report table |
 | `status` | Read `20_PROGRESS.yaml` + active milestone from `50_ROADMAP.md` → present concise summary. No code changes. |
@@ -179,6 +179,8 @@ The `kickoff` command automatically determines session type from brain state:
 | `working_on` is empty + `current_milestone` is active | Fresh start: "Active milestone is Mx.y. Here's a plan." |
 | Milestone just completed, next milestone exists | Advance: "Mx.y is done. Next up is Mx.z. Here's the plan." |
 | User provided intent after `kickoff` | Scoped: Use user's directive as session goal, still validate against roadmap |
+| `kickoff tooling` | Configure/refresh MCP servers from `profiles/<profile>/profile.yaml` (`recommended_mcps`) |
+| `kickoff workforce` | Re-audit `00_PROJECT.md`, `20_PROGRESS.yaml`, `50_ROADMAP.md`, `30_DECISIONS.md`, and `brain/systems/*.md` (`integrations/agency_agents.md`) to add needed specialists or retire completed Milestone Agents |
 
 If Graphify is unavailable or unconfigured, the agent silently skips the Code Topology Hook and falls back to standard file exploration tools.
 
