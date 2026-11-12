@@ -188,10 +188,10 @@ Install genOS into a `genOS/` subfolder in this repository from https://github.c
 3. When done, type **`shutdown`**.
 
 ### Upgrading an Existing Project (`v1`, `v2`, or `v3`)
-Run **`update`** in chat (or paste [`guides/prompts/update.md`](guides/prompts/update.md) and point to an older `v1`/`v2` `genOS` folder). genOS fetches `main` read-only, verifies whether your files are outdated (stopping cleanly if already up to date), shows an Upgrade & Migration Plan for approval, refreshes core files while strictly shielding `brain/`, `.obsidian/`, custom profiles, project-installed Agency Agents, and source code, and runs `doctor`.
+Run **`update`** in chat (or paste [`guides/prompts/update.md`](guides/prompts/update.md) and point to an older `v1`/`v2` `genOS` folder). genOS fetches `main` read-only, verifies whether your files are outdated (stopping cleanly if already up to date, with a tip if an existing codebase lacks Graphify), shows an Upgrade & Migration Plan for approval (including optional codebase-aware Graphify setup), refreshes core files while strictly shielding `brain/`, `.obsidian/`, custom profiles, project-installed Agency Agents, and source code, and runs `doctor`.
 
 ### Optional: Local Code Topology with Graphify
-If you work on large codebases, install Graphify locally (powered by PyPI [`graphifyy`](https://pypi.org/project/graphifyy/)):
+If you work on large codebases, install Graphify locally (powered by PyPI [`graphifyy`](https://pypi.org/project/graphifyy/)). Both Day 0 setup (`setup-init.md`) and framework upgrade (`update` / `kickoff tooling`) detect existing coding codebases and offer approval-gated configuration:
 ```bash
 uv tool install "graphifyy[mcp]"
 graphify extract . --code-only

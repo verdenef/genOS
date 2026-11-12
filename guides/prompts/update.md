@@ -22,7 +22,13 @@ Do **not** modify any project files yet. Locate the latest official genOS source
 Determine whether the genOS installation lives at repository root or inside a subdirectory (e.g. `genOS/`), then audit it against upstream:
 - **Version Check:** Check `AGENTS.md` for `> **Framework Version:**` and compare all core framework files (`AGENTS.md`, `CLAUDE.md` at repo root, `guides/guide.md`, `guides/scripts/install_agent.py`, canonical prompts in `guides/prompts/`, standard `profiles/`, core `.agents/skills/` and `.cursor/rules/`), **excluding** `brain/`.
 - **Legacy (`v1`/`v2`) Signals:** Note if `AGENTS.md` lacks `## Commands` / `## Framework Update Protocol`, if obsolete replaced prompts exist (`setup-04-framework-upgrade.md`, `setup-tooling.md`, `setup-workforce.md`, `setup-obsidian-migration.md`, `workflow-01-kickoff.md`, `workflow-02-shutdown.md`, `workflow-03-resume-session.md`, `workflow-doctor.md`, `workflow-autonomous-batch.md`), if `CLAUDE.md`/`.agents/`/`.cursor/` are missing from repo root, or if `brain/` has legacy schema issues (`Status` column in `brain/systems/README.md`, missing keys in `20_PROGRESS.yaml`).
-- **Short-Circuit if Up to Date:** If all core framework files and repo-root discovery entries match upstream cleanly and no obsolete prompts remain, delete `_genOS_Update/`, output:
+- **Graphify Readiness Check:** Check if the host repository has an existing coding codebase (skip only blank greenfield or pure-prose repos; hybrid code + manuscript repos qualify) that lacks `graphify` CLI or `graphify-out/graph.json`.
+- **Short-Circuit if Up to Date:** If all core framework files and repo-root discovery entries match upstream cleanly and no obsolete prompts remain, delete `_genOS_Update/`. If an existing coding codebase lacks Graphify, append a 1-line tip:
+  ```
+  ✅ genOS is already up to date. No changes made.
+  (Tip: existing codebase detected without Graphify — run kickoff tooling to configure local --code-only code topology.)
+  ```
+  Otherwise output:
   `✅ genOS is already up to date. No changes made.`
   and **STOP**.
 
@@ -37,7 +43,8 @@ If outdated, present a clear plan before modifying any files:
    - Custom profiles in `profiles/`
    - Project source code
    - Project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`
-5. **Post-Sync Doctor Check:** Note any non-destructive `v1`/`v2` schema repairs Doctor will run after syncing.
+5. **Recommended Graphify Setup (Approval-Gated):** If an existing coding codebase lacks Graphify, offer optional setup in the plan (`uv tool install "graphifyy[mcp]"`, `.graphifyignore` excluding any manuscript/prose paths like `paper/`, `manuscript/`, `*.tex`, `*.bib`, `*.docx`, `.gitignore` `graphify-out/`, `graphify extract . --code-only`, and MCP registration via `profiles/templates/mcp-graphify.json`). Skip recommendation entirely if the repo is blank or pure prose.
+6. **Post-Sync Doctor Check:** Note any non-destructive `v1`/`v2` schema repairs Doctor will run after syncing.
 
 **STOP and wait for human approval before applying changes.**
 
@@ -45,7 +52,8 @@ If outdated, present a clear plan before modifying any files:
 Once approved:
 1. Record before-hashes (or line counts/paths) of `brain/` and any project-installed Agency Agents.
 2. Apply approved updates to `AGENTS.md`, `guides/`, standard `profiles/`, repo-root `CLAUDE.md`, and ONLY core skills/rules (`genos*`, `ponytail`, `graphify`, Superpowers in `.agents/skills/` and `.cursor/rules/`). Never copy upstream `brain/` over the project's `brain/`.
-3. Remove approved obsolete `v1`/`v2` prompt files and delete `_genOS_Update/`.
+3. If approved by the human, configure Graphify: install tool, write `.graphifyignore`, ensure `.gitignore` contains `graphify-out/`, build graph with `graphify extract . --code-only` (offline, AST-only, zero LLM calls), and wire `graphify-mcp` if `.mcp.json` / `.cursor/mcp.json` is present. Never write graph output into `brain/`.
+4. Remove approved obsolete `v1`/`v2` prompt files and delete `_genOS_Update/`.
 
 ### 5. Post-Upgrade Doctor & Proof
 1. Read the **newly updated `AGENTS.md`** (`Doctor Protocol`) and verify/auto-repair any legacy `v1`/`v2` `brain/` schema gaps (missing `20_PROGRESS.yaml` keys, `[[wikilink]]` syntax, `brain/systems/README.md` Status column removal, Index sync) **without** erasing project history.
@@ -61,5 +69,6 @@ Once approved:
 | Guides, Scripts & Prompts | ✅ | Refreshed canonical files; obsolete prompts cleaned (`<count>`) |
 | Project Brain (`brain/`) | 🛡️ | Preserved (plus Doctor v1/v2 schema repairs if needed) |
 | Project Skills & Rules | 🛡️ | Core refreshed; project Agency Agents shielded |
+| Code Topology (Graphify) | [✅ / ⏭️ / ℹ️] | [Configured / Skipped (prose or declined) / Tip: kickoff tooling] |
 | Brain Doctor Audit | ✅ | All sanity checks passing |
 ```

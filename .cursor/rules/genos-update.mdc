@@ -3,4 +3,4 @@ description: "genOS update — verify if outdated, propose an upgrade plan, wait
 alwaysApply: false
 ---
 
-Execute the `update` command as defined in `AGENTS.md` → Framework Update Protocol (or `guides/prompts/update.md`). Fetch upstream read-only, verify drift (stop if already current), present an Upgrade & Migration Plan and wait for human approval, apply core updates while strictly shielding `brain/`, custom profiles, and project-installed Agency Agents, and run the Doctor health check using the new `AGENTS.md`.
+Execute the `update` command as defined in `AGENTS.md` → Framework Update Protocol (or `guides/prompts/update.md`). Fetch upstream read-only, verify drift (stop cleanly if already current, with a tip if an existing codebase lacks Graphify), present an Upgrade & Migration Plan (with approval-gated Graphify setup if an existing coding codebase lacks it) and wait for human approval, apply core updates while strictly shielding `brain/`, custom profiles, and project-installed Agency Agents, and run the Doctor health check using the new `AGENTS.md`.

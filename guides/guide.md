@@ -83,7 +83,7 @@ Once genOS is inside your project repository, open a chat with your AI agent and
 This interactive wizard guides you through:
 1. **Stack Profile Selection:** Detects your stack and suggests a profile from `profiles/`.
 2. **Project Brain Setup:** Asks for your vision, initializes `brain/00_PROJECT.md`, proposes milestones.
-3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack (including optional `graphify-mcp`).
+3. **Runtime Tooling / MCP:** Configures live runtime MCP servers for your stack (including codebase-aware, approval-gated `graphify-mcp` recommendation when an existing coding codebase is detected).
 4. **AI Workforce & Skills:** Recommends specialist AI agent roles from `msitarzewski/agency-agents`. Upon human approval, automatically installs them via `guides/scripts/install_agent.py` into `.agents/skills/` and `.cursor/rules/` without any external desktop app, then confirms Ponytail, Graphify, and Superpowers skills.
 5. **Doctor Check & Handoff:** Runs integrity check and directs you to start coding in a fresh session.
 
@@ -133,7 +133,7 @@ Type `doctor` to scan all brain files, auto-repair issues, and output a health r
 
 ## Optional: Code Topology with Graphify
 
-For medium-to-large codebases, Graphify (PyPI `graphifyy`) maps classes, methods, and call edges locally so agents don't waste tokens hunting across files:
+For medium-to-large codebases, Graphify (PyPI `graphifyy`) maps classes, methods, and call edges locally so agents don't waste tokens hunting across files. During initial setup (`setup-init.md`), tool refresh (`kickoff tooling`), or framework upgrades (`update`), genOS automatically detects existing coding codebases lacking Graphify and proposes approval-gated local configuration:
 
 1. **Install once per machine:**
    ```bash
