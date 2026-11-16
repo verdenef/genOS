@@ -39,6 +39,10 @@ Before writing any code:
      ```
      kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
      ```
+   - Subagent-driven execution with tier routing (for codebases with domain constraints or invisible rules):
+     ```
+     kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; Flagship for design/judgment tasks and all reviewers, Balanced for known-cause fixes, Fast only for mechanical steps (file copies, record updates)
+     ```
 9. Wait for my approval before modifying the implementation.
 
 ## Variants

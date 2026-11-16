@@ -131,11 +131,13 @@ that implementer. Single-file mechanical fixes also take the cheapest tier.
 
 ### Project-Specific Model Routing in the Handoff Block
 
-When a codebase has **invisible rules** — constraints that aren't visible in the file being edited (naming conventions, setup order, single-hint invariants, platform-specific forbidden patterns) — encode model assignments directly in the execution handoff block so the new session inherits them without needing to rediscover them:
+When a codebase has **invisible rules** — constraints that aren't visible in the file being edited (naming conventions, setup order, single-hint invariants, platform-specific forbidden patterns) — encode model assignments directly in the execution handoff block using timeless tier names (`Flagship`, `Balanced`, `Fast` per DEC-002) so the executing session can resolve them to whatever IDE/platform it runs on:
 
 ```
-kickoff execute the approved plan: <path> using subagent-driven-development; <Flagship> for design tasks and all reviewers, <Balanced> for known-cause fixes, <Fast> only for file copies and record updates
+kickoff execute the approved plan: <path> using subagent-driven-development; Flagship for design tasks and all reviewers, Balanced for known-cause fixes, Fast only for file copies and record updates
 ```
+
+The executing session maps these tiers to its platform models at dispatch time via the Platform Mapping table in `AGENTS.md`.
 
 **When to downgrade to Fast for an implementer:** only when the plan contains the complete code to write (transcription + test), the task touches one file, and that file has no invisible codebase rules. The moment a task can silently violate a constraint the model cannot see, use Balanced minimum.
 

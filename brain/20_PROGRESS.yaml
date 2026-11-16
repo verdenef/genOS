@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Extended SDD execution handoff block spec (DEC-005): added model routing pattern to AGENTS.md copy-pasteable blocks and added 'Project-Specific Model Routing in the Handoff Block' subsection to subagent-driven-development/SKILL.md. No new decision recorded (extension of accepted DEC-005 format, not intent-affecting). M2 active, working_on empty."
+session_summary: "Aligned SDD execution handoff spec with DEC-002 timeless tiers (Flagship, Balanced, Fast) across AGENTS.md, subagent-driven-development/SKILL.md, workflow-kickoff.md, and DEC-005 in 30_DECISIONS.md. Handoff commands remain platform-agnostic and cross-IDE resilient. M2 active, working_on empty."

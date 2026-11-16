@@ -376,16 +376,16 @@ genOS recovers from the Project Brain alone. New sessions are always preferred o
     ```
     kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
     ```
-  - Subagent-driven execution with explicit model routing (use when the codebase has domain constraints or cross-system risks that a weaker model would miss):
+  - Subagent-driven execution with explicit tier routing (use when the codebase has domain constraints or cross-system risks that a weaker model would miss; uses timeless tier names per DEC-002, resolved to local platform models by the executing agent):
     ```
-    kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; <Flagship model> for design/judgment tasks and all reviewers, <Balanced model> for known-cause fixes, <Fast model> only for mechanical steps (file copies, record updates)
+    kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; Flagship for design/judgment tasks and all reviewers, Balanced for known-cause fixes, Fast only for mechanical steps (file copies, record updates)
     ```
-    Model routing guidelines for SDD dispatches:
-    - **Design/judgment tasks** (multi-system, requires reading captures, inferred from behavior): Flagship model
-    - **Known-cause fixes** (plan names the file, function, and pure test): Balanced model
+    Tier routing guidelines for SDD dispatches:
+    - **Design/judgment tasks** (multi-system, requires reading captures, inferred from behavior): Flagship tier (e.g. Opus, Gemini Pro, o3)
+    - **Known-cause fixes** (plan names the file, function, and pure test): Balanced tier (e.g. Sonnet, Gemini Flash, GPT-4o)
     - **All reviewers**: same tier as the builder they review (never weaker)
-    - **Mechanical steps** (file copies, string sweeps, brain record updates): Fast model only if it touches no game/domain logic
-    - **Never** use Fast model for tasks that edit files with invisible codebase rules (e.g., naming conventions, setup order constraints, single-hint invariants)
+    - **Mechanical steps** (file copies, string sweeps, brain record updates): Fast tier (e.g. Haiku, Gemini Flash, GPT-4o-mini) only if it touches no game/domain logic
+    - **Never** use Fast tier for tasks that edit files with invisible codebase rules (e.g., naming conventions, setup order constraints, single-hint invariants)
     - **Only the coordinator drives Unity/Editor/runtime.** Subagents write code and tests; the coordinator compiles, runs tests, and captures.
 - After SHUTDOWN, always start a **new session** for the next milestone.
 - If context feels degraded (repetition, forgetting instructions), start a new session.

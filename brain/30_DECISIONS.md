@@ -115,9 +115,10 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
   In multi-session AI software development, context window degradation is the leading driver of instruction drift, forgotten invariants, and subtle hallucination. While genOS mandates cold-start session resets after planning via [[20_PROGRESS.yaml]], human operators frequently experienced friction transitioning between the planning session and the fresh execution session. Manually formulating the execution command often resulted in omitted execution flags (e.g., omitting subagent workflows or failing to pass the exact plan path).
 - **Impact:**
   - Planners must conclude every `kickoff` plan with copy-pasteable execution command blocks.
-  - Two standard copy-pasteable command formats are supported:
+  - Standard copy-pasteable command formats are supported:
     1. Standard sequential execution: `kickoff execute the approved plan: <path-to-plan>`
     2. Subagent-driven execution: `kickoff execute the approved plan: <path-to-plan> using subagent-driven-development`
+    3. Subagent-driven execution with tier routing: `kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; Flagship for design tasks and all reviewers, Balanced for known-cause fixes, Fast only for mechanical steps` (uses DEC-002 timeless tiers for cross-IDE resilience)
   - Eliminates human friction when transitioning between a Flagship model session (planning) and a fresh execution session.
   - Formalized in `AGENTS.md` under Model & Session Guidance; integrated into [[Kernel]] and [[Workforce]].
 - **Supersedes:** none
