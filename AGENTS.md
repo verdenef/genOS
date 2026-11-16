@@ -337,7 +337,7 @@ Run when the user issues the `update` command, pastes `guides/prompts/update.md`
    - **STOP and wait for explicit human approval** before writing any files.
 4. **Strict Shielding & Apply Approved Upgrade:**
    - **NEVER** overwrite, modify, or delete `brain/` during file sync (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`).
-   - **NEVER** delete `.obsidian/`, custom profiles in `profiles/`, project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`, or user source code.
+   - **NEVER** delete `sidecar .gitignore` (`genOS/.gitignore`), `.obsidian/`, custom profiles in `profiles/`, project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`, or user source code.
    - Update `AGENTS.md`, `guides/` (`guide.md`, canonical prompts, `guides/scripts/install_agent.py`), standard `profiles/`, repo-root `CLAUDE.md`, and ONLY core genOS skills/rules (`genos*`, `ponytail`, `graphify`, Superpowers). Remove approved obsolete v1/v2 prompts and delete `_genOS_Update/`. If the human explicitly approved the recommended Graphify setup, run it alongside core updates (preserving local `--code-only` constraints and never writing graph artifacts to `brain/`).
 5. **Post-Upgrade Doctor & Proof:**
    - Read the **newly updated `AGENTS.md`**, run the Doctor Protocol to verify and non-destructively migrate any legacy v1/v2 `brain/` schema gaps, confirm project-installed Agency Agents and Brain history are intact, and output the Upgrade Summary table (including Graphify readiness status: `Configured`, `Skipped`, or `Tip`).

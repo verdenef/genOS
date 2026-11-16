@@ -58,7 +58,7 @@ Install genOS into a `genOS/` subfolder in this repository from https://github.c
 2. **Root Discovery (if placed in a subfolder like `genOS/`):** Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at the repository root.
 3. **Sidecar Git Isolation:** When placing genOS in a subfolder (e.g. `genOS/`), copy `templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, completely ignoring framework scaffolding (`guides/`, `profiles/`, `templates/`, etc.). If an existing project already tracked or pushed scaffolding files to git, untrack them cleanly:
    ```bash
-   git rm -r --cached genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md 2>/dev/null
+   git rm -r --cached --ignore-unmatch genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md
    ```
 
 ### Repository Structure

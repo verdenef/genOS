@@ -183,7 +183,7 @@ Install genOS into a `genOS/` subfolder in this repository from https://github.c
 2. Because `brain/` in this upstream repo tracks **genOS itself**, initialize your project's `brain/` directory from [`templates/brain/`](templates/brain/) (or let `setup-init.md` reset it for you).
 3. If installing inside a subfolder like `genOS/`:
    - Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at your repo root so Claude Code and Cursor auto-detect them.
-   - Copy [`templates/sidecar.gitignore`](templates/sidecar.gitignore) to `genOS/.gitignore` so Git only tracks `genOS/brain/` and `genOS/.gitignore`. (If scaffolding was previously committed: `git rm -r --cached genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md 2>/dev/null`).
+   - Copy [`templates/sidecar.gitignore`](templates/sidecar.gitignore) to `genOS/.gitignore` so Git only tracks `genOS/brain/` and `genOS/.gitignore`. (If scaffolding was previously committed: `git rm -r --cached --ignore-unmatch genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md`).
 4. Open your AI chat and paste [`guides/prompts/setup-init.md`](guides/prompts/setup-init.md).
 
 ### Day 1+: Daily Workflow

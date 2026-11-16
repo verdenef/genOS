@@ -20,7 +20,7 @@ Do **not** modify any project files yet. Locate the latest official genOS source
 
 ### 2. Verify Drift & Detect Installation Generation
 Determine whether the genOS installation lives at repository root or inside a subdirectory (e.g. `genOS/`), then audit it against upstream:
-- **Version Check:** Check `AGENTS.md` for `> **Framework Version:**` and compare all core framework files (`AGENTS.md`, `CLAUDE.md` at repo root, `guides/guide.md`, `guides/scripts/install_agent.py`, canonical prompts in `guides/prompts/`, standard `profiles/`, core `.agents/skills/` and `.cursor/rules/`), **excluding** `brain/`.
+- **Version Check:** Check `AGENTS.md` for `> **Framework Version:**` and compare all core framework files (`AGENTS.md`, `CLAUDE.md` at repo root, `guides/guide.md`, `guides/scripts/install_agent.py`, canonical prompts in `guides/prompts/`, standard `profiles/`, core `.agents/skills/` and `.cursor/rules/`), **excluding** `brain/` and `sidecar .gitignore` (`genOS/.gitignore`).
 - **Legacy (`v1`/`v2`) Signals:** Note if `AGENTS.md` lacks `## Commands` / `## Framework Update Protocol`, if obsolete replaced prompts exist (`setup-04-framework-upgrade.md`, `setup-tooling.md`, `setup-workforce.md`, `setup-obsidian-migration.md`, `workflow-01-kickoff.md`, `workflow-02-shutdown.md`, `workflow-03-resume-session.md`, `workflow-doctor.md`, `workflow-autonomous-batch.md`), if `CLAUDE.md`/`.agents/`/`.cursor/` are missing from repo root, or if `brain/` has legacy schema issues (`Status` column in `brain/systems/README.md`, missing keys in `20_PROGRESS.yaml`).
 - **Graphify Readiness Check:** Check if the host repository has an existing coding codebase (skip only blank greenfield or pure-prose repos; hybrid code + manuscript repos qualify) that lacks `graphify` CLI or `graphify-out/graph.json`.
 - **Short-Circuit if Up to Date:** If all core framework files and repo-root discovery entries match upstream cleanly and no obsolete prompts remain, delete `_genOS_Update/`. If an existing coding codebase lacks Graphify, append a 1-line tip:
@@ -39,6 +39,7 @@ If outdated, present a clear plan before modifying any files:
 3. **Obsolete v1/v2 Files to Remove (if any):** List exact legacy prompts to prune.
 4. **Strict Shield List (Untouched During File Sync):**
    - `brain/` (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`, plus any project-specific subfolders in `brain/`)
+   - `sidecar .gitignore` (`genOS/.gitignore`)
    - `.obsidian/` configuration
    - Custom profiles in `profiles/`
    - Project source code

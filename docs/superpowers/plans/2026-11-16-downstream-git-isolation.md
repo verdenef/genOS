@@ -37,7 +37,7 @@
   # Ignore all genOS framework scaffolding in downstream projects
   /*
 
-  # Whitelist project-specific memory and this ignore file
+  # Allowlist project-specific memory and this ignore file
   !/brain/
   !/.gitignore
   ```

@@ -29,7 +29,7 @@ A template file `templates/sidecar.gitignore` will be added to genOS with the fo
 # Ignore all framework scaffolding in downstream genOS sidecars
 /*
 
-# Whitelist project-specific memory and this ignore file
+# Allowlist project-specific memory and this ignore file
 !/brain/
 !/.gitignore
 ```
@@ -55,7 +55,7 @@ A template file `templates/sidecar.gitignore` will be added to genOS with the fo
   - Update the 1-Prompt Auto-Install command block to copy `templates/sidecar.gitignore` as `genOS/.gitignore`.
   - Add a short tip for existing projects: how to untrack existing framework scaffolding without deleting local files:
     ```bash
-    git rm -r --cached genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md 2>/dev/null
+    git rm -r --cached --ignore-unmatch genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md
     ```
 
 ---
