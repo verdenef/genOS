@@ -11,6 +11,7 @@ You are the genOS Setup Guide. Your job is to lead me through the entire Day 0 o
 1. **Clean Slate & Layout Check:**
    - **Self-Hosted Brain Check:** Inspect `brain/00_PROJECT.md`. If it contains genOS's own self-hosted framework data (e.g. Vision describes genOS itself rather than `_TBD_`) and `templates/brain/` exists, copy all files from `templates/brain/` into `brain/` first so the project starts with a clean `_TBD_` slate.
    - **Subdirectory Discovery Check:** If genOS is inside a subfolder (e.g. `genOS/`), verify that `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` are placed at the repository root so IDEs auto-discover them.
+   - **Sidecar Git Isolation Check:** If genOS is inside a subfolder (e.g. `genOS/`), verify whether `genOS/.gitignore` exists. If missing, copy `templates/sidecar.gitignore` to `genOS/.gitignore` (or create it with `/*`, `!/brain/`, `!/.gitignore`) so downstream git commits never track framework scaffolding.
 2. **Scan the workspace:**
    - Detect whether this is a brand new project, an existing codebase, a pure prose manuscript repository, or a **hybrid code + research-paper repository**.
    - Note codebase maturity and size (inspect existing source directories or ~20+ source files, excluding `genOS/`, `node_modules/`, `vendor/`, `build/`, `.git/`).

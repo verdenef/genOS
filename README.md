@@ -153,6 +153,7 @@ genOS/
 │   ├── 60_AGENTS.md                 # Approved AI workforce roster
 │   └── systems/                     # Modular system documents
 ├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
+├── templates/sidecar.gitignore      # Git isolation template for downstream sidecars
 ├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
 ├── guides/                          # User guide (guide.md), workflow prompts, and plans
 │   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
@@ -172,14 +173,17 @@ Open your project in an AI IDE/CLI with terminal access and paste:
 Install genOS into a `genOS/` subfolder in this repository from https://github.com/verdenef/genOS/archive/refs/heads/main.zip (using a temporary `_genOS_Temp/` folder, then deleting it after):
 1. Copy `AGENTS.md`, `guides/`, `profiles/`, `integrations/`, `templates/`, and `README.md` into `genOS/`.
 2. Initialize `genOS/brain/` from `templates/brain/` (do NOT copy the upstream repo's self-hosted `brain/`, `docs/superpowers/`, or `scratch/`).
-3. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
-4. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
+3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, ignoring framework scaffolding.
+4. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
+5. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
 ```
 
 #### Option B: Manual Download *(for sandboxed or offline setups)*
 1. Download or clone `verdenef/genOS` into your repository (either at root or inside a `genOS/` subfolder).
 2. Because `brain/` in this upstream repo tracks **genOS itself**, initialize your project's `brain/` directory from [`templates/brain/`](templates/brain/) (or let `setup-init.md` reset it for you).
-3. If installing inside a subfolder like `genOS/`: keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at your repo root so Claude Code and Cursor auto-detect them.
+3. If installing inside a subfolder like `genOS/`:
+   - Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at your repo root so Claude Code and Cursor auto-detect them.
+   - Copy [`templates/sidecar.gitignore`](templates/sidecar.gitignore) to `genOS/.gitignore` so Git only tracks `genOS/brain/` and `genOS/.gitignore`. (If scaffolding was previously committed: `git rm -r --cached genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md 2>/dev/null`).
 4. Open your AI chat and paste [`guides/prompts/setup-init.md`](guides/prompts/setup-init.md).
 
 ### Day 1+: Daily Workflow

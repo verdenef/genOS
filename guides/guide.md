@@ -48,13 +48,18 @@ Open a brand-new or existing project in Claude Code, Cursor, Antigravity, or Cod
 Install genOS into a `genOS/` subfolder in this repository from https://github.com/verdenef/genOS/archive/refs/heads/main.zip (using a temporary `_genOS_Temp/` folder, then deleting it after):
 1. Copy `AGENTS.md`, `guides/`, `profiles/`, `integrations/`, `templates/`, and `README.md` into `genOS/`.
 2. Initialize `genOS/brain/` from `templates/brain/` (do NOT copy the upstream repo's self-hosted `brain/`, `docs/superpowers/`, or `scratch/`).
-3. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
-4. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
+3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, ignoring framework scaffolding.
+4. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
+5. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
 ```
 
 ### Option B: Manual Download *(for sandboxed or offline setups)*
 1. **Clean Starter Brain:** Because `brain/` inside the upstream genOS repo tracks genOS itself, copy the clean `_TBD_` files from `templates/brain/` into your project's `brain/` directory (the setup wizard also verifies this).
 2. **Root Discovery (if placed in a subfolder like `genOS/`):** Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at the repository root.
+3. **Sidecar Git Isolation:** When placing genOS in a subfolder (e.g. `genOS/`), copy `templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, completely ignoring framework scaffolding (`guides/`, `profiles/`, `templates/`, etc.). If an existing project already tracked or pushed scaffolding files to git, untrack them cleanly:
+   ```bash
+   git rm -r --cached genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md 2>/dev/null
+   ```
 
 ### Repository Structure
 
@@ -67,6 +72,7 @@ genOS/
 ├── .cursor/rules/                   # Cursor IDE rules (genos, ponytail, graphify, Agency Agents)
 ├── brain/                           # Self-hosted Project Brain tracking genOS itself
 ├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
+├── templates/sidecar.gitignore      # Git isolation template for downstream sidecars
 ├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
 ├── guides/                          # User guide (guide.md), workflow prompts, and plans
 │   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
