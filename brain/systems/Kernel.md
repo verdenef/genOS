@@ -13,12 +13,13 @@ Governs session lifecycle, state handoff, and execution protocols across AI agen
 - Provide Smart Kickoff routing (Resume, Fresh Start, Advance, Scoped Intent) for automated context switching.
 - Enforce timeless 3-tier Model & Session guidance (Flagship, Balanced, Fast) and generate copy-pasteable execution handoff blocks.
 - Guarantee single source of truth ownership across all Project Brain files.
+- Support sidecar git isolation: in nested downstream installations, ensure only brain state and local git configuration are tracked by default ([[DEC-011]]).
 
 ## Dependencies
 - [[Updater]]: Invoked for framework maintenance and upgrades via the `update` command.
 - [[Skills]]: Leverages operational skills for plan authoring, execution, and verification.
 - [[Workforce]]: Reads and verifies active agent personas during BOOT and pre-planning gates.
-- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]], [[DEC-009]], [[DEC-010]]).
+- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]], [[DEC-009]], [[DEC-010]], [[DEC-011]]).
 
 ## Runtime References
 - `AGENTS.md`: Canonical genOS operating kernel specification, ownership table, lifecycle protocols, and commands.
@@ -31,6 +32,7 @@ Governs session lifecycle, state handoff, and execution protocols across AI agen
 - Zero-history recovery: Every agent recovers state completely from the Project Brain alone without relying on chat history.
 - Single source of truth: Domain ownership strictly follows the `AGENTS.md` Ownership table; no state mirroring across files.
 - Location-agnostic pathing: All relative paths are evaluated relative to the directory containing `AGENTS.md`.
+- Sidecar git isolation: When genOS is deployed as a subfolder in downstream projects, only the project brain directory and nested `.gitignore` are git-tracked; framework scaffolding remains untracked ([[DEC-011]]).
 - Obsidian compatibility: All internal brain cross-references must use `[[wikilink]]` syntax.
 - Mandatory Sanity Gate: SHUTDOWN must execute all Sanity Gate checks with zero tolerance for errors or desynchronization.
 

@@ -27,6 +27,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-008 | accepted | 2026-11-10 | Verify-First & Plan-Gated Framework Updater |
 | DEC-009 | accepted | 2026-11-12 | Automatic Workforce Gap Check & Kernel Subcommand Routing |
 | DEC-010 | accepted | 2026-11-12 | Codebase-Aware Graphify Recommendation in Setup & Update |
+| DEC-011 | accepted | 2026-11-16 | Downstream genOS Sidecar Git Isolation |
 
 ---
 
@@ -46,6 +47,13 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-011: Downstream genOS Sidecar Git Isolation
+- **Status:** accepted
+- **Date:** 2026-11-16
+- **Reason:** Downstream projects embedding genOS as a sidecar (`genOS/`) experienced repository clutter and merge conflicts because git recursively tracked all framework scaffolding (`guides/`, `profiles/`, `templates/`, `integrations/`, `AGENTS.md`, etc.). In downstream projects, only `genOS/brain/` represents project-specific semantic truth.
+- **Impact:** Added `templates/sidecar.gitignore` with strict allowlist rules (`/*`, `!/brain/`, `!/.gitignore`). Automated sidecar git isolation in Day 0 setup (`setup-init.md`) by verifying and deploying `genOS/.gitignore` when genOS is in a subfolder. Updated 1-prompt auto-install workflows and manual setup in `guides/guide.md` and `README.md` to copy the template, and provided cleanup commands (`git rm -r --cached`) for existing repositories. Governed by [[Kernel]] and [[Updater]].
+- **Supersedes:** none
 
 ### DEC-010: Codebase-Aware Graphify Recommendation in Setup & Update
 - **Status:** accepted

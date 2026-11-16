@@ -5,7 +5,7 @@
 schema_version: 2
 
 # ISO date of last SHUTDOWN update (YYYY-MM-DD)
-last_updated: "2026-11-12"
+last_updated: "2026-11-16"
 
 # Who last wrote this file (e.g. cursor-agent, agy-agent, agency:unity-specialist)
 last_agent: antigravity
@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Completed codebase-aware Graphify onboarding across Day 0 setup (setup-init.md), framework update (AGENTS.md, guides/prompts/update.md), and kickoff tooling. Scoped hybrid code + paper repos to index source while ignoring manuscript folders in .graphifyignore. Recorded DEC-010, updated M2 in 50_ROADMAP.md, aligned Kernel, Updater, and Skills system docs, and passed all Doctor and test suites."
+session_summary: "Implemented downstream genOS sidecar Git isolation via templates/sidecar.gitignore and Day 0 setup-init automation, allowing downstream projects to track only genOS/brain/ and .gitignore while completely ignoring framework scaffolding. Recorded DEC-011, updated M2 in 50_ROADMAP.md, Kernel, and Updater system docs, passing all unit tests and Doctor checks."

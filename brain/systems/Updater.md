@@ -12,11 +12,12 @@ Manages framework upgrade verification, migration planning, and execution while 
 - Detect existing codebases lacking Graphify topology during drift checks, offering approval-gated local extraction in the Upgrade Plan or clean short-circuit tips ([[DEC-010]]).
 - Propose an explicit Upgrade & Migration Plan (core files, repo-root `CLAUDE.md`/`.agents/`/`.cursor/`, obsolete `v1`/`v2` prompt pruning, shield list, post-sync Doctor repairs) and wait for human approval before modifying files.
 - Enforce strict shielding for `brain/`, `.obsidian/`, custom profiles, user code, and project-installed Agency Agents.
+- Preserve sidecar git isolation: Framework updates in nested sidecar deployments must strictly respect and never overwrite or remove the downstream project's sidecar `.gitignore` configuration ([[DEC-011]]).
 - Trigger post-upgrade Doctor audits using the **newly installed `AGENTS.md`** so legacy `v1`/`v2` brain schema gaps are migrated safely without losing history.
 
 ## Dependencies
 - [[Kernel]]: Integrated into kernel commands and version header (`> **Framework Version:**`) in `AGENTS.md`, and verified by the Doctor Protocol.
-- [[30_DECISIONS.md]]: Governed by [[DEC-004]], [[DEC-007]], [[DEC-008]], and [[DEC-010]].
+- [[30_DECISIONS.md]]: Governed by [[DEC-004]], [[DEC-007]], [[DEC-008]], [[DEC-010]], and [[DEC-011]].
 
 ## Runtime References
 - `AGENTS.md`: Version header and "Framework Update Protocol" defining the 5-phase Verify → Plan → Approve → Apply → Doctor lifecycle.
@@ -27,7 +28,7 @@ Manages framework upgrade verification, migration planning, and execution while 
 ## Invariants
 - Verify before modifying: Read-only upstream comparison runs first; zero target files change until drift is confirmed and the human approves the Upgrade Plan.
 - Self-contained legacy support: `guides/prompts/update.md` never depends on the target repo's outdated `AGENTS.md` having Doctor or update instructions; Doctor always runs against the newly updated `AGENTS.md`.
-- Strict shielding: Never overwrite, modify, or delete `brain/` during file sync (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`). Never delete `.obsidian/`, custom profiles in `profiles/`, project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`, or user source code.
+- Strict shielding: Never overwrite, modify, or delete `brain/` during file sync (`00_PROJECT.md`, `20_PROGRESS.yaml`, `30_DECISIONS.md`, `40_BACKLOG.md`, `50_ROADMAP.md`, `60_AGENTS.md`, `brain/systems/*.md`). Never delete `.obsidian/`, custom profiles in `profiles/`, project-installed Agency Agents in `.agents/skills/` or `.cursor/rules/`, sidecar `.gitignore` configurations ([[DEC-011]]), or user source code.
 - Staging cleanliness: Temporary update extraction directories (`_genOS_Update/`) must always be deleted before finishing (both when short-circuiting and after upgrading).
 
 ## Notes

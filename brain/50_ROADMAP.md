@@ -61,6 +61,7 @@ Do not copy milestone criteria into Progress or Backlog. Progress stores only `c
   - Verify-first & plan-gated framework updater (`AGENTS.md` Framework Version `3.2`, self-contained `guides/prompts/update.md`) verifying drift, halting cleanly when current, and supporting legacy `v1`/`v2` migrations after explicit approval ([[DEC-008]]).
   - Automatic Workforce Gap Check during kickoff and native kernel subcommand routing (`kickoff workforce` / `kickoff tooling`) with progress-based lifecycle audits ([[DEC-009]]).
   - Codebase-aware Graphify recommendation during Day 0 setup and framework update for existing codebases with approval-gated local extraction and verify-first short-circuit ([[DEC-010]]).
+  - Downstream genOS sidecar Git isolation via nested templates/sidecar.gitignore and Day 0 setup automation ([[DEC-011]]).
   - Self-hosted Project Brain in `d:\GameOS` with clean starter templates preserved in `templates/brain/`.
   - Canonical system definitions for `Kernel`, `Updater`, `Skills`, and `Workforce` in `brain/systems/`.
 - **Done when:** Self-hosting brain is fully initialized, all canonical systems defined, and passes Doctor with 100% clean check.
