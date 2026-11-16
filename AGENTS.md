@@ -376,6 +376,17 @@ genOS recovers from the Project Brain alone. New sessions are always preferred o
     ```
     kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
     ```
+  - Subagent-driven execution with explicit model routing (use when the codebase has domain constraints or cross-system risks that a weaker model would miss):
+    ```
+    kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; <Flagship model> for design/judgment tasks and all reviewers, <Balanced model> for known-cause fixes, <Fast model> only for mechanical steps (file copies, record updates)
+    ```
+    Model routing guidelines for SDD dispatches:
+    - **Design/judgment tasks** (multi-system, requires reading captures, inferred from behavior): Flagship model
+    - **Known-cause fixes** (plan names the file, function, and pure test): Balanced model
+    - **All reviewers**: same tier as the builder they review (never weaker)
+    - **Mechanical steps** (file copies, string sweeps, brain record updates): Fast model only if it touches no game/domain logic
+    - **Never** use Fast model for tasks that edit files with invisible codebase rules (e.g., naming conventions, setup order constraints, single-hint invariants)
+    - **Only the coordinator drives Unity/Editor/runtime.** Subagents write code and tests; the coordinator compiles, runs tests, and captures.
 - After SHUTDOWN, always start a **new session** for the next milestone.
 - If context feels degraded (repetition, forgetting instructions), start a new session.
 - Never compact as a substitute for SHUTDOWN → new session.

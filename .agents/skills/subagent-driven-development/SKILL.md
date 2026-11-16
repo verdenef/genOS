@@ -129,6 +129,20 @@ that implementer. Single-file mechanical fixes also take the cheapest tier.
 - Touches multiple files with integration concerns → standard model
 - Requires design judgment or broad codebase understanding → most capable model
 
+### Project-Specific Model Routing in the Handoff Block
+
+When a codebase has **invisible rules** — constraints that aren't visible in the file being edited (naming conventions, setup order, single-hint invariants, platform-specific forbidden patterns) — encode model assignments directly in the execution handoff block so the new session inherits them without needing to rediscover them:
+
+```
+kickoff execute the approved plan: <path> using subagent-driven-development; <Flagship> for design tasks and all reviewers, <Balanced> for known-cause fixes, <Fast> only for file copies and record updates
+```
+
+**When to downgrade to Fast for an implementer:** only when the plan contains the complete code to write (transcription + test), the task touches one file, and that file has no invisible codebase rules. The moment a task can silently violate a constraint the model cannot see, use Balanced minimum.
+
+**Reviewers never go below the builder's tier.** A reviewer catching what the builder missed must be at least as capable.
+
+**Only the coordinator drives interactive runtimes** (game editors, test harnesses that require serial state). Subagents write code and tests; the coordinator compiles, runs, and captures. Never dispatch a subagent to operate the editor directly.
+
 ## Handling Implementer Status
 
 Implementer subagents report one of four statuses. Handle each appropriately:
