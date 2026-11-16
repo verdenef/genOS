@@ -63,6 +63,7 @@ Do not copy milestone criteria into Progress or Backlog. Progress stores only `c
   - Codebase-aware Graphify recommendation during Day 0 setup and framework update for existing codebases with approval-gated local extraction and verify-first short-circuit ([[DEC-010]]).
   - Downstream genOS sidecar Git isolation via nested templates/sidecar.gitignore and Day 0 setup automation ([[DEC-011]]).
   - Mandatory Recommended Execution Designation in kickoff handoffs and ephemeral scratch isolation ([[DEC-012]]).
+  - Critical evaluation of human proposals before agreeing — anti-sycophancy principle ([[DEC-013]]).
   - Self-hosted Project Brain in `d:\GameOS` with clean starter templates preserved in `templates/brain/`.
   - Canonical system definitions for `Kernel`, `Updater`, `Skills`, and `Workforce` in `brain/systems/`.
 - **Done when:** Self-hosting brain is fully initialized, all canonical systems defined, and passes Doctor with 100% clean check.

@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Resolved handoff ambiguity and git clutter (DEC-012): mandated that kickoff planners evaluate tasks and explicitly designate exactly ONE execution method as (Recommended) with a rationale, placed prominently first. Isolated ephemeral AI execution scratch (.superpowers/, .claude/, *.tmp) in .gitignore and templates/project-root.gitignore, and added root hygiene checks to Day 0 setup. Updated AGENTS.md, workflow-kickoff.md, 30_DECISIONS.md, 50_ROADMAP.md, and Kernel system docs."
+session_summary: "Added anti-sycophancy principle (DEC-013): Critical Evaluation of Proposals section in AGENTS.md requiring agents to state concrete risks/trade-offs/alternatives before agreeing with architecture or workflow proposals. Scoped to decision points only, requires explicit 'I checked and found none' when no issues exist. Also committed DEC-012 (recommended execution designation + ephemeral scratch isolation). M2 active, working_on empty."

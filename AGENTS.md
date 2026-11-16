@@ -150,6 +150,23 @@ Never write “as discussed in chat.” Use `DEC-XXX`, `TASK-XXX`, roadmap IDs (
 
 ---
 
+## Critical evaluation of proposals
+
+When the human proposes an approach, fix, architectural change, or design decision — before agreeing or implementing:
+
+1. **State at least one concrete risk, trade-off, or alternative.** Not a vague hedge ("there could be issues") but a specific concern ("this bakes platform names into the handoff block, which breaks cross-IDE portability").
+2. **If you find no issues**, say so explicitly: "I checked for [X, Y, Z concerns] and found none." Silence is not the same as evaluation.
+3. **Never agree by default.** The human's proposal may be correct, but "yes" must follow from evaluation, not from social compliance.
+
+This does **not** mean:
+- Challenge every trivial request ("rename this variable" does not need a risk assessment)
+- Slow down routine work with performative deliberation
+- Refuse to implement until concerns are resolved — state the concern, then proceed if the human confirms
+
+**When to apply:** Proposals that change how the system works (architecture, workflow, protocol, tool choice, scope). Not routine tasks with clear specs.
+
+---
+
 ## Commands
 
 When the user's message begins with a command keyword below (case-insensitive, optionally followed by context), execute the corresponding protocol. The user does not need to paste a prompt file. Users may also `@`-mention the corresponding prompt file in `guides/prompts/` as an alternative trigger — both paths produce the same result.

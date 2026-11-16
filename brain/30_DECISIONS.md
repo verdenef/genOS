@@ -29,6 +29,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-010 | accepted | 2026-11-12 | Codebase-Aware Graphify Recommendation in Setup & Update |
 | DEC-011 | accepted | 2026-11-16 | Downstream genOS Sidecar Git Isolation |
 | DEC-012 | accepted | 2026-11-17 | Mandatory Recommended Execution Designation & Ephemeral Scratch Isolation |
+| DEC-013 | accepted | 2026-11-17 | Critical Evaluation of Human Proposals |
 
 ---
 
@@ -48,6 +49,17 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-013: Critical Evaluation of Human Proposals
+- **Status:** accepted
+- **Date:** 2026-11-17
+- **Reason:** AI agents consistently defaulted to agreeing with human proposals without critically evaluating risks, trade-offs, or alternatives — a known sycophancy failure mode. In observed sessions, this led to implementing flawed approaches (e.g., baking platform-specific model names into cross-IDE handoff blocks), only to walk them back 1–2 messages later after the agent itself identified the issue it should have caught upfront.
+- **Impact:**
+  - Added a `## Critical evaluation of proposals` section to `AGENTS.md` requiring agents to state at least one concrete risk, trade-off, or alternative before agreeing with any proposal that changes how the system works (architecture, workflow, protocol, tool choice, scope).
+  - Explicitly requires "I checked for [X, Y, Z] and found none" when no issues exist — silence is not evaluation.
+  - Scoped to decision points only (not routine tasks) to avoid performative deliberation on trivial requests.
+  - Governed by [[Kernel]].
+- **Supersedes:** none
 
 ### DEC-012: Mandatory Recommended Execution Designation & Ephemeral Scratch Isolation
 - **Status:** accepted
