@@ -12,6 +12,11 @@ graphify-out/
 # Superpowers git worktrees
 .worktrees/
 
+# Ephemeral AI execution scratch, diff packages & local agent caches
+.superpowers/
+.claude/
+*.tmp
+
 # Python bytecode
 __pycache__/
 *.py[cod]

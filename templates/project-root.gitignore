@@ -1,0 +1,15 @@
+# genOS Downstream Project Root Gitignore Snippet
+# Append these rules to your repository's root .gitignore to isolate AI execution clutter.
+
+# Ephemeral AI execution scratch & diff packages (NEVER commit)
+.superpowers/
+.worktrees/
+.claude/
+*.tmp
+
+# AI IDE Harness & Discovery Files (OPTIONAL)
+# Uncomment the lines below if you want your Git repository to track ONLY project code and genOS/brain/,
+# keeping AI agent skills, prompts, and IDE rule files strictly local on your machine.
+# .agents/
+# .cursor/
+# CLAUDE.md

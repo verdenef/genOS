@@ -28,6 +28,7 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 | DEC-009 | accepted | 2026-11-12 | Automatic Workforce Gap Check & Kernel Subcommand Routing |
 | DEC-010 | accepted | 2026-11-12 | Codebase-Aware Graphify Recommendation in Setup & Update |
 | DEC-011 | accepted | 2026-11-16 | Downstream genOS Sidecar Git Isolation |
+| DEC-012 | accepted | 2026-11-17 | Mandatory Recommended Execution Designation & Ephemeral Scratch Isolation |
 
 ---
 
@@ -47,6 +48,17 @@ Keep the Index in sync with entries below. Do not leave blank placeholder rows.
 ## Decisions
 
 <!-- Entries go below. Newest first preferred. -->
+
+### DEC-012: Mandatory Recommended Execution Designation & Ephemeral Scratch Isolation
+- **Status:** accepted
+- **Date:** 2026-11-17
+- **Reason:** In multi-session handoffs, AI planners frequently output multiple copy-pasteable execution command blocks without explicitly designating which method was recommended for the specific plan, forcing operators to ask follow-up questions in chat. Additionally, ephemeral execution scratch (.superpowers/ review packages and briefs, .claude/ telemetry and session caches, .worktrees/) and root AI harness files frequently leaked into git repositories during commits.
+- **Impact:**
+  - Mandated that planners must evaluate task independence and codebase constraints, explicitly designate exactly ONE execution method as `(Recommended)` with a 1-sentence rationale, and present that recommended command block first and prominent.
+  - Added universal ignore rules for ephemeral execution scratch (`.superpowers/`, `.claude/`, `*.tmp`) to root `.gitignore` and `templates/project-root.gitignore`.
+  - Updated Day 0 setup (`setup-init.md`) to verify root repository hygiene and provide an optional AI harness isolation path so downstream projects can track only project code and `genOS/brain/`.
+  - Governed by [[Kernel]] and [[Skills]].
+- **Supersedes:** none
 
 ### DEC-011: Downstream genOS Sidecar Git Isolation
 - **Status:** accepted

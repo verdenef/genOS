@@ -29,20 +29,22 @@ Before writing any code:
 4b. **Code Topology Check (Optional):** If Graphify is available, inspect call chains and blast radius for in-scope components before proposing task breakdowns (otherwise proceed with standard file tools).
 5. Present a concise implementation plan that strictly adheres to those cited agent rules.
 6. Identify any architectural risks or dependencies.
-7. State your **Model & Session recommendation** per AGENTS.md (e.g. "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session.").
-8. Provide **copy-pasteable execution command blocks** so the user can easily copy and paste into the new session:
-   - Standard execution:
+7. State your **Model & Session recommendation** per AGENTS.md (e.g. "💡 Recommended Model & Session: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session.").
+8. **Designate and output the Recommended Execution Command:**
+   Evaluate task independence and codebase constraints, explicitly designate **exactly ONE** command as **`💡 Recommended Execution Command`** with a 1-sentence rationale, and present that copy-pasteable block first and prominent:
+   - If sequential / tightly coupled:
      ```
      kickoff execute the approved plan: <path-to-plan>
      ```
-   - Subagent-driven execution:
+   - If independent modular tasks (standard visible rules):
      ```
      kickoff execute the approved plan: <path-to-plan> using subagent-driven-development
      ```
-   - Subagent-driven execution with tier routing (for codebases with domain constraints or invisible rules):
+   - If independent tasks with domain constraints / invisible rules / game engine checks:
      ```
      kickoff execute the approved plan: <path-to-plan> using subagent-driven-development; Flagship for design/judgment tasks and all reviewers, Balanced for known-cause fixes, Fast only for mechanical steps (file copies, record updates)
      ```
+   Optionally provide the alternative execution options below it under an `Alternative execution options:` section so the user never has to ask which command to run.
 9. Wait for my approval before modifying the implementation.
 
 ## Variants

@@ -366,8 +366,16 @@ genOS recovers from the Project Brain alone. New sessions are always preferred o
 
 ### Rules
 - Detect host platform on BOOT.
-- Format recommendation as: "💡 Recommended: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session."
-- At the end of planning/kickoff, always provide **copy-pasteable execution command blocks** so the user can easily copy and paste into the new session:
+- Format model recommendation as: "💡 Recommended Model & Session: [Platform Model] (Thinking/Effort: [Level]) in a [new/continued] session."
+- **Mandatory Execution Method Recommendation:** The planner MUST evaluate the plan's tasks and explicitly designate **exactly ONE** execution command as `(Recommended)` with a 1-sentence rationale:
+  - **Sequential / Standard Execution:** Recommend when tasks are tightly coupled, sequential, or trivial (1–2 steps).
+  - **Subagent-Driven Development (SDD):** Recommend when tasks are mostly independent, modular, and the codebase has standard visible rules.
+  - **SDD with Tier Routing:** Recommend when tasks are independent AND the codebase has domain constraints, invisible rules, multi-system judgment, or interactive runtime checks (e.g., Unity/game engine, play checks).
+- At the end of planning/kickoff, present the **`💡 Recommended Execution Command`** block first and prominent:
+  ```
+  kickoff execute the approved plan: <path-to-plan> [using subagent-driven-development [; <Tier Routing>]]
+  ```
+- Below the recommended block, provide any alternative execution options under a clearly labeled `Alternative execution options:` section so the user never has to ask which command to run:
   - Standard execution:
     ```
     kickoff execute the approved plan: <path-to-plan>

@@ -11,15 +11,15 @@ Governs session lifecycle, state handoff, and execution protocols across AI agen
 - Manage session initialization through the BOOT sequence and zero-history recovery.
 - Govern session termination through the SHUTDOWN sequence and mandatory Sanity Gate verification.
 - Provide Smart Kickoff routing (Resume, Fresh Start, Advance, Scoped Intent) for automated context switching.
-- Enforce timeless 3-tier Model & Session guidance (Flagship, Balanced, Fast) and generate copy-pasteable execution handoff blocks.
+- Enforce timeless 3-tier Model & Session guidance (Flagship, Balanced, Fast) and generate copy-pasteable execution handoff blocks with mandatory designation of exactly ONE recommended execution method ([[DEC-005]], [[DEC-012]]).
 - Guarantee single source of truth ownership across all Project Brain files.
-- Support sidecar git isolation: in nested downstream installations, ensure only brain state and local git configuration are tracked by default ([[DEC-011]]).
+- Support sidecar git isolation: in nested downstream installations, ensure only brain state and local git configuration are tracked by default ([[DEC-011]], [[DEC-012]]).
 
 ## Dependencies
 - [[Updater]]: Invoked for framework maintenance and upgrades via the `update` command.
 - [[Skills]]: Leverages operational skills for plan authoring, execution, and verification.
 - [[Workforce]]: Reads and verifies active agent personas during BOOT and pre-planning gates.
-- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]], [[DEC-009]], [[DEC-010]], [[DEC-011]]).
+- [[30_DECISIONS.md]]: Governed by canonical architectural decisions ([[DEC-001]], [[DEC-002]], [[DEC-005]], [[DEC-009]], [[DEC-010]], [[DEC-011]], [[DEC-012]]).
 
 ## Runtime References
 - `AGENTS.md`: Canonical genOS operating kernel specification, ownership table, lifecycle protocols, and commands.
