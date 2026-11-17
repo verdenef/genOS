@@ -117,7 +117,7 @@ genOS eliminates prompt boilerplate. In any AI chat (Antigravity, Cursor, Claude
 
 | Command | Action |
 |:---|:---|
-| `kickoff` | BOOTs from brain, verifies specialist rules, runs optional Graphify topology check, applies Ponytail filter, and proposes a plan + Model Tier recommendation + copy-pasteable execution handoff blocks. |
+| `kickoff` | BOOTs from brain, verifies specialist rules, runs optional Graphify topology check, applies Ponytail filter, and proposes a plan + Model Tier recommendation + designated (Recommended) execution command block (Sequential, SDD, or SDD with timeless Tier Routing). |
 | `kickoff <intent>` | Scoped session — e.g. `kickoff fix the login flow` or `kickoff execute the approved plan: <path>`. |
 | `shutdown` | Verifies milestone criteria, runs the mandatory Sanity Gate, and persists cold-start execution RAM. |
 | `doctor` | Diagnoses and auto-repairs brain integrity issues. |
@@ -154,6 +154,7 @@ genOS/
 │   └── systems/                     # Modular system documents
 ├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
 ├── templates/sidecar.gitignore      # Git isolation template for downstream sidecars
+├── templates/project-root.gitignore # Root gitignore snippet isolating ephemeral AI scratch (.superpowers, .claude)
 ├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
 ├── guides/                          # User guide (guide.md), workflow prompts, and plans
 │   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
@@ -173,7 +174,7 @@ Open your project in an AI IDE/CLI with terminal access and paste:
 Install genOS into a `genOS/` subfolder in this repository from https://github.com/verdenef/genOS/archive/refs/heads/main.zip (using a temporary `_genOS_Temp/` folder, then deleting it after):
 1. Copy `AGENTS.md`, `guides/`, `profiles/`, `integrations/`, `templates/`, and `README.md` into `genOS/`.
 2. Initialize `genOS/brain/` from `templates/brain/` (do NOT copy the upstream repo's self-hosted `brain/`, `docs/superpowers/`, or `scratch/`).
-3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, ignoring framework scaffolding.
+3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` (so Git tracks only `genOS/brain/` and `genOS/.gitignore`), and append `genOS/templates/project-root.gitignore` to your project root `.gitignore` to prevent ephemeral AI execution scratch (`.superpowers/`, `.claude/`, `*.tmp`) from leaking into commits.
 4. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
 5. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
 ```
@@ -184,11 +185,12 @@ Install genOS into a `genOS/` subfolder in this repository from https://github.c
 3. If installing inside a subfolder like `genOS/`:
    - Keep `.agents/`, `.cursor/`, and a root `CLAUDE.md` pointing to `genOS/AGENTS.md` at your repo root so Claude Code and Cursor auto-detect them.
    - Copy [`templates/sidecar.gitignore`](templates/sidecar.gitignore) to `genOS/.gitignore` so Git only tracks `genOS/brain/` and `genOS/.gitignore`. (If scaffolding was previously committed: `git rm -r --cached --ignore-unmatch genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md`).
+   - Append [`templates/project-root.gitignore`](templates/project-root.gitignore) to your repository root's `.gitignore` to isolate ephemeral scratch (`.superpowers/`, `.claude/`, `*.tmp`). (If already committed: `git rm -r --cached --ignore-unmatch .superpowers .claude .worktrees`).
 4. Open your AI chat and paste [`guides/prompts/setup-init.md`](guides/prompts/setup-init.md).
 
 ### Day 1+: Daily Workflow
 1. Open a fresh chat and type **`kickoff`**.
-2. Review the plan, then copy-paste the generated execution command block into a new session.
+2. Review the plan, then copy-paste the designated **Recommended Execution Command** into a fresh session.
 3. When done, type **`shutdown`**.
 
 ### Upgrading an Existing Project (`v1`, `v2`, or `v3`)
@@ -215,6 +217,7 @@ For the full walkthrough, see the [genOS User Guide](guides/guide.md).
 4. **Local-Only Code Topology:** Graphify AST parsing uses `--code-only` offline without sending code to external LLMs, paired with Grep checks for runtime strings and scene/prefab refs.
 5. **On-Disk Skills:** Skills in `.agents/skills/` are read dynamically from disk during `kickoff`—no manual UI settings uploads required.
 6. **Zero-App Workforce Automation:** Specialist Agency Agents from `msitarzewski/agency-agents` install directly via `guides/scripts/install_agent.py` upon human approval—requiring only Python 3 stdlib, with zero external tools or desktop apps.
+7. **Critical Evaluation of Proposals:** Agents must never agree by default. When the human proposes an architectural, workflow, or design change, the agent must evaluate and state at least one concrete risk, trade-off, or alternative before implementing.
 
 ---
 

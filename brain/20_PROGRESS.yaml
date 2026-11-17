@@ -5,7 +5,7 @@
 schema_version: 2
 
 # ISO date of last SHUTDOWN update (YYYY-MM-DD)
-last_updated: "2026-11-16"
+last_updated: "2026-11-17"
 
 # Who last wrote this file (e.g. cursor-agent, agy-agent, agency:unity-specialist)
 last_agent: antigravity
@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Added anti-sycophancy principle (DEC-013): Critical Evaluation of Proposals section in AGENTS.md requiring agents to state concrete risks/trade-offs/alternatives before agreeing with architecture or workflow proposals. Scoped to decision points only, requires explicit 'I checked and found none' when no issues exist. Also committed DEC-012 (recommended execution designation + ephemeral scratch isolation). M2 active, working_on empty."
+session_summary: "Brought README.md and guides/guide.md fully up to date with DEC-011 through DEC-013: added templates/project-root.gitignore to trees and Day 0 setup instructions, documented mandatory Recommended Execution Command designation during kickoff, and added Critical Evaluation of Proposals (anti-sycophancy) to Core Principles and daily workflows. All Doctor checks pass, M2 active, working_on empty."

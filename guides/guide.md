@@ -48,7 +48,7 @@ Open a brand-new or existing project in Claude Code, Cursor, Antigravity, or Cod
 Install genOS into a `genOS/` subfolder in this repository from https://github.com/verdenef/genOS/archive/refs/heads/main.zip (using a temporary `_genOS_Temp/` folder, then deleting it after):
 1. Copy `AGENTS.md`, `guides/`, `profiles/`, `integrations/`, `templates/`, and `README.md` into `genOS/`.
 2. Initialize `genOS/brain/` from `templates/brain/` (do NOT copy the upstream repo's self-hosted `brain/`, `docs/superpowers/`, or `scratch/`).
-3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, ignoring framework scaffolding.
+3. Copy `genOS/templates/sidecar.gitignore` to `genOS/.gitignore` (so Git tracks only `genOS/brain/` and `genOS/.gitignore`), and append `genOS/templates/project-root.gitignore` to your project root `.gitignore` to prevent ephemeral AI execution scratch (`.superpowers/`, `.claude/`, `*.tmp`) from leaking into commits.
 4. Merge `.agents/` and `.cursor/` into the repository root, and create/append root `CLAUDE.md` so it points to `genOS/AGENTS.md` (preserving any existing files/rules in this repo).
 5. Once installed, read `genOS/AGENTS.md` and begin Day 0 setup following `genOS/guides/prompts/setup-init.md`.
 ```
@@ -59,6 +59,10 @@ Install genOS into a `genOS/` subfolder in this repository from https://github.c
 3. **Sidecar Git Isolation:** When placing genOS in a subfolder (e.g. `genOS/`), copy `templates/sidecar.gitignore` to `genOS/.gitignore` so Git tracks only `genOS/brain/` and `genOS/.gitignore`, completely ignoring framework scaffolding (`guides/`, `profiles/`, `templates/`, etc.). If an existing project already tracked or pushed scaffolding files to git, untrack them cleanly:
    ```bash
    git rm -r --cached --ignore-unmatch genOS/guides genOS/profiles genOS/templates genOS/integrations genOS/AGENTS.md genOS/README.md
+   ```
+4. **Root Gitignore Hygiene:** Append [`templates/project-root.gitignore`](templates/project-root.gitignore) to your repository root's `.gitignore` to isolate ephemeral scratch (`.superpowers/`, `.claude/`, `*.tmp`). If already committed, untrack them cleanly:
+   ```bash
+   git rm -r --cached --ignore-unmatch .superpowers .claude .worktrees
    ```
 
 ### Repository Structure
@@ -73,6 +77,7 @@ genOS/
 ├── brain/                           # Self-hosted Project Brain tracking genOS itself
 ├── templates/brain/                 # Pristine (_TBD_) starter Brain templates for new projects
 ├── templates/sidecar.gitignore      # Git isolation template for downstream sidecars
+├── templates/project-root.gitignore # Root gitignore snippet isolating ephemeral AI scratch (.superpowers, .claude)
 ├── profiles/                        # Stack profiles + profiles/templates/mcp-graphify.json
 ├── guides/                          # User guide (guide.md), workflow prompts, and plans
 │   └── scripts/                     # Framework scripts (install_agent.py: Agency Agents auto-installer)
@@ -106,12 +111,12 @@ Open a new session and type `kickoff`. The agent will:
 - Read active specialist agent files (`Hard Persona Gate`) and cite 2–3 governing rules
 - Optionally verify Graphify code graph freshness and inspect callers/dependencies
 - Prune unnecessary complexity via Ponytail's Ladder of Restraint
-- Propose a test-driven plan, recommend a **Model Tier** (**Flagship** / **Balanced** / **Fast**), and print **copy-pasteable execution command blocks**
+- Propose a test-driven plan, recommend a **Model Tier** (**Flagship** / **Balanced** / **Fast**), and designate exactly one **`💡 Recommended Execution Command`** (Sequential, SDD, or SDD with timeless Tier Routing per DEC-002) so you never have to guess which method to run
 - Wait for your approval before writing code
 
 ### 2. Execution
 
-Once you approve the plan, start a fresh execution session and paste one of the handoff command blocks (standard sequential or `subagent-driven-development`).
+Once you approve the plan, start a fresh execution session and paste the designated **Recommended Execution Command** (or select an alternative if your preferences differ).
 
 ### 3. Ending Work (`shutdown`)
 
@@ -134,6 +139,10 @@ Type `batch` for hands-free execution. The agent alternates between a Builder pe
 ### 6. Diagnostics
 
 Type `doctor` to scan all brain files, auto-repair issues, and output a health report.
+
+### 7. Critical Evaluation of Proposals
+
+When you propose an architectural change, new workflow, or design decision, genOS agents must never agree by default (anti-sycophancy principle, `AGENTS.md`). Before implementing, the agent evaluates the proposal and states at least one concrete risk, trade-off, or alternative.
 
 ---
 
