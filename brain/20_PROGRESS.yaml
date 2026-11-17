@@ -34,4 +34,4 @@ blocked: []
 
 # Self-contained SHUTDOWN summary: what completed, what remains, what next agent should do
 # null = unset (Empty Brain / no session yet) — do not invent
-session_summary: "Brought README.md and guides/guide.md fully up to date with DEC-011 through DEC-013: added templates/project-root.gitignore to trees and Day 0 setup instructions, documented mandatory Recommended Execution Command designation during kickoff, and added Critical Evaluation of Proposals (anti-sycophancy) to Core Principles and daily workflows. All Doctor checks pass, M2 active, working_on empty."
+session_summary: "Executed and verified the Git remote credential sanitization plan (docs/superpowers/plans/2026-11-17-git-remote-credential-sanitization.md): stripped embedded PAT from .git/config, verified clean remote endpoint, verified zero occurrences of token pattern in .git/config, verified Windows GCM integration with successful remote HEAD lookup, user revoked and deleted leaked tokens on GitHub, and re-verified remote connectivity with exit code 0. Committed completed plan. M2 remains active with empty working_on."
